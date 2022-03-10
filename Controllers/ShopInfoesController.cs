@@ -11,11 +11,11 @@ using System.Web.Http.Description;
 using GNT_server.Models;
 
 namespace GNT_server.Controllers
-{
+{   [RoutePrefix("api/ShopInfoes")]
     public class ShopInfoesController : ApiController
     {
         private projectDBEntities1 db = new projectDBEntities1();
-
+        [Route("")]
         // GET: api/ShopInfoes
         public IQueryable<ShopInfo> GetShopInfo()
         {
@@ -23,6 +23,7 @@ namespace GNT_server.Controllers
         }
 
         // GET: api/ShopInfoes/5
+        [Route("{id:int}")]
         [ResponseType(typeof(ShopInfo))]
         public IHttpActionResult GetShopInfo(int id)
         {
@@ -34,7 +35,40 @@ namespace GNT_server.Controllers
 
             return Ok(shopInfo);
         }
+        [Route("type/{type:int}")]
+        public IHttpActionResult GetShopInfoType(int type)
+        {
+            string realtype = "";
+            if (type == 1)
+                realtype = "酒吧";
+            else if (type == 2)
+                realtype = "宵夜小吃";
+            else if (type == 3)
+                realtype = "深夜甜點";
+            else if (type == 4)
+                realtype = "夜間景點";
+            var shopInfo = from s in db.ShopInfo
+                           where s.Type == realtype
+                           select s;
+            if (shopInfo == null)
+            {
+                return NotFound();
+            }            
+            return Ok(shopInfo);
+        }
 
+        [Route("type/{type:length(1,50)}")]
+        public IHttpActionResult GetShopInfoType2(string type)
+        {
+            var shopInfo = from s in db.ShopInfo
+                           where s.Type == type
+                           select s;
+            if (shopInfo == null)
+            {
+                return NotFound();
+            }
+            return Ok(shopInfo);
+        }
         // PUT: api/ShopInfoes/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutShopInfo(int id, ShopInfo shopInfo)
