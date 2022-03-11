@@ -59,13 +59,38 @@ namespace GNT_server.Controllers
             }
             return Ok(shopInfo);
         }
-        [Route("tag/{tag1:length(1,50)/{tag2:length(1,50)/{tag2:length(1,50)}")]
-        public IHttpActionResult GetShopInfoType2(string tag1, string tag2, string tag3)
+        [Route("tag/{tag:length(1,50)}")]
+        public IHttpActionResult GetShopInfoTag1(string tag)
         {
             var shopInfo = from s in db.ShopInfo
-                           where SqlMethods.Like(s.Tag, $"%{tag1}%")
-                           && SqlMethods.Like(s.Tag, $"%{tag2}%")
-                           && SqlMethods.Like(s.Tag, $"%{tag3}%")
+                           where SqlMethods.Like(s.Tag, "%" + tag + "%")
+                           select s;
+            if (shopInfo == null)
+            {
+                return NotFound();
+            }
+            return Ok(shopInfo);
+        }
+        [Route("tag/{taga:length(1,50)}/{tagb:length(1,50)}")]
+        public IHttpActionResult GetShopInfoTag2(string taga, string tagb)
+        {
+            var shopInfo = from s in db.ShopInfo
+                           where SqlMethods.Like(s.Tag, "%" + taga + "%")
+                           && SqlMethods.Like(s.Tag, "%" + tagb + "%")
+                           select s;
+            if (shopInfo == null)
+            {
+                return NotFound();
+            }
+            return Ok(shopInfo);
+        }
+        [Route("tag/{taga:length(1,50)}/{tagb:length(1,50)}/{tagc:length(1,50)}")]
+        public IHttpActionResult GetShopInfoTag3(string taga, string tagb, string tagc)
+        {
+            var shopInfo = from s in db.ShopInfo
+                           where SqlMethods.Like(s.Tag, "%" + taga + "%")
+                           && SqlMethods.Like(s.Tag, "%" + tagb + "%")
+                           && SqlMethods.Like(s.Tag, "%"+tagc+"%")
                            select s;
             if (shopInfo == null)
             {
