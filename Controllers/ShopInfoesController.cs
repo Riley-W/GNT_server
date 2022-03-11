@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Linq.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -35,33 +36,36 @@ namespace GNT_server.Controllers
 
             return Ok(shopInfo);
         }
-        [Route("type/{type:int}")]
-        public IHttpActionResult GetShopInfoType(int type)
+        [Route("type/{type:length(1:50)}")]
+        public IHttpActionResult GetShopInfoType(string type)
         {
-            string realtype = "";
-            if (type == 1)
+            string realtype;
+            if (type == " bar")
                 realtype = "酒吧";
-            else if (type == 2)
+            else if (type == "snack")
                 realtype = "宵夜小吃";
-            else if (type == 3)
+            else if (type == "dessert")
                 realtype = "深夜甜點";
-            else if (type == 4)
+            else if (type == "viewpoint")
                 realtype = "夜間景點";
+            else
+                realtype = "";
             var shopInfo = from s in db.ShopInfo
                            where s.Type == realtype
                            select s;
             if (shopInfo == null)
             {
                 return NotFound();
-            }            
+            }
             return Ok(shopInfo);
         }
-
-        [Route("type/{type:length(1,50)}")]
-        public IHttpActionResult GetShopInfoType2(string type)
+        [Route("tag/{tag1:length(1,50)/{tag2:length(1,50)/{tag2:length(1,50)}")]
+        public IHttpActionResult GetShopInfoType2(string tag1, string tag2, string tag3)
         {
             var shopInfo = from s in db.ShopInfo
-                           where s.Type == type
+                           where SqlMethods.Like(s.Tag, $"%{tag1}%")
+                           && SqlMethods.Like(s.Tag, $"%{tag2}%")
+                           && SqlMethods.Like(s.Tag, $"%{tag3}%")
                            select s;
             if (shopInfo == null)
             {
