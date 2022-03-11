@@ -12,7 +12,8 @@ using System.Web.Http.Description;
 using GNT_server.Models;
 
 namespace GNT_server.Controllers
-{   [RoutePrefix("api/ShopInfoes")]
+{
+    [RoutePrefix("api/ShopInfoes")]
     public class ShopInfoesController : ApiController
     {
         private projectDBEntities1 db = new projectDBEntities1();
@@ -36,11 +37,11 @@ namespace GNT_server.Controllers
 
             return Ok(shopInfo);
         }
-        [Route("type/{type:length(1:50)}")]
+        [Route("type/{type:length(1,50)}")]
         public IHttpActionResult GetShopInfoType(string type)
         {
             string realtype;
-            if (type == " bar")
+            if (type == "bar")
                 realtype = "酒吧";
             else if (type == "snack")
                 realtype = "宵夜小吃";
@@ -63,7 +64,7 @@ namespace GNT_server.Controllers
         public IHttpActionResult GetShopInfoTag1(string tag)
         {
             var shopInfo = from s in db.ShopInfo
-                           where SqlMethods.Like(s.Tag, "%" + tag + "%")
+                           where s.Tag.Contains(tag)
                            select s;
             if (shopInfo == null)
             {
@@ -75,8 +76,8 @@ namespace GNT_server.Controllers
         public IHttpActionResult GetShopInfoTag2(string taga, string tagb)
         {
             var shopInfo = from s in db.ShopInfo
-                           where SqlMethods.Like(s.Tag, "%" + taga + "%")
-                           && SqlMethods.Like(s.Tag, "%" + tagb + "%")
+                           where s.Tag.Contains(taga)
+                           && s.Tag.Contains(tagb)
                            select s;
             if (shopInfo == null)
             {
@@ -88,9 +89,9 @@ namespace GNT_server.Controllers
         public IHttpActionResult GetShopInfoTag3(string taga, string tagb, string tagc)
         {
             var shopInfo = from s in db.ShopInfo
-                           where SqlMethods.Like(s.Tag, "%" + taga + "%")
-                           && SqlMethods.Like(s.Tag, "%" + tagb + "%")
-                           && SqlMethods.Like(s.Tag, "%"+tagc+"%")
+                           where s.Tag.Contains(taga)
+                           && s.Tag.Contains(tagb)
+                           && s.Tag.Contains(tagc)
                            select s;
             if (shopInfo == null)
             {
@@ -99,6 +100,8 @@ namespace GNT_server.Controllers
             return Ok(shopInfo);
         }
         // PUT: api/ShopInfoes/5
+        [HttpPut]
+        [Route("update /{id:int}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutShopInfo(int id, ShopInfo shopInfo)
         {
@@ -134,6 +137,8 @@ namespace GNT_server.Controllers
         }
 
         // POST: api/ShopInfoes
+        [HttpPost]
+        [Route("create /{id:int}")]
         [ResponseType(typeof(ShopInfo))]
         public IHttpActionResult PostShopInfo(ShopInfo shopInfo)
         {
@@ -149,7 +154,9 @@ namespace GNT_server.Controllers
         }
 
         // DELETE: api/ShopInfoes/5
+        [HttpDelete]
         [ResponseType(typeof(ShopInfo))]
+        [Route("delete /{id:int}")]
         public IHttpActionResult DeleteShopInfo(int id)
         {
             ShopInfo shopInfo = db.ShopInfo.Find(id);
