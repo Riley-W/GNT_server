@@ -12,6 +12,7 @@
           <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Account" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Enable" Type="bit" />
         </EntityType>
         <EntityType Name="MemberFavorite">
           <Key>
@@ -38,6 +39,7 @@
           <Property Name="Image" Type="nvarchar" MaxLength="200" />
           <Property Name="Account" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Point" Type="int" />
         </EntityType>
         <EntityType Name="Route">
           <Key>
@@ -45,40 +47,42 @@
           </Key>
           <Property Name="RouteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MemberID" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" />
           <Property Name="AddDate" Type="date" />
-          <Property Name="Dest1" Type="nvarchar" MaxLength="200" />
-          <Property Name="Dest2" Type="nvarchar" MaxLength="200" />
-          <Property Name="Dest3" Type="nvarchar" MaxLength="200" />
-          <Property Name="Dest4" Type="nvarchar" MaxLength="200" />
-          <Property Name="Dest5" Type="nvarchar" MaxLength="200" />
-          <Property Name="Dest6" Type="nvarchar" MaxLength="200" />
-          <Property Name="Dest7" Type="nvarchar" MaxLength="200" />
-          <Property Name="Dest8" Type="nvarchar" MaxLength="200" />
+          <Property Name="Dest1" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Dest2" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Dest3" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Dest4" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Dest5" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Dest6" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Dest7" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Dest8" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Enable" Type="bit" />
         </EntityType>
         <EntityType Name="ShopInfo">
           <Key>
             <PropertyRef Name="ShopID" />
           </Key>
           <Property Name="ShopID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
           <Property Name="Phone" Type="nvarchar" MaxLength="50" />
-          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
           <Property Name="Longitude" Type="decimal" Precision="10" Scale="6" />
           <Property Name="Latitude" Type="decimal" Precision="10" Scale="6" />
           <Property Name="Email" Type="nvarchar" MaxLength="2000" />
           <Property Name="Facebook" Type="nvarchar" MaxLength="2000" />
           <Property Name="Instagram" Type="nvarchar" MaxLength="2000" />
-          <Property Name="Min" Type="nvarchar" MaxLength="50" />
+          <Property Name="Min" Type="nvarchar" MaxLength="300" />
           <Property Name="Note" Type="nvarchar" MaxLength="4000" />
           <Property Name="Type" Type="nvarchar" MaxLength="500" />
           <Property Name="Tag" Type="nvarchar" MaxLength="1500" />
           <Property Name="Status" Type="nvarchar" MaxLength="500" />
-          <Property Name="Image1" Type="nvarchar" MaxLength="2000" />
-          <Property Name="Image2" Type="nvarchar" MaxLength="2000" />
-          <Property Name="Image3" Type="nvarchar" MaxLength="2000" />
-          <Property Name="Image4" Type="nvarchar" MaxLength="2000" />
-          <Property Name="Image5" Type="nvarchar" MaxLength="2000" />
-          <Property Name="PhotoSource" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Image1" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Image2" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Image3" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Image4" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Image5" Type="nvarchar" MaxLength="4000" />
+          <Property Name="PhotoSource" Type="nvarchar" MaxLength="4000" />
           <Property Name="Monday" Type="nvarchar" MaxLength="50" />
           <Property Name="Tuesday" Type="nvarchar" MaxLength="50" />
           <Property Name="Wednesday" Type="nvarchar" MaxLength="50" />
@@ -86,6 +90,8 @@
           <Property Name="Friday" Type="nvarchar" MaxLength="50" />
           <Property Name="Saturday" Type="nvarchar" MaxLength="50" />
           <Property Name="Sunday" Type="nvarchar" MaxLength="50" />
+          <Property Name="Click" Type="int" />
+          <Property Name="Enable" Type="bit" />
         </EntityType>
         <EntityType Name="ShopReview">
           <Key>
@@ -97,6 +103,7 @@
           <Property Name="ReviewDate" Type="date" />
           <Property Name="RContent" Type="nvarchar" MaxLength="2000" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Enable" Type="bit" />
         </EntityType>
         <EntityType Name="WebsiteReview">
           <Key>
@@ -105,10 +112,10 @@
           <Property Name="ReviewID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MemberID" Type="int" />
           <Property Name="ReviewDate" Type="date" />
-          <Property Name="Type" Type="nvarchar" MaxLength="50" />
-          <Property Name="RContent" Type="nvarchar" MaxLength="2000" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" />
-          <Property Name="Remark" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Type" Type="nvarchar" MaxLength="500" />
+          <Property Name="RContent" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Status" Type="nvarchar" MaxLength="500" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="4000" />
         </EntityType>
         <Association Name="FK_MemberFavorite_MemberInfo">
           <End Role="MemberInfo" Type="Self.MemberInfo" Multiplicity="1" />
@@ -227,6 +234,7 @@
           <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Enable" Type="Boolean" />
         </EntityType>
         <EntityType Name="MemberFavorite">
           <Key>
@@ -255,6 +263,7 @@
           <Property Name="Image" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Point" Type="Int32" />
           <NavigationProperty Name="MemberFavorite" Relationship="Self.FK_MemberFavorite_MemberInfo" FromRole="MemberInfo" ToRole="MemberFavorite" />
           <NavigationProperty Name="Route" Relationship="Self.FK_Route_MemberInfo" FromRole="MemberInfo" ToRole="Route" />
           <NavigationProperty Name="ShopReview" Relationship="Self.FK_ShopReview_MemberInfo" FromRole="MemberInfo" ToRole="ShopReview" />
@@ -266,15 +275,17 @@
           </Key>
           <Property Name="RouteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MemberID" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="AddDate" Type="DateTime" Precision="0" />
-          <Property Name="Dest1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Dest2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Dest3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Dest4" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Dest5" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Dest6" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Dest7" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Dest8" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Dest1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Dest2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Dest3" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Dest4" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Dest5" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Dest6" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Dest7" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Dest8" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Enable" Type="Boolean" />
           <NavigationProperty Name="MemberInfo" Relationship="Self.FK_Route_MemberInfo" FromRole="Route" ToRole="MemberInfo" />
         </EntityType>
         <EntityType Name="ShopInfo">
@@ -282,25 +293,25 @@
             <PropertyRef Name="ShopID" />
           </Key>
           <Property Name="ShopID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Longitude" Type="Decimal" Precision="10" Scale="6" />
           <Property Name="Latitude" Type="Decimal" Precision="10" Scale="6" />
           <Property Name="Email" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="Facebook" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="Instagram" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="Min" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Min" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="Note" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Tag" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Image1" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="Image2" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="Image3" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="Image4" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="Image5" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="PhotoSource" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Image1" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Image2" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Image3" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Image4" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Image5" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoSource" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="Monday" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Tuesday" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Wednesday" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -308,6 +319,8 @@
           <Property Name="Friday" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Saturday" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Sunday" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Click" Type="Int32" />
+          <Property Name="Enable" Type="Boolean" />
           <NavigationProperty Name="MemberFavorite" Relationship="Self.FK_MemberFavorite_ShopInfo" FromRole="ShopInfo" ToRole="MemberFavorite" />
           <NavigationProperty Name="ShopReview" Relationship="Self.FK_ShopReview_ShopInfo" FromRole="ShopInfo" ToRole="ShopReview" />
         </EntityType>
@@ -321,6 +334,7 @@
           <Property Name="ReviewDate" Type="DateTime" Precision="0" />
           <Property Name="RContent" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Enable" Type="Boolean" />
           <NavigationProperty Name="MemberInfo" Relationship="Self.FK_ShopReview_MemberInfo" FromRole="ShopReview" ToRole="MemberInfo" />
           <NavigationProperty Name="ShopInfo" Relationship="Self.FK_ShopReview_ShopInfo" FromRole="ShopReview" ToRole="ShopInfo" />
         </EntityType>
@@ -331,10 +345,10 @@
           <Property Name="ReviewID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MemberID" Type="Int32" />
           <Property Name="ReviewDate" Type="DateTime" Precision="0" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RContent" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="RContent" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MemberInfo" Relationship="Self.FK_WebsiteReview_MemberInfo" FromRole="WebsiteReview" ToRole="MemberInfo" />
         </EntityType>
         <Association Name="FK_MemberFavorite_MemberInfo">
@@ -409,7 +423,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="projectDBEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="projectDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AdminInfo" EntityType="Self.AdminInfo" />
           <EntitySet Name="MemberFavorite" EntityType="Self.MemberFavorite" />
           <EntitySet Name="MemberInfo" EntityType="Self.MemberInfo" />
@@ -447,13 +461,14 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="projectDBModelStoreContainer" CdmEntityContainer="projectDBEntities1">
+        <EntityContainerMapping StorageEntityContainer="projectDBModelStoreContainer" CdmEntityContainer="projectDBEntities">
           <EntitySetMapping Name="AdminInfo">
             <EntityTypeMapping TypeName="projectDBModel.AdminInfo">
               <MappingFragment StoreEntitySet="AdminInfo">
                 <ScalarProperty Name="AdminID" ColumnName="AdminID" />
                 <ScalarProperty Name="Account" ColumnName="Account" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -481,6 +496,7 @@
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Account" ColumnName="Account" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -489,6 +505,7 @@
               <MappingFragment StoreEntitySet="Route">
                 <ScalarProperty Name="RouteID" ColumnName="RouteID" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="AddDate" ColumnName="AddDate" />
                 <ScalarProperty Name="Dest1" ColumnName="Dest1" />
                 <ScalarProperty Name="Dest2" ColumnName="Dest2" />
@@ -498,6 +515,7 @@
                 <ScalarProperty Name="Dest6" ColumnName="Dest6" />
                 <ScalarProperty Name="Dest7" ColumnName="Dest7" />
                 <ScalarProperty Name="Dest8" ColumnName="Dest8" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -531,6 +549,8 @@
                 <ScalarProperty Name="Friday" ColumnName="Friday" />
                 <ScalarProperty Name="Saturday" ColumnName="Saturday" />
                 <ScalarProperty Name="Sunday" ColumnName="Sunday" />
+                <ScalarProperty Name="Click" ColumnName="Click" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -542,6 +562,7 @@
                 <ScalarProperty Name="ReviewDate" ColumnName="ReviewDate" />
                 <ScalarProperty Name="RContent" ColumnName="RContent" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

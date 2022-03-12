@@ -35,6 +35,7 @@ namespace GNT_server.Models
         public string Image { get; set; }
         public string Account { get; set; }
         public string Password { get; set; }
+        public Nullable<int> Point { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MemberFavorite> MemberFavorite { get; set; }

@@ -48,6 +48,8 @@ namespace GNT_server.Models
         public string Friday { get; set; }
         public string Saturday { get; set; }
         public string Sunday { get; set; }
+        public Nullable<int> Click { get; set; }
+        public Nullable<bool> Enable { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MemberFavorite> MemberFavorite { get; set; }

@@ -16,7 +16,7 @@ namespace GNT_server.Controllers
     [RoutePrefix("api/ShopInfoes")]
     public class ShopInfoesController : ApiController
     {
-        private projectDBEntities1 db = new projectDBEntities1();
+        private projectDBEntities db = new projectDBEntities();
         [Route("")]
         // GET: api/ShopInfoes
         public IQueryable<ShopInfo> GetShopInfo()
@@ -100,8 +100,8 @@ namespace GNT_server.Controllers
             return Ok(shopInfo);
         }
         // PUT: api/ShopInfoes/5
+
         [HttpPut]
-        [Route("update /{id:int}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutShopInfo(int id, ShopInfo shopInfo)
         {
@@ -138,7 +138,6 @@ namespace GNT_server.Controllers
 
         // POST: api/ShopInfoes
         [HttpPost]
-        [Route("create /{id:int}")]
         [ResponseType(typeof(ShopInfo))]
         public IHttpActionResult PostShopInfo(ShopInfo shopInfo)
         {
@@ -150,13 +149,12 @@ namespace GNT_server.Controllers
             db.ShopInfo.Add(shopInfo);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = shopInfo.ShopID }, shopInfo);
+            return CreatedAtRoute("PostApi", new { id = shopInfo.ShopID }, shopInfo);
         }
 
         // DELETE: api/ShopInfoes/5
         [HttpDelete]
         [ResponseType(typeof(ShopInfo))]
-        [Route("delete /{id:int}")]
         public IHttpActionResult DeleteShopInfo(int id)
         {
             ShopInfo shopInfo = db.ShopInfo.Find(id);

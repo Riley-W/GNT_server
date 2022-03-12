@@ -17,5 +17,6 @@ namespace GNT_server.Models
         public int AdminID { get; set; }
         public string Account { get; set; }
         public string Password { get; set; }
+        public Nullable<bool> Enable { get; set; }
     }
 }
