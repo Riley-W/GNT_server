@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Formatting;
 using System.Web.Http;
 
 namespace GNT_server
@@ -10,6 +11,9 @@ namespace GNT_server
         public static void Register(HttpConfiguration config)
         {
             // Web API 設定和服務
+            GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.MediaTypeMappings.Add(new QueryStringMapping("json", "true", "application/json"));
 
             // Web API 路由
             config.MapHttpAttributeRoutes();
