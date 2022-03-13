@@ -10,9 +10,10 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using GNT_server.Models;
+using System.Web;
 
 namespace GNT_server.Controllers
-{
+{    
     [RoutePrefix("api/ShopInfoes")]
     public class ShopInfoesController : ApiController
     {
@@ -60,7 +61,8 @@ namespace GNT_server.Controllers
             }
             return Ok(shopInfo);
         }
-        [Route("tag/{tag:length(1,50)}")]
+        [HttpGet]
+        [Route("tag")]
         public IHttpActionResult GetShopInfoTag1(string tag)
         {
             var shopInfo = from s in db.ShopInfo
@@ -72,35 +74,7 @@ namespace GNT_server.Controllers
             }
             return Ok(shopInfo);
         }
-        [Route("tag/{taga:length(1,50)}/{tagb:length(1,50)}")]
-        public IHttpActionResult GetShopInfoTag2(string taga, string tagb)
-        {
-            var shopInfo = from s in db.ShopInfo
-                           where s.Tag.Contains(taga)
-                           && s.Tag.Contains(tagb)
-                           select s;
-            if (shopInfo == null)
-            {
-                return NotFound();
-            }
-            return Ok(shopInfo);
-        }
-        [Route("tag/{taga:length(1,50)}/{tagb:length(1,50)}/{tagc:length(1,50)}")]
-        public IHttpActionResult GetShopInfoTag3(string taga, string tagb, string tagc)
-        {
-            var shopInfo = from s in db.ShopInfo
-                           where s.Tag.Contains(taga)
-                           && s.Tag.Contains(tagb)
-                           && s.Tag.Contains(tagc)
-                           select s;
-            if (shopInfo == null)
-            {
-                return NotFound();
-            }
-            return Ok(shopInfo);
-        }
         // PUT: api/ShopInfoes/5
-
         [HttpPut]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutShopInfo(int id, ShopInfo shopInfo)
