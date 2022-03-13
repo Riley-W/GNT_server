@@ -62,13 +62,39 @@ namespace GNT_server.Controllers
             return Ok(shopInfo);
         }
         [HttpGet]
-        [Route("tag")]
-        public IHttpActionResult GetShopInfoTag1(string tag)
+        [Route("tag")]//api/ShopInfoes/tag?tag=2,5
+        public IHttpActionResult GetShopInfoTag(string tag)
         {
             string Qstring= Query.QueryFromList(tag);
            
             var shopInfo = from s in db.ShopInfo
-                           where s.Tag.Contains(tag)
+                           where s.Tag.Contains(Qstring)
+                           select s;
+            if (shopInfo == null)
+            {
+                return NotFound();
+            }
+            return Ok(shopInfo);
+        }
+        [HttpGet]
+        [Route("typeandtag")]//api/ShopInfoes/tag?tag=2,5
+        public IHttpActionResult GetShopInfoTypeAndTag(string type , string tag)
+        {
+            string Qstring = Query.QueryFromList(tag);
+            string realtype;
+            if (type == "bar")
+                realtype = "酒吧";
+            else if (type == "snack")
+                realtype = "宵夜小吃";
+            else if (type == "dessert")
+                realtype = "深夜甜點";
+            else if (type == "viewpoint")
+                realtype = "夜間景點";
+            else
+                realtype = "";
+            var shopInfo = from s in db.ShopInfo
+                           where s.Tag.Contains(Qstring)
+                           && s.Type==realtype
                            select s;
             if (shopInfo == null)
             {
@@ -77,6 +103,7 @@ namespace GNT_server.Controllers
             return Ok(shopInfo);
         }
         // PUT: api/ShopInfoes/5
+        // api/{controller}/update/{id}
         [HttpPut]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutShopInfo(int id, ShopInfo shopInfo)
@@ -111,8 +138,43 @@ namespace GNT_server.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+        //[HttpPatch]
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PatchShopInfo(int id, ShopInfo shopInfo)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    if (id != shopInfo.ShopID)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    db.Entry(shopInfo).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!ShopInfoExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
         // POST: api/ShopInfoes
+        //api/{controller}/create/{id}
         [HttpPost]
         [ResponseType(typeof(ShopInfo))]
         public IHttpActionResult PostShopInfo(ShopInfo shopInfo)
