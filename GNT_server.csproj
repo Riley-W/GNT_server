@@ -193,6 +193,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProjectDBModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Query.cs" />
     <Compile Include="Models\Route.cs">
       <DependentUpon>ProjectDBModel.tt</DependentUpon>
     </Compile>

@@ -13,7 +13,7 @@ using GNT_server.Models;
 using System.Web;
 
 namespace GNT_server.Controllers
-{    
+{
     [RoutePrefix("api/ShopInfoes")]
     public class ShopInfoesController : ApiController
     {
@@ -65,6 +65,8 @@ namespace GNT_server.Controllers
         [Route("tag")]
         public IHttpActionResult GetShopInfoTag1(string tag)
         {
+            string Qstring= Query.QueryFromList(tag);
+           
             var shopInfo = from s in db.ShopInfo
                            where s.Tag.Contains(tag)
                            select s;
@@ -127,21 +129,21 @@ namespace GNT_server.Controllers
         }
 
         // DELETE: api/ShopInfoes/5
-        [HttpDelete]
-        [ResponseType(typeof(ShopInfo))]
-        public IHttpActionResult DeleteShopInfo(int id)
-        {
-            ShopInfo shopInfo = db.ShopInfo.Find(id);
-            if (shopInfo == null)
-            {
-                return NotFound();
-            }
+        //[HttpDelete]
+        //[ResponseType(typeof(ShopInfo))]
+        //public IHttpActionResult DeleteShopInfo(int id)
+        //{
+        //    ShopInfo shopInfo = db.ShopInfo.Find(id);
+        //    if (shopInfo == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            db.ShopInfo.Remove(shopInfo);
-            db.SaveChanges();
+        //    db.ShopInfo.Remove(shopInfo);
+        //    db.SaveChanges();
 
-            return Ok(shopInfo);
-        }
+        //    return Ok(shopInfo);
+        //}
 
         protected override void Dispose(bool disposing)
         {
