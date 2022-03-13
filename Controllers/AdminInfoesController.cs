@@ -86,20 +86,20 @@ namespace GNT_server.Controllers
         }
 
         // DELETE: api/AdminInfoes/5
-        [ResponseType(typeof(AdminInfo))]
-        public IHttpActionResult DeleteAdminInfo(int id)
-        {
-            AdminInfo adminInfo = db.AdminInfo.Find(id);
-            if (adminInfo == null)
-            {
-                return NotFound();
-            }
+        //[ResponseType(typeof(AdminInfo))]
+        //public IHttpActionResult DeleteAdminInfo(int id)
+        //{
+        //    AdminInfo adminInfo = db.AdminInfo.Find(id);
+        //    if (adminInfo == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            db.AdminInfo.Remove(adminInfo);
-            db.SaveChanges();
+        //    db.AdminInfo.Remove(adminInfo);
+        //    db.SaveChanges();
 
-            return Ok(adminInfo);
-        }
+        //    return Ok(adminInfo);
+        //}
 
         protected override void Dispose(bool disposing)
         {
