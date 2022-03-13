@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Web.Http;
 using System.Web.Http.Description;
 using GNT_server.Models;
@@ -78,6 +79,12 @@ namespace GNT_server.Controllers
             {
                 return BadRequest(ModelState);
             }
+            DateTime date = DateTime.Now;
+           
+            memberInfo.RegisterDate = date;
+            
+            
+
 
             db.MemberInfo.Add(memberInfo);
             db.SaveChanges();
