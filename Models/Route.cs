@@ -25,6 +25,8 @@ namespace GNT_server.Models
         public string Dest6 { get; set; }
         public string Dest7 { get; set; }
         public string Dest8 { get; set; }
+        public string Title { get; set; }
+        public Nullable<bool> Enable { get; set; }
     
         public virtual MemberInfo MemberInfo { get; set; }
     }
