@@ -23,19 +23,13 @@ namespace GNT_server
             ); 
              config.Routes.MapHttpRoute(
                  name: "PutApi",
-                 routeTemplate: "api/{controller}/update/{id}",
+                 routeTemplate: "api/{controller}/{id}",
                  defaults: new { id = RouteParameter.Optional }
 
              );
             config.Routes.MapHttpRoute(
                 name: "PostApi",
-                routeTemplate: "api/{controller}/create",
-                defaults: new { id = RouteParameter.Optional }
-
-            );
-            config.Routes.MapHttpRoute(
-                name: "DeleteApi",
-                routeTemplate: "api/{controller}/delete/{id}",
+                routeTemplate: "api/{controller}",
                 defaults: new { id = RouteParameter.Optional }
 
             );

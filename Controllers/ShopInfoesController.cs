@@ -61,7 +61,7 @@ namespace GNT_server.Controllers
             }
             return Ok(shopInfo);
         }
-        [HttpGet]
+        [HttpGet]//待更正為動態生成
         [Route("tag")]//api/ShopInfoes/tag?tag=2,5
         public IHttpActionResult GetShopInfoTag(string tag)
         {
@@ -105,6 +105,7 @@ namespace GNT_server.Controllers
         // PUT: api/ShopInfoes/5
         // api/{controller}/update/{id}
         [HttpPut]
+        [Route("{id:int}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutShopInfo(int id, ShopInfo shopInfo)
         {
@@ -136,7 +137,7 @@ namespace GNT_server.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok("修改成功");
         }
         //[HttpPatch]
         //[ResponseType(typeof(void))]
@@ -176,6 +177,7 @@ namespace GNT_server.Controllers
         // POST: api/ShopInfoes
         //api/{controller}/create
         [HttpPost]
+        [Route("")]
         [ResponseType(typeof(ShopInfo))]
         public IHttpActionResult PostShopInfo(ShopInfo shopInfo)
         {
