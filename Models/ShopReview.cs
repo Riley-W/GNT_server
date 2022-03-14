@@ -9,6 +9,7 @@
 
 namespace GNT_server.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -18,9 +19,10 @@ namespace GNT_server.Models
         public int ShopID { get; set; }
         public Nullable<System.DateTime> ReviewDate { get; set; }
         public string RContent { get; set; }
-        public string Status { get; set; }
-    
+        public Nullable<int> score { get; set; }
+        [JsonIgnore]
         public virtual MemberInfo MemberInfo { get; set; }
+        [JsonIgnore]
         public virtual ShopInfo ShopInfo { get; set; }
     }
 }
