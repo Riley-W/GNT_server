@@ -77,7 +77,7 @@ namespace GNT_server.Controllers
             return Ok(shopInfo);
         }
         [HttpGet]
-        [Route("typeandtag")]//api/ShopInfoes/tag?tag=2,5
+        [Route("typeandtag")]//api/ShopInfoes/typeandtag?type=bar&tag=2,5
         public IHttpActionResult GetShopInfoTypeAndTag(string type , string tag)
         {
             string Qstring = Query.QueryFromList(tag);
