@@ -29,7 +29,7 @@ namespace GNT_server
              );
             config.Routes.MapHttpRoute(
                 name: "PostApi",
-                routeTemplate: "api/{controller}/create/{id}",
+                routeTemplate: "api/{controller}/create",
                 defaults: new { id = RouteParameter.Optional }
 
             );

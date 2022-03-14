@@ -20,7 +20,8 @@ namespace GNT_server.Models
                 "精釀啤酒",//6
                 "居酒屋" ,//7
                 "水果調酒",//8
-                "創意調酒" //9
+                "創意調酒", //9
+                "經典調酒"//10
             };
             int tagmax = QueryList.Count();
             string[] querytags = tag.Split(',');

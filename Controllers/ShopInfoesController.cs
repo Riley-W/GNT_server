@@ -174,7 +174,7 @@ namespace GNT_server.Controllers
         //}
 
         // POST: api/ShopInfoes
-        //api/{controller}/create/{id}
+        //api/{controller}/create
         [HttpPost]
         [ResponseType(typeof(ShopInfo))]
         public IHttpActionResult PostShopInfo(ShopInfo shopInfo)
