@@ -40,9 +40,9 @@ namespace GNT_server.Security
         {
             if (requestUri.EndsWith("/Login"))
                 return true;
-            else if(requestUri.Contains("NT"))
-                return true;
-            return false;
+            else if(requestUri.Contains("Admin"))
+                return false;
+            return true;
         }
 
         //驗證token時效
