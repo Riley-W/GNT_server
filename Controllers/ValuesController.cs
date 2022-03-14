@@ -9,6 +9,12 @@ namespace GNT_server.Controllers
 {
     public class ValuesController : ApiController
     {
+        [Route("api/Values/NT")]
+        public string Getnotoken()
+        {
+            return "value";
+        }
+
         // GET api/values
         public IEnumerable<string> Get()
         {

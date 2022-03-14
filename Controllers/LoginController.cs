@@ -1,0 +1,48 @@
+﻿using GNT_server.Models;
+using GNT_server.Security;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Security.Claims;
+using System.Text;
+using System.Web.Http;
+
+namespace GNT_server.Controllers
+{
+
+    public class LoginController : ApiController
+    {
+
+        [HttpPost]
+        public Object Post(AdminInfo admininfo)
+        {
+            projectDBEntities1 db = new projectDBEntities1();
+            var result = (from a in db.AdminInfo
+                          where a.Account == admininfo.Account
+                          && a.Password == admininfo.Password
+                          select a).FirstOrDefault();
+            if (result!=null)
+            {
+                JwtAuthUtil jwtAuthUtil = new JwtAuthUtil();
+                string jwtToken = jwtAuthUtil.GenerateToken();
+                return new
+                {
+                    status = true,
+                    token = jwtToken
+                };
+            }
+            else
+            {
+                return new
+                {
+                    status = false,
+                    token = "Account Or Password Error"
+                };
+            }
+        }
+    }
+}
