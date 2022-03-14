@@ -11,7 +11,7 @@ namespace GNT_server.Security
     {
         public string GenerateToken()
         {
-            string secret = "GoodNightTainan";//加解密的key,如果不一樣會無法成功解密
+            string secret = "GoodNightTainanORoKaMoNo";//加解密的key,如果不一樣會無法成功解密
             Dictionary<string, Object> claim = new Dictionary<string, Object>();//payload 需透過token傳遞的資料
             claim.Add("Account", "Admin");
             claim.Add("Company", "GoodNightTainan.com");
