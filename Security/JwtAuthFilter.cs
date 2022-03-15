@@ -10,7 +10,7 @@ namespace GNT_server.Security
 {
         public override void OnActionExecuting(System.Web.Http.Controllers.HttpActionContext actionContext)
         {
-            string secret = "GoodNightTainanORoKaMoNo";//加解密的key,如果不一樣會無法成功解密
+            string secret = "GoodNightTainan";//加解密的key,如果不一樣會無法成功解密
             var request = actionContext.Request;
             if (!WithoutVerifyToken(request.RequestUri.ToString()))
             {

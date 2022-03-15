@@ -223,6 +223,7 @@
       <DependentUpon>ProjectDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\TokenException.cs" />
     <Compile Include="Security\JwtAuthUtil.cs" />
     <Compile Include="Security\JwtAuthFilter.cs" />
   </ItemGroup>
