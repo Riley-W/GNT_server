@@ -22,7 +22,7 @@ namespace GNT_server.Models
         public string RContent { get; set; }
         public string Status { get; set; }
         public string Remark { get; set; }
-        [JsonIgnore]
+       // [JsonIgnore]
         public virtual MemberInfo MemberInfo { get; set; }
     }
 }

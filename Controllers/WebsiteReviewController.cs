@@ -9,7 +9,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Mvc;
 using GNT_server.Models;
 
 namespace GNT_server.Controllers
@@ -21,6 +20,7 @@ namespace GNT_server.Controllers
         // GET: WebsiteReview
 
         // POST: EDIT
+        
         [ResponseType(typeof(WebsiteReview))]
         public async Task<IHttpActionResult> PostWebsiteReview(WebsiteReview WebsiteReview)
         {
@@ -66,6 +66,8 @@ namespace GNT_server.Controllers
             return db.WebsiteReview.Where(p => p.ReviewDate.ToString().Contains(Keywords) || p.Type.Contains(Keywords) || p.RContent.Contains(Keywords) || p.Status.Contains(Keywords) || p.Remark.Contains(Keywords));
         }
 
+        [Route("api/WebsiteReview/{ReviewID}")]
+        [HttpGet]
         public IQueryable<WebsiteReview> GetWebsiteReviewByID(int ReviewID)
         {   //QueryByID
             var GetReviewByID = db.WebsiteReview.Where(p => p.ReviewID == ReviewID);
@@ -79,11 +81,13 @@ namespace GNT_server.Controllers
         }
 
 
-        //DELETE: 需要此功能??
-
+        //DELETE: 
+        [Route("api/WebsiteReview/{ReviewID}")]
+        [HttpDelete]
         [ResponseType(typeof(WebsiteReview))]
         public async Task<IHttpActionResult> DeleteWebsiteReview(int ReviewID)
         {
+            //DELETE
             WebsiteReview websiteReviewWithID = await db.WebsiteReview.FindAsync(ReviewID);
             if (websiteReviewWithID != null)
             {
@@ -98,6 +102,8 @@ namespace GNT_server.Controllers
 
 
         // PUT: EDIT
+        [Route("api/WebsiteReview/{ReviewID}")]
+        [HttpPut]
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutWebsiteReview(int ReviewID, WebsiteReview WebsiteReview) // id傳進來的資料, WebsiteReview修改的資料
         {
@@ -111,11 +117,11 @@ namespace GNT_server.Controllers
                 return BadRequest();
             }
 
-            //if (WebsiteReview.MemberID == null || WebsiteReview.ReviewDate == null || WebsiteReview.Type == null || WebsiteReview.RContent == null || WebsiteReview.Status == null)
-            //{
-            //    //驗證是否資料齊全
-            //    return BadRequest();
-            //}
+            if (WebsiteReview.MemberID == null || WebsiteReview.ReviewDate == null || WebsiteReview.Type == null || WebsiteReview.RContent == null || WebsiteReview.Status == null)
+            {
+                //驗證是否資料齊全
+                return BadRequest();
+            }
 
             db.Entry(WebsiteReview).State = EntityState.Modified;
 
@@ -135,7 +141,7 @@ namespace GNT_server.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);        
+            return Ok(WebsiteReview); //StatusCode(HttpStatusCode.OK);        
 
         }
 
