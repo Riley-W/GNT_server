@@ -28,11 +28,14 @@ namespace GNT_server.Controllers
             if (result!=null)
             {
                 JwtAuthUtil jwtAuthUtil = new JwtAuthUtil();
-                string jwtToken = jwtAuthUtil.GenerateToken();
+                string jwtToken = jwtAuthUtil.GenerateToken(admininfo.Account);
                 return new
                 {
                     status = true,
+                    message="登入成功",
+                    expiretime = ExpiredTime.ETime,
                     token = jwtToken
+                    
                 };
             }
             else
