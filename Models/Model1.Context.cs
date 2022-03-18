@@ -13,10 +13,10 @@ namespace GNT_server.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class projectDBEntities1 : DbContext
+    public partial class projectDBEntities2 : DbContext
     {
-        public projectDBEntities1()
-            : base("name=projectDBEntities1")
+        public projectDBEntities2()
+            : base("name=projectDBEntities2")
         {
         }
     

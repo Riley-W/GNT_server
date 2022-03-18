@@ -19,6 +19,7 @@ namespace GNT_server.Models
         public Nullable<System.DateTime> ReviewDate { get; set; }
         public string RContent { get; set; }
         public string Status { get; set; }
+        public Nullable<bool> Enable { get; set; }
     
         public virtual MemberInfo MemberInfo { get; set; }
         public virtual ShopInfo ShopInfo { get; set; }
