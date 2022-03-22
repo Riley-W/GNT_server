@@ -14,7 +14,7 @@ namespace GNT_server.Controllers
 {
     public class MemberFavoritesController : ApiController
     {
-        private projectDBEntities2 db = new projectDBEntities2();
+        private projectDBEntities db = new projectDBEntities();
 
         // GET: api/MemberFavorites
         public IQueryable<MemberFavorite> GetMemberFavorite()

@@ -61,47 +61,47 @@ namespace GNT_server.Controllers
             }
             return Ok(shopInfo);
         }
-        [HttpGet]//待更正為動態生成
-        [Route("tag")]//api/ShopInfoes/tag?tag=2,5
-        public IHttpActionResult GetShopInfoTag(string tag)
-        {
-            string Qstring= Query.QueryFromList(tag);
+        //[HttpGet]//待更正為動態生成
+        //[Route("tag")]//api/ShopInfoes/tag?tag=2,5
+        //public IHttpActionResult GetShopInfoTag(string tag)
+        //{
+        //    string Qstring= Query.QueryFromList(tag);
            
-            var shopInfo = from s in db.ShopInfo
-                           where s.Tag.Contains(Qstring)
-                           select s;
-            if (shopInfo == null)
-            {
-                return NotFound();
-            }
-            return Ok(shopInfo);
-        }
-        [HttpGet]
-        [Route("typeandtag")]//api/ShopInfoes/typeandtag?type=bar&tag=2,5
-        public IHttpActionResult GetShopInfoTypeAndTag(string type , string tag)
-        {
-            string Qstring = Query.QueryFromList(tag);
-            string realtype;
-            if (type == "bar")
-                realtype = "酒吧";
-            else if (type == "snack")
-                realtype = "宵夜小吃";
-            else if (type == "dessert")
-                realtype = "深夜甜點";
-            else if (type == "viewpoint")
-                realtype = "夜間景點";
-            else
-                realtype = "";
-            var shopInfo = from s in db.ShopInfo
-                           where s.Tag.Contains(Qstring)
-                           && s.Type==realtype
-                           select s;
-            if (shopInfo == null)
-            {
-                return NotFound();
-            }
-            return Ok(shopInfo);
-        }
+        //    var shopInfo = from s in db.ShopInfo
+        //                   where s.Tag.Contains(Qstring)
+        //                   select s;
+        //    if (shopInfo == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(shopInfo);
+        //}
+        //[HttpGet]
+        //[Route("typeandtag")]//api/ShopInfoes/typeandtag?type=bar&tag=2,5
+        //public IHttpActionResult GetShopInfoTypeAndTag(string type , string tag)
+        //{
+        //    string Qstring = Query.QueryFromList(tag);
+        //    string realtype;
+        //    if (type == "bar")
+        //        realtype = "酒吧";
+        //    else if (type == "snack")
+        //        realtype = "宵夜小吃";
+        //    else if (type == "dessert")
+        //        realtype = "深夜甜點";
+        //    else if (type == "viewpoint")
+        //        realtype = "夜間景點";
+        //    else
+        //        realtype = "";
+        //    var shopInfo = from s in db.ShopInfo
+        //                   where s.Tag.Contains(Qstring)
+        //                   && s.Type==realtype
+        //                   select s;
+        //    if (shopInfo == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(shopInfo);
+        //}
         // PUT: api/ShopInfoes/5
         // api/{controller}/update/{id}
         [HttpPut]

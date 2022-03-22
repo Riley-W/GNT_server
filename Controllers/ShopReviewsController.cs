@@ -18,7 +18,7 @@ namespace GNT_server.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ShopReviewsController : ApiController
     {
-        private projectDBEntities2 db = new projectDBEntities2();
+        private projectDBEntities db = new projectDBEntities();
         
         // GET: api/ShopReviews
         public IQueryable<ShopReview> GetShopReview()

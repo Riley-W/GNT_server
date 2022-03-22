@@ -17,7 +17,7 @@ namespace GNT_server.Controllers
 {
     public class MemberInfoes1Controller : ApiController
     {
-        private projectDBEntities1 db = new projectDBEntities1();
+        private projectDBEntities db = new projectDBEntities();
 
         // GET: api/MemberInfoes1
         public IQueryable<MemberInfo> GetMemberInfo()

@@ -20,7 +20,7 @@ namespace GNT_server.Controllers
         [HttpPost]
         public Object Post(AdminInfo admininfo)
         {
-            projectDBEntities1 db = new projectDBEntities1();
+            projectDBEntities db = new projectDBEntities();
             var result = (from a in db.AdminInfo
                           where a.Account == admininfo.Account
                           && a.Password == admininfo.Password

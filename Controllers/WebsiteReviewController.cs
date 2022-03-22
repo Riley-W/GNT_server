@@ -15,7 +15,7 @@ namespace GNT_server.Controllers
 {
     public class WebsiteReviewController : ApiController
     {
-        private projectDBEntities1 db = new projectDBEntities1();
+        private projectDBEntities db = new projectDBEntities();
 
         // GET: WebsiteReview
 

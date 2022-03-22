@@ -14,7 +14,7 @@ namespace GNT_server.Controllers
 {
     public class RoutesController : ApiController
     {
-        private projectDBEntities1 db = new projectDBEntities1();
+        private projectDBEntities db = new projectDBEntities();
 
         // GET: api/Routes
         public IQueryable<Route> GetRoute()
