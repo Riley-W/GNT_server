@@ -12,15 +12,18 @@ namespace GNT_server.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ShopReview
+    public partial class Tag
     {
-        public int MemberID { get; set; }
-        public int ShopID { get; set; }
-        public Nullable<System.DateTime> ReviewDate { get; set; }
-        public string RContent { get; set; }
-        public Nullable<int> Score { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Tag()
+        {
+            this.ShopInfo = new HashSet<ShopInfo>();
+        }
     
-        public virtual MemberInfo MemberInfo { get; set; }
-        public virtual ShopInfo ShopInfo { get; set; }
+        public int TagID { get; set; }
+        public string TagName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ShopInfo> ShopInfo { get; set; }
     }
 }
