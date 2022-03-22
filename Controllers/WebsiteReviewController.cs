@@ -91,7 +91,7 @@ namespace GNT_server.Controllers
             WebsiteReview websiteReviewWithID = await db.WebsiteReview.FindAsync(ReviewID);
             if (websiteReviewWithID != null)
             {
-                NotFound();
+                BadRequest("找無此ID");
             }
 
             db.WebsiteReview.Remove(websiteReviewWithID);
@@ -120,7 +120,7 @@ namespace GNT_server.Controllers
             if (WebsiteReview.MemberID == null || WebsiteReview.ReviewDate == null || WebsiteReview.Type == null || WebsiteReview.RContent == null || WebsiteReview.Status == null)
             {
                 //驗證是否資料齊全
-                return BadRequest();
+                return BadRequest("缺少資料");
             }
 
             db.Entry(WebsiteReview).State = EntityState.Modified;
@@ -133,7 +133,7 @@ namespace GNT_server.Controllers
             {
                 if (!WebsiteReviewExits(ReviewID))
                 {
-                    return NotFound();
+                    return BadRequest("找無此ID");
                 }
                 else
                 {
