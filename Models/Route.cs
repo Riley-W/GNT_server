@@ -18,16 +18,24 @@ namespace GNT_server.Models
         public Nullable<int> MemberID { get; set; }
         public string Title { get; set; }
         public Nullable<System.DateTime> AddDate { get; set; }
-        public string Dest1 { get; set; }
-        public string Dest2 { get; set; }
-        public string Dest3 { get; set; }
-        public string Dest4 { get; set; }
-        public string Dest5 { get; set; }
-        public string Dest6 { get; set; }
-        public string Dest7 { get; set; }
-        public string Dest8 { get; set; }
-        public Nullable<bool> Enable { get; set; }
+        public Nullable<int> Dest1 { get; set; }
+        public Nullable<int> Dest2 { get; set; }
+        public Nullable<int> Dest3 { get; set; }
+        public Nullable<int> Dest4 { get; set; }
+        public Nullable<int> Dest5 { get; set; }
+        public Nullable<int> Dest6 { get; set; }
+        public Nullable<int> Dest7 { get; set; }
+        public Nullable<int> Dest8 { get; set; }
     
         public virtual MemberInfo MemberInfo { get; set; }
+        public virtual ShopInfo ShopInfo { get; set; }
+        public virtual ShopInfo ShopInfo1 { get; set; }
+        public virtual ShopInfo ShopInfo2 { get; set; }
+        public virtual ShopInfo ShopInfo3 { get; set; }
+        public virtual ShopInfo ShopInfo4 { get; set; }
+        public virtual ShopInfo ShopInfo5 { get; set; }
+        public virtual ShopInfo ShopInfo6 { get; set; }
+        public virtual ShopInfo ShopInfo7 { get; set; }
+        public virtual ShopInfo ShopInfo8 { get; set; }
     }
 }

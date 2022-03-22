@@ -9,15 +9,17 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
+using Catel.Data;
 using GNT_server.Models;
 
 namespace GNT_server.Controllers
 {
+    
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ShopReviewsController : ApiController
     {
-        private projectDBEntities1 db = new projectDBEntities1();
-
+        private projectDBEntities2 db = new projectDBEntities2();
+        
         // GET: api/ShopReviews
         public IQueryable<ShopReview> GetShopReview()
         {
@@ -25,23 +27,27 @@ namespace GNT_server.Controllers
         }
 
         // GET: api/ShopReviews/5
-        //[Route("api/shopreviews/{memberid}")] //搜尋會員評分紀錄
+        [Route("api/shopreviews/{memberid}")] //搜尋會員評分紀錄
         [HttpGet]
         [ResponseType(typeof(ShopReview))]
         public IHttpActionResult GetShopReview(int memberid)
         {
             var shopReview = db.ShopReview.Where(s => s.MemberID == memberid);
-            if (shopReview == null)
+            var shopReviewCount = db.ShopReview.Where(s => s.MemberID == memberid).ToList();
+            if (shopReviewCount.Count == 0)
             {
-                return NotFound();
-            }
+                //return NotFound();
+                //return Content(HttpStatusCode.NotFound, "無此ID"); //錯誤訊息
+                return BadRequest("無此ID");
 
+            }
             return Ok(shopReview);
         }
 
         // PUT: api/ShopReviews/5
-        /*[Route("api/shopreviews/{memberid}/{shopid}")]*/ //修改會員評分紀錄
+        [Route("api/shopreviews/{memberid}/{shopid}")] //修改會員評分紀錄
         [HttpPut]
+        
         [ResponseType(typeof(void))]
         public IHttpActionResult PutShopReview(int memberid, int shopid, ShopReview shopReview)
         {
@@ -52,7 +58,9 @@ namespace GNT_server.Controllers
 
             if (memberid != shopReview.MemberID && shopid != shopReview.ShopID)
             {
-                return BadRequest();
+                //return BadRequest();
+                //return Content(HttpStatusCode.BadRequest, "會員ID或店家ID錯誤");
+                return BadRequest("會員ID或店家ID錯誤");
             }
 
             db.Entry(shopReview).State = EntityState.Modified;
@@ -72,8 +80,9 @@ namespace GNT_server.Controllers
                     throw;
                 }
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            //return Content(HttpStatusCode.OK, "修改完成");
+            //return StatusCode(HttpStatusCode.NoContent);
+            return Ok("修改完成");
         }
 
         // POST: api/ShopReviews
@@ -108,7 +117,7 @@ namespace GNT_server.Controllers
         }
 
         // DELETE: api/ShopReviews/5
-        /*[Route("api/shopreviews/{memberid}/{shopid}")]*/ //刪除會員評分紀錄
+        [Route("api/shopreviews/{memberid}/{shopid}")] //刪除會員評分紀錄
         [HttpDelete]
         [ResponseType(typeof(ShopReview))]
         public IHttpActionResult DeleteShopReview(int memberid, int shopid)
@@ -122,7 +131,7 @@ namespace GNT_server.Controllers
             db.ShopReview.Remove(shopReview);
             db.SaveChanges();
 
-            return Ok(shopReview);
+            return Ok("刪除成功");
         }
 
         protected override void Dispose(bool disposing)

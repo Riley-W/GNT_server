@@ -18,7 +18,17 @@ namespace GNT_server.Models
         public ShopInfo()
         {
             this.MemberFavorite = new HashSet<MemberFavorite>();
+            this.Route = new HashSet<Route>();
+            this.Route1 = new HashSet<Route>();
+            this.Route2 = new HashSet<Route>();
+            this.Route3 = new HashSet<Route>();
+            this.Route4 = new HashSet<Route>();
+            this.Route5 = new HashSet<Route>();
+            this.Route6 = new HashSet<Route>();
+            this.Route7 = new HashSet<Route>();
+            this.Route8 = new HashSet<Route>();
             this.ShopReview = new HashSet<ShopReview>();
+            this.Tag = new HashSet<Tag>();
         }
     
         public int ShopID { get; set; }
@@ -33,7 +43,6 @@ namespace GNT_server.Models
         public string Min { get; set; }
         public string Note { get; set; }
         public string Type { get; set; }
-        public string Tag { get; set; }
         public string Status { get; set; }
         public string Image1 { get; set; }
         public string Image2 { get; set; }
@@ -54,6 +63,26 @@ namespace GNT_server.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MemberFavorite> MemberFavorite { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Route> Route { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Route> Route1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Route> Route2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Route> Route3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Route> Route4 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Route> Route5 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Route> Route6 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Route> Route7 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Route> Route8 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ShopReview> ShopReview { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tag> Tag { get; set; }
     }
 }

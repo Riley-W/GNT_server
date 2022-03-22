@@ -12,10 +12,18 @@ namespace GNT_server.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AdminInfo
+    public partial class Tag
     {
-        public int AdminID { get; set; }
-        public string Account { get; set; }
-        public string Password { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Tag()
+        {
+            this.ShopInfo = new HashSet<ShopInfo>();
+        }
+    
+        public int TagID { get; set; }
+        public string TagName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ShopInfo> ShopInfo { get; set; }
     }
 }

@@ -11,21 +11,13 @@ namespace GNT_server.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class ShopReview
+    
+    public partial class sysdiagrams
     {
-        public int MemberID { get; set; }
-        public int ShopID { get; set; }
-        [Required]
-        public System.DateTime ReviewDate { get; set; }
-        [Required]
-        public string RContent { get; set; }
-        [Required]
-        public int Score { get; set; }
-        
-        public virtual MemberInfo MemberInfo { get; set; }
-
-        public virtual ShopInfo ShopInfo { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

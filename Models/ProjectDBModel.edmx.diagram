@@ -4,20 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="211c92308fb24b629575314270384868" Name="Diagram1">
-        <EntityTypeShape EntityType="projectDBModel.AdminInfo" Width="1.5" PointX="2.75" PointY="4.125" />
-        <EntityTypeShape EntityType="projectDBModel.MemberFavorite" Width="1.5" PointX="3" PointY="7.125" />
-        <EntityTypeShape EntityType="projectDBModel.MemberInfo" Width="1.5" PointX="0.75" PointY="9" />
-        <EntityTypeShape EntityType="projectDBModel.Route" Width="1.5" PointX="3" PointY="13.375" />
-        <EntityTypeShape EntityType="projectDBModel.ShopInfo" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="projectDBModel.ShopReview" Width="1.5" PointX="3" PointY="10" />
-        <EntityTypeShape EntityType="projectDBModel.WebsiteReview" Width="1.5" PointX="3" PointY="17.75" />
-        <AssociationConnector Association="projectDBModel.FK_MemberFavorite_MemberInfo" />
-        <AssociationConnector Association="projectDBModel.FK_MemberFavorite_ShopInfo" />
-        <AssociationConnector Association="projectDBModel.FK_Route_MemberInfo" />
-        <AssociationConnector Association="projectDBModel.FK_ShopReview_MemberInfo" />
-        <AssociationConnector Association="projectDBModel.FK_WebsiteReview_MemberInfo" />
-        <AssociationConnector Association="projectDBModel.FK_ShopReview_ShopInfo" />
+      <Diagram DiagramId="903e81da97b04d9bb40b560258ef2662" Name="Diagram1">
+        <EntityTypeShape EntityType="projectDBModel.AdminInfo" Width="1.5" PointX="5.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.MemberFavorite" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.MemberInfo" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.Route" Width="1.5" PointX="6" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.ShopInfo" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.ShopReview" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.Tag" Width="1.5" PointX="3" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.WebsiteReview" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <AssociationConnector Association="projectDBModel.FK_MemberFavorite_MemberInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_MemberFavorite_ShopInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_MemberInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_ShopReview_MemberInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_WebsiteReview_MemberInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo1" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo2" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo3" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo4" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo5" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo6" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo7" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo8" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_ShopReview_ShopInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.ShopTag" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

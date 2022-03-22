@@ -13,10 +13,10 @@ namespace GNT_server.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class projectDBEntities1 : DbContext
+    public partial class projectDBEntities2 : DbContext
     {
-        public projectDBEntities1()
-            : base("name=projectDBEntities1")
+        public projectDBEntities2()
+            : base("name=projectDBEntities2")
         {
         }
     
@@ -31,6 +31,8 @@ namespace GNT_server.Models
         public virtual DbSet<Route> Route { get; set; }
         public virtual DbSet<ShopInfo> ShopInfo { get; set; }
         public virtual DbSet<ShopReview> ShopReview { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Tag> Tag { get; set; }
         public virtual DbSet<WebsiteReview> WebsiteReview { get; set; }
     }
 }

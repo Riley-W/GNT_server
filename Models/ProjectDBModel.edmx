@@ -12,7 +12,6 @@
           <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Account" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
-          <Property Name="Enable" Type="bit" />
         </EntityType>
         <EntityType Name="MemberFavorite">
           <Key>
@@ -39,7 +38,6 @@
           <Property Name="Image" Type="nvarchar" MaxLength="200" />
           <Property Name="Account" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
-          <Property Name="Point" Type="int" />
         </EntityType>
         <EntityType Name="Route">
           <Key>
@@ -49,15 +47,14 @@
           <Property Name="MemberID" Type="int" />
           <Property Name="Title" Type="nvarchar" MaxLength="500" />
           <Property Name="AddDate" Type="date" />
-          <Property Name="Dest1" Type="nvarchar" MaxLength="1000" />
-          <Property Name="Dest2" Type="nvarchar" MaxLength="1000" />
-          <Property Name="Dest3" Type="nvarchar" MaxLength="1000" />
-          <Property Name="Dest4" Type="nvarchar" MaxLength="1000" />
-          <Property Name="Dest5" Type="nvarchar" MaxLength="1000" />
-          <Property Name="Dest6" Type="nvarchar" MaxLength="1000" />
-          <Property Name="Dest7" Type="nvarchar" MaxLength="1000" />
-          <Property Name="Dest8" Type="nvarchar" MaxLength="1000" />
-          <Property Name="Enable" Type="bit" />
+          <Property Name="Dest1" Type="int" />
+          <Property Name="Dest2" Type="int" />
+          <Property Name="Dest3" Type="int" />
+          <Property Name="Dest4" Type="int" />
+          <Property Name="Dest5" Type="int" />
+          <Property Name="Dest6" Type="int" />
+          <Property Name="Dest7" Type="int" />
+          <Property Name="Dest8" Type="int" />
         </EntityType>
         <EntityType Name="ShopInfo">
           <Key>
@@ -75,7 +72,6 @@
           <Property Name="Min" Type="nvarchar" MaxLength="300" />
           <Property Name="Note" Type="nvarchar" MaxLength="4000" />
           <Property Name="Type" Type="nvarchar" MaxLength="500" />
-          <Property Name="Tag" Type="nvarchar" MaxLength="1500" />
           <Property Name="Status" Type="nvarchar" MaxLength="500" />
           <Property Name="Image1" Type="nvarchar" MaxLength="4000" />
           <Property Name="Image2" Type="nvarchar" MaxLength="4000" />
@@ -102,7 +98,32 @@
           <Property Name="ShopID" Type="int" Nullable="false" />
           <Property Name="ReviewDate" Type="date" />
           <Property Name="RContent" Type="nvarchar" MaxLength="2000" />
-          <Property Name="score" Type="int" />
+          <Property Name="Score" Type="int" />
+        </EntityType>
+        <EntityType Name="ShopTag">
+          <Key>
+            <PropertyRef Name="ShopID" />
+            <PropertyRef Name="TagID" />
+          </Key>
+          <Property Name="ShopID" Type="int" Nullable="false" />
+          <Property Name="TagID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="TagID" />
+          </Key>
+          <Property Name="TagID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TagName" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="WebsiteReview">
           <Key>
@@ -152,6 +173,102 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Route_ShopInfo1">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopInfo">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Dest2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_ShopInfo2">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopInfo">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Dest3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_ShopInfo3">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopInfo">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Dest4" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_ShopInfo4">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopInfo">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Dest5" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_ShopInfo5">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopInfo">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Dest6" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_ShopInfo6">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopInfo">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Dest7" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_ShopInfo7">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopInfo">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Dest8" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_ShopInfo8">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopInfo">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Dest8" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ShopReview_MemberInfo">
           <End Role="MemberInfo" Type="Self.MemberInfo" Multiplicity="1" />
           <End Role="ShopReview" Type="Self.ShopReview" Multiplicity="*" />
@@ -176,6 +293,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ShopTag_ShopInfo">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="1" />
+          <End Role="ShopTag" Type="Self.ShopTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopInfo">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="ShopTag">
+              <PropertyRef Name="ShopID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopTag_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+          <End Role="ShopTag" Type="Self.ShopTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="TagID" />
+            </Principal>
+            <Dependent Role="ShopTag">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_WebsiteReview_MemberInfo">
           <End Role="MemberInfo" Type="Self.MemberInfo" Multiplicity="0..1" />
           <End Role="WebsiteReview" Type="Self.WebsiteReview" Multiplicity="*" />
@@ -195,6 +336,9 @@
           <EntitySet Name="Route" EntityType="Self.Route" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShopInfo" EntityType="Self.ShopInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShopReview" EntityType="Self.ShopReview" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShopTag" EntityType="Self.ShopTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebsiteReview" EntityType="Self.WebsiteReview" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_MemberFavorite_MemberInfo" Association="Self.FK_MemberFavorite_MemberInfo">
             <End Role="MemberInfo" EntitySet="MemberInfo" />
@@ -208,6 +352,38 @@
             <End Role="MemberInfo" EntitySet="MemberInfo" />
             <End Role="Route" EntitySet="Route" />
           </AssociationSet>
+          <AssociationSet Name="FK_Route_ShopInfo1" Association="Self.FK_Route_ShopInfo1">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_ShopInfo2" Association="Self.FK_Route_ShopInfo2">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_ShopInfo3" Association="Self.FK_Route_ShopInfo3">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_ShopInfo4" Association="Self.FK_Route_ShopInfo4">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_ShopInfo5" Association="Self.FK_Route_ShopInfo5">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_ShopInfo6" Association="Self.FK_Route_ShopInfo6">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_ShopInfo7" Association="Self.FK_Route_ShopInfo7">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_ShopInfo8" Association="Self.FK_Route_ShopInfo8">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
           <AssociationSet Name="FK_ShopReview_MemberInfo" Association="Self.FK_ShopReview_MemberInfo">
             <End Role="MemberInfo" EntitySet="MemberInfo" />
             <End Role="ShopReview" EntitySet="ShopReview" />
@@ -215,6 +391,14 @@
           <AssociationSet Name="FK_ShopReview_ShopInfo" Association="Self.FK_ShopReview_ShopInfo">
             <End Role="ShopInfo" EntitySet="ShopInfo" />
             <End Role="ShopReview" EntitySet="ShopReview" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopTag_ShopInfo" Association="Self.FK_ShopTag_ShopInfo">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="ShopTag" EntitySet="ShopTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopTag_Tag" Association="Self.FK_ShopTag_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="ShopTag" EntitySet="ShopTag" />
           </AssociationSet>
           <AssociationSet Name="FK_WebsiteReview_MemberInfo" Association="Self.FK_WebsiteReview_MemberInfo">
             <End Role="MemberInfo" EntitySet="MemberInfo" />
@@ -225,39 +409,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="projectDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="projectDBEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AdminInfo" EntityType="projectDBModel.AdminInfo" />
-          <EntitySet Name="MemberFavorite" EntityType="projectDBModel.MemberFavorite" />
-          <EntitySet Name="MemberInfo" EntityType="projectDBModel.MemberInfo" />
-          <EntitySet Name="Route" EntityType="projectDBModel.Route" />
-          <EntitySet Name="ShopInfo" EntityType="projectDBModel.ShopInfo" />
-          <EntitySet Name="ShopReview" EntityType="projectDBModel.ShopReview" />
-          <EntitySet Name="WebsiteReview" EntityType="projectDBModel.WebsiteReview" />
-          <AssociationSet Name="FK_MemberFavorite_MemberInfo" Association="projectDBModel.FK_MemberFavorite_MemberInfo">
-            <End Role="MemberInfo" EntitySet="MemberInfo" />
-            <End Role="MemberFavorite" EntitySet="MemberFavorite" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MemberFavorite_ShopInfo" Association="projectDBModel.FK_MemberFavorite_ShopInfo">
-            <End Role="ShopInfo" EntitySet="ShopInfo" />
-            <End Role="MemberFavorite" EntitySet="MemberFavorite" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Route_MemberInfo" Association="projectDBModel.FK_Route_MemberInfo">
-            <End Role="MemberInfo" EntitySet="MemberInfo" />
-            <End Role="Route" EntitySet="Route" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ShopReview_MemberInfo" Association="projectDBModel.FK_ShopReview_MemberInfo">
-            <End Role="MemberInfo" EntitySet="MemberInfo" />
-            <End Role="ShopReview" EntitySet="ShopReview" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WebsiteReview_MemberInfo" Association="projectDBModel.FK_WebsiteReview_MemberInfo">
-            <End Role="MemberInfo" EntitySet="MemberInfo" />
-            <End Role="WebsiteReview" EntitySet="WebsiteReview" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ShopReview_ShopInfo" Association="projectDBModel.FK_ShopReview_ShopInfo">
-            <End Role="ShopInfo" EntitySet="ShopInfo" />
-            <End Role="ShopReview" EntitySet="ShopReview" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="AdminInfo">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -265,7 +416,6 @@
           <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Enable" Type="Boolean" />
         </EntityType>
         <EntityType Name="MemberFavorite">
           <Key>
@@ -275,8 +425,8 @@
           <Property Name="MemberID" Type="Int32" Nullable="false" />
           <Property Name="ShopID" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="MemberInfo" Relationship="projectDBModel.FK_MemberFavorite_MemberInfo" FromRole="MemberFavorite" ToRole="MemberInfo" />
-          <NavigationProperty Name="ShopInfo" Relationship="projectDBModel.FK_MemberFavorite_ShopInfo" FromRole="MemberFavorite" ToRole="ShopInfo" />
+          <NavigationProperty Name="MemberInfo" Relationship="Self.FK_MemberFavorite_MemberInfo" FromRole="MemberFavorite" ToRole="MemberInfo" />
+          <NavigationProperty Name="ShopInfo" Relationship="Self.FK_MemberFavorite_ShopInfo" FromRole="MemberFavorite" ToRole="ShopInfo" />
         </EntityType>
         <EntityType Name="MemberInfo">
           <Key>
@@ -294,11 +444,10 @@
           <Property Name="Image" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Point" Type="Int32" />
-          <NavigationProperty Name="MemberFavorite" Relationship="projectDBModel.FK_MemberFavorite_MemberInfo" FromRole="MemberInfo" ToRole="MemberFavorite" />
-          <NavigationProperty Name="Route" Relationship="projectDBModel.FK_Route_MemberInfo" FromRole="MemberInfo" ToRole="Route" />
-          <NavigationProperty Name="ShopReview" Relationship="projectDBModel.FK_ShopReview_MemberInfo" FromRole="MemberInfo" ToRole="ShopReview" />
-          <NavigationProperty Name="WebsiteReview" Relationship="projectDBModel.FK_WebsiteReview_MemberInfo" FromRole="MemberInfo" ToRole="WebsiteReview" />
+          <NavigationProperty Name="MemberFavorite" Relationship="Self.FK_MemberFavorite_MemberInfo" FromRole="MemberInfo" ToRole="MemberFavorite" />
+          <NavigationProperty Name="Route" Relationship="Self.FK_Route_MemberInfo" FromRole="MemberInfo" ToRole="Route" />
+          <NavigationProperty Name="ShopReview" Relationship="Self.FK_ShopReview_MemberInfo" FromRole="MemberInfo" ToRole="ShopReview" />
+          <NavigationProperty Name="WebsiteReview" Relationship="Self.FK_WebsiteReview_MemberInfo" FromRole="MemberInfo" ToRole="WebsiteReview" />
         </EntityType>
         <EntityType Name="Route">
           <Key>
@@ -308,16 +457,24 @@
           <Property Name="MemberID" Type="Int32" />
           <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="AddDate" Type="DateTime" Precision="0" />
-          <Property Name="Dest1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Dest2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Dest3" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Dest4" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Dest5" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Dest6" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Dest7" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Dest8" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Enable" Type="Boolean" />
-          <NavigationProperty Name="MemberInfo" Relationship="projectDBModel.FK_Route_MemberInfo" FromRole="Route" ToRole="MemberInfo" />
+          <Property Name="Dest1" Type="Int32" />
+          <Property Name="Dest2" Type="Int32" />
+          <Property Name="Dest3" Type="Int32" />
+          <Property Name="Dest4" Type="Int32" />
+          <Property Name="Dest5" Type="Int32" />
+          <Property Name="Dest6" Type="Int32" />
+          <Property Name="Dest7" Type="Int32" />
+          <Property Name="Dest8" Type="Int32" />
+          <NavigationProperty Name="MemberInfo" Relationship="Self.FK_Route_MemberInfo" FromRole="Route" ToRole="MemberInfo" />
+          <NavigationProperty Name="ShopInfo" Relationship="Self.FK_Route_ShopInfo" FromRole="Route" ToRole="ShopInfo" />
+          <NavigationProperty Name="ShopInfo1" Relationship="Self.FK_Route_ShopInfo1" FromRole="Route" ToRole="ShopInfo" />
+          <NavigationProperty Name="ShopInfo2" Relationship="Self.FK_Route_ShopInfo2" FromRole="Route" ToRole="ShopInfo" />
+          <NavigationProperty Name="ShopInfo3" Relationship="Self.FK_Route_ShopInfo3" FromRole="Route" ToRole="ShopInfo" />
+          <NavigationProperty Name="ShopInfo4" Relationship="Self.FK_Route_ShopInfo4" FromRole="Route" ToRole="ShopInfo" />
+          <NavigationProperty Name="ShopInfo5" Relationship="Self.FK_Route_ShopInfo5" FromRole="Route" ToRole="ShopInfo" />
+          <NavigationProperty Name="ShopInfo6" Relationship="Self.FK_Route_ShopInfo6" FromRole="Route" ToRole="ShopInfo" />
+          <NavigationProperty Name="ShopInfo7" Relationship="Self.FK_Route_ShopInfo7" FromRole="Route" ToRole="ShopInfo" />
+          <NavigationProperty Name="ShopInfo8" Relationship="Self.FK_Route_ShopInfo8" FromRole="Route" ToRole="ShopInfo" />
         </EntityType>
         <EntityType Name="ShopInfo">
           <Key>
@@ -335,7 +492,6 @@
           <Property Name="Min" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="Note" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Tag" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Image1" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="Image2" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
@@ -352,8 +508,18 @@
           <Property Name="Sunday" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Click" Type="Int32" />
           <Property Name="Enable" Type="Boolean" />
-          <NavigationProperty Name="MemberFavorite" Relationship="projectDBModel.FK_MemberFavorite_ShopInfo" FromRole="ShopInfo" ToRole="MemberFavorite" />
-          <NavigationProperty Name="ShopReview" Relationship="projectDBModel.FK_ShopReview_ShopInfo" FromRole="ShopInfo" ToRole="ShopReview" />
+          <NavigationProperty Name="MemberFavorite" Relationship="Self.FK_MemberFavorite_ShopInfo" FromRole="ShopInfo" ToRole="MemberFavorite" />
+          <NavigationProperty Name="Route" Relationship="Self.FK_Route_ShopInfo" FromRole="ShopInfo" ToRole="Route" />
+          <NavigationProperty Name="Route1" Relationship="Self.FK_Route_ShopInfo1" FromRole="ShopInfo" ToRole="Route" />
+          <NavigationProperty Name="Route2" Relationship="Self.FK_Route_ShopInfo2" FromRole="ShopInfo" ToRole="Route" />
+          <NavigationProperty Name="Route3" Relationship="Self.FK_Route_ShopInfo3" FromRole="ShopInfo" ToRole="Route" />
+          <NavigationProperty Name="Route4" Relationship="Self.FK_Route_ShopInfo4" FromRole="ShopInfo" ToRole="Route" />
+          <NavigationProperty Name="Route5" Relationship="Self.FK_Route_ShopInfo5" FromRole="ShopInfo" ToRole="Route" />
+          <NavigationProperty Name="Route6" Relationship="Self.FK_Route_ShopInfo6" FromRole="ShopInfo" ToRole="Route" />
+          <NavigationProperty Name="Route7" Relationship="Self.FK_Route_ShopInfo7" FromRole="ShopInfo" ToRole="Route" />
+          <NavigationProperty Name="Route8" Relationship="Self.FK_Route_ShopInfo8" FromRole="ShopInfo" ToRole="Route" />
+          <NavigationProperty Name="ShopReview" Relationship="Self.FK_ShopReview_ShopInfo" FromRole="ShopInfo" ToRole="ShopReview" />
+          <NavigationProperty Name="Tag" Relationship="Self.ShopTag" FromRole="ShopInfo" ToRole="Tag" />
         </EntityType>
         <EntityType Name="ShopReview">
           <Key>
@@ -364,9 +530,27 @@
           <Property Name="ShopID" Type="Int32" Nullable="false" />
           <Property Name="ReviewDate" Type="DateTime" Precision="0" />
           <Property Name="RContent" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="score" Type="Int32" />
-          <NavigationProperty Name="MemberInfo" Relationship="projectDBModel.FK_ShopReview_MemberInfo" FromRole="ShopReview" ToRole="MemberInfo" />
-          <NavigationProperty Name="ShopInfo" Relationship="projectDBModel.FK_ShopReview_ShopInfo" FromRole="ShopReview" ToRole="ShopInfo" />
+          <Property Name="Score" Type="Int32" />
+          <NavigationProperty Name="MemberInfo" Relationship="Self.FK_ShopReview_MemberInfo" FromRole="ShopReview" ToRole="MemberInfo" />
+          <NavigationProperty Name="ShopInfo" Relationship="Self.FK_ShopReview_ShopInfo" FromRole="ShopReview" ToRole="ShopInfo" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="TagID" />
+          </Key>
+          <Property Name="TagID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TagName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ShopInfo" Relationship="Self.ShopTag" FromRole="Tag" ToRole="ShopInfo" />
         </EntityType>
         <EntityType Name="WebsiteReview">
           <Key>
@@ -379,11 +563,11 @@
           <Property Name="RContent" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Remark" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="MemberInfo" Relationship="projectDBModel.FK_WebsiteReview_MemberInfo" FromRole="WebsiteReview" ToRole="MemberInfo" />
+          <NavigationProperty Name="MemberInfo" Relationship="Self.FK_WebsiteReview_MemberInfo" FromRole="WebsiteReview" ToRole="MemberInfo" />
         </EntityType>
         <Association Name="FK_MemberFavorite_MemberInfo">
-          <End Type="projectDBModel.MemberInfo" Role="MemberInfo" Multiplicity="1" />
-          <End Type="projectDBModel.MemberFavorite" Role="MemberFavorite" Multiplicity="*" />
+          <End Role="MemberInfo" Type="Self.MemberInfo" Multiplicity="1" />
+          <End Role="MemberFavorite" Type="Self.MemberFavorite" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MemberInfo">
               <PropertyRef Name="MemberID" />
@@ -394,8 +578,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MemberFavorite_ShopInfo">
-          <End Type="projectDBModel.ShopInfo" Role="ShopInfo" Multiplicity="1" />
-          <End Type="projectDBModel.MemberFavorite" Role="MemberFavorite" Multiplicity="*" />
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="1" />
+          <End Role="MemberFavorite" Type="Self.MemberFavorite" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ShopInfo">
               <PropertyRef Name="ShopID" />
@@ -406,8 +590,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Route_MemberInfo">
-          <End Type="projectDBModel.MemberInfo" Role="MemberInfo" Multiplicity="0..1" />
-          <End Type="projectDBModel.Route" Role="Route" Multiplicity="*" />
+          <End Role="MemberInfo" Type="Self.MemberInfo" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MemberInfo">
               <PropertyRef Name="MemberID" />
@@ -418,8 +602,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ShopReview_MemberInfo">
-          <End Type="projectDBModel.MemberInfo" Role="MemberInfo" Multiplicity="1" />
-          <End Type="projectDBModel.ShopReview" Role="ShopReview" Multiplicity="*" />
+          <End Role="MemberInfo" Type="Self.MemberInfo" Multiplicity="1" />
+          <End Role="ShopReview" Type="Self.ShopReview" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MemberInfo">
               <PropertyRef Name="MemberID" />
@@ -430,8 +614,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_WebsiteReview_MemberInfo">
-          <End Type="projectDBModel.MemberInfo" Role="MemberInfo" Multiplicity="0..1" />
-          <End Type="projectDBModel.WebsiteReview" Role="WebsiteReview" Multiplicity="*" />
+          <End Role="MemberInfo" Type="Self.MemberInfo" Multiplicity="0..1" />
+          <End Role="WebsiteReview" Type="Self.WebsiteReview" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MemberInfo">
               <PropertyRef Name="MemberID" />
@@ -441,9 +625,117 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Route_ShopInfo">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopInfo">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Dest1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_ShopInfo1">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopInfo">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Dest2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_ShopInfo2">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopInfo">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Dest3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_ShopInfo3">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopInfo">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Dest4" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_ShopInfo4">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopInfo">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Dest5" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_ShopInfo5">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopInfo">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Dest6" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_ShopInfo6">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopInfo">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Dest7" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_ShopInfo7">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopInfo">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Dest8" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_ShopInfo8">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopInfo">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Dest8" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ShopReview_ShopInfo">
-          <End Type="projectDBModel.ShopInfo" Role="ShopInfo" Multiplicity="1" />
-          <End Type="projectDBModel.ShopReview" Role="ShopReview" Multiplicity="*" />
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="1" />
+          <End Role="ShopReview" Type="Self.ShopReview" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ShopInfo">
               <PropertyRef Name="ShopID" />
@@ -453,128 +745,230 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="ShopTag">
+          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="*" />
+          <End Role="Tag" Type="Self.Tag" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="projectDBEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminInfo" EntityType="Self.AdminInfo" />
+          <EntitySet Name="MemberFavorite" EntityType="Self.MemberFavorite" />
+          <EntitySet Name="MemberInfo" EntityType="Self.MemberInfo" />
+          <EntitySet Name="Route" EntityType="Self.Route" />
+          <EntitySet Name="ShopInfo" EntityType="Self.ShopInfo" />
+          <EntitySet Name="ShopReview" EntityType="Self.ShopReview" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" />
+          <EntitySet Name="WebsiteReview" EntityType="Self.WebsiteReview" />
+          <AssociationSet Name="FK_MemberFavorite_MemberInfo" Association="Self.FK_MemberFavorite_MemberInfo">
+            <End Role="MemberInfo" EntitySet="MemberInfo" />
+            <End Role="MemberFavorite" EntitySet="MemberFavorite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberFavorite_ShopInfo" Association="Self.FK_MemberFavorite_ShopInfo">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="MemberFavorite" EntitySet="MemberFavorite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_MemberInfo" Association="Self.FK_Route_MemberInfo">
+            <End Role="MemberInfo" EntitySet="MemberInfo" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopReview_MemberInfo" Association="Self.FK_ShopReview_MemberInfo">
+            <End Role="MemberInfo" EntitySet="MemberInfo" />
+            <End Role="ShopReview" EntitySet="ShopReview" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebsiteReview_MemberInfo" Association="Self.FK_WebsiteReview_MemberInfo">
+            <End Role="MemberInfo" EntitySet="MemberInfo" />
+            <End Role="WebsiteReview" EntitySet="WebsiteReview" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_ShopInfo" Association="Self.FK_Route_ShopInfo">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_ShopInfo1" Association="Self.FK_Route_ShopInfo1">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_ShopInfo2" Association="Self.FK_Route_ShopInfo2">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_ShopInfo3" Association="Self.FK_Route_ShopInfo3">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_ShopInfo4" Association="Self.FK_Route_ShopInfo4">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_ShopInfo5" Association="Self.FK_Route_ShopInfo5">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_ShopInfo6" Association="Self.FK_Route_ShopInfo6">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_ShopInfo7" Association="Self.FK_Route_ShopInfo7">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_ShopInfo8" Association="Self.FK_Route_ShopInfo8">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopReview_ShopInfo" Association="Self.FK_ShopReview_ShopInfo">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="ShopReview" EntitySet="ShopReview" />
+          </AssociationSet>
+          <AssociationSet Name="ShopTag" Association="Self.ShopTag">
+            <End Role="ShopInfo" EntitySet="ShopInfo" />
+            <End Role="Tag" EntitySet="Tag" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="projectDBModelStoreContainer" CdmEntityContainer="projectDBEntities1">
+        <EntityContainerMapping StorageEntityContainer="projectDBModelStoreContainer" CdmEntityContainer="projectDBEntities2">
           <EntitySetMapping Name="AdminInfo">
             <EntityTypeMapping TypeName="projectDBModel.AdminInfo">
               <MappingFragment StoreEntitySet="AdminInfo">
-                <ScalarProperty Name="Enable" ColumnName="Enable" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Account" ColumnName="Account" />
                 <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MemberFavorite">
             <EntityTypeMapping TypeName="projectDBModel.MemberFavorite">
               <MappingFragment StoreEntitySet="MemberFavorite">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ShopID" ColumnName="ShopID" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="ShopID" ColumnName="ShopID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MemberInfo">
             <EntityTypeMapping TypeName="projectDBModel.MemberInfo">
               <MappingFragment StoreEntitySet="MemberInfo">
-                <ScalarProperty Name="Point" ColumnName="Point" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Account" ColumnName="Account" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="BlackList" ColumnName="BlackList" />
-                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+                <ScalarProperty Name="BlackList" ColumnName="BlackList" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Route">
             <EntityTypeMapping TypeName="projectDBModel.Route">
               <MappingFragment StoreEntitySet="Route">
-                <ScalarProperty Name="Enable" ColumnName="Enable" />
-                <ScalarProperty Name="Dest8" ColumnName="Dest8" />
-                <ScalarProperty Name="Dest7" ColumnName="Dest7" />
-                <ScalarProperty Name="Dest6" ColumnName="Dest6" />
-                <ScalarProperty Name="Dest5" ColumnName="Dest5" />
-                <ScalarProperty Name="Dest4" ColumnName="Dest4" />
-                <ScalarProperty Name="Dest3" ColumnName="Dest3" />
-                <ScalarProperty Name="Dest2" ColumnName="Dest2" />
-                <ScalarProperty Name="Dest1" ColumnName="Dest1" />
-                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="RouteID" ColumnName="RouteID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="Dest1" ColumnName="Dest1" />
+                <ScalarProperty Name="Dest2" ColumnName="Dest2" />
+                <ScalarProperty Name="Dest3" ColumnName="Dest3" />
+                <ScalarProperty Name="Dest4" ColumnName="Dest4" />
+                <ScalarProperty Name="Dest5" ColumnName="Dest5" />
+                <ScalarProperty Name="Dest6" ColumnName="Dest6" />
+                <ScalarProperty Name="Dest7" ColumnName="Dest7" />
+                <ScalarProperty Name="Dest8" ColumnName="Dest8" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ShopInfo">
             <EntityTypeMapping TypeName="projectDBModel.ShopInfo">
               <MappingFragment StoreEntitySet="ShopInfo">
-                <ScalarProperty Name="Enable" ColumnName="Enable" />
-                <ScalarProperty Name="Click" ColumnName="Click" />
-                <ScalarProperty Name="Sunday" ColumnName="Sunday" />
-                <ScalarProperty Name="Saturday" ColumnName="Saturday" />
-                <ScalarProperty Name="Friday" ColumnName="Friday" />
-                <ScalarProperty Name="Thursday" ColumnName="Thursday" />
-                <ScalarProperty Name="Wednesday" ColumnName="Wednesday" />
-                <ScalarProperty Name="Tuesday" ColumnName="Tuesday" />
-                <ScalarProperty Name="Monday" ColumnName="Monday" />
-                <ScalarProperty Name="PhotoSource" ColumnName="PhotoSource" />
-                <ScalarProperty Name="Image5" ColumnName="Image5" />
-                <ScalarProperty Name="Image4" ColumnName="Image4" />
-                <ScalarProperty Name="Image3" ColumnName="Image3" />
-                <ScalarProperty Name="Image2" ColumnName="Image2" />
-                <ScalarProperty Name="Image1" ColumnName="Image1" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Tag" ColumnName="Tag" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="Min" ColumnName="Min" />
-                <ScalarProperty Name="Instagram" ColumnName="Instagram" />
-                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ShopID" ColumnName="ShopID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+                <ScalarProperty Name="Min" ColumnName="Min" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Image1" ColumnName="Image1" />
+                <ScalarProperty Name="Image2" ColumnName="Image2" />
+                <ScalarProperty Name="Image3" ColumnName="Image3" />
+                <ScalarProperty Name="Image4" ColumnName="Image4" />
+                <ScalarProperty Name="Image5" ColumnName="Image5" />
+                <ScalarProperty Name="PhotoSource" ColumnName="PhotoSource" />
+                <ScalarProperty Name="Monday" ColumnName="Monday" />
+                <ScalarProperty Name="Tuesday" ColumnName="Tuesday" />
+                <ScalarProperty Name="Wednesday" ColumnName="Wednesday" />
+                <ScalarProperty Name="Thursday" ColumnName="Thursday" />
+                <ScalarProperty Name="Friday" ColumnName="Friday" />
+                <ScalarProperty Name="Saturday" ColumnName="Saturday" />
+                <ScalarProperty Name="Sunday" ColumnName="Sunday" />
+                <ScalarProperty Name="Click" ColumnName="Click" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ShopReview">
             <EntityTypeMapping TypeName="projectDBModel.ShopReview">
               <MappingFragment StoreEntitySet="ShopReview">
-                <ScalarProperty Name="score" ColumnName="score" />
-                <ScalarProperty Name="RContent" ColumnName="RContent" />
-                <ScalarProperty Name="ReviewDate" ColumnName="ReviewDate" />
-                <ScalarProperty Name="ShopID" ColumnName="ShopID" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="ShopID" ColumnName="ShopID" />
+                <ScalarProperty Name="ReviewDate" ColumnName="ReviewDate" />
+                <ScalarProperty Name="RContent" ColumnName="RContent" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="projectDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tag">
+            <EntityTypeMapping TypeName="projectDBModel.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WebsiteReview">
             <EntityTypeMapping TypeName="projectDBModel.WebsiteReview">
               <MappingFragment StoreEntitySet="WebsiteReview">
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="RContent" ColumnName="RContent" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="ReviewDate" ColumnName="ReviewDate" />
-                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="ReviewID" ColumnName="ReviewID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="ReviewDate" ColumnName="ReviewDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="RContent" ColumnName="RContent" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="ShopTag" TypeName="projectDBModel.ShopTag" StoreEntitySet="ShopTag">
+            <EndProperty Name="ShopInfo">
+              <ScalarProperty Name="ShopID" ColumnName="ShopID" />
+            </EndProperty>
+            <EndProperty Name="Tag">
+              <ScalarProperty Name="TagID" ColumnName="TagID" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
