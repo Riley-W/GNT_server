@@ -245,49 +245,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AdminInfo.cs">
-      <DependentUpon>projectDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MemberFavorite.cs">
-      <DependentUpon>projectDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MemberInfo.cs">
-      <DependentUpon>projectDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\projectDBModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>projectDBModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\projectDBModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>projectDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\projectDBModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>projectDBModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\Query.cs" />
-    <Compile Include="Models\Route.cs">
-      <DependentUpon>projectDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ShopInfo.cs">
-      <DependentUpon>projectDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ShopReview.cs">
-      <DependentUpon>projectDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>projectDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Tag.cs">
-      <DependentUpon>projectDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WebsiteReview.cs">
-      <DependentUpon>projectDBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\ExpiredTime.cs" />
     <Compile Include="Security\JwtAuthUtil.cs" />
@@ -302,16 +260,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\projectDBModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>projectDBModel.edmx</DependentUpon>
-      <LastGenOutput>projectDBModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\projectDBModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>projectDBModel.edmx</DependentUpon>
-      <LastGenOutput>projectDBModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -333,13 +281,6 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="Models\projectDBModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>projectDBModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\projectDBModel.edmx.diagram">
-      <DependentUpon>projectDBModel.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -363,8 +304,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\WebsiteReview\" />
     <Folder Include="Views\asd\" />
+    <Folder Include="Views\WebsiteReview\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
