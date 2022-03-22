@@ -6,9 +6,11 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Remoting.Contexts;
 using System.Text.RegularExpressions;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Mvc;
 using GNT_server.Models;
 
 namespace GNT_server.Controllers
@@ -70,7 +72,7 @@ namespace GNT_server.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+       
         // POST: api/MemberInfoes1
         [ResponseType(typeof(MemberInfo))]
         public IHttpActionResult PostMemberInfo(MemberInfo memberInfo)
@@ -79,9 +81,24 @@ namespace GNT_server.Controllers
             {
                 return BadRequest(ModelState);
             }
-            DateTime date = DateTime.Now;
+
+            var exist = db.MemberInfo.Any(m => m.Phone == memberInfo.Phone);
+            var exists = db.MemberInfo.Any(m => m.Account == memberInfo.Account);
+            if (exists == true)
+            {
+                return BadRequest("帳號已被使用");
+            }else if (exist == true)
+            {
+                return BadRequest("電話已被註冊");
+            }
+            
            
+
+
+
+            DateTime date = DateTime.Now;
             memberInfo.RegisterDate = date;
+            memberInfo.BlackList = false;
             
             
 
@@ -97,6 +114,13 @@ namespace GNT_server.Controllers
         public IHttpActionResult DeleteMemberInfo(int id)
         {
             MemberInfo memberInfo = db.MemberInfo.Find(id);
+            var query = db.Route.Where(o => o.MemberID == id);
+            db.Route.RemoveRange(query);
+            db.SaveChanges();
+            var query2 = db.WebsiteReview.Where(o => o.MemberID == id);
+            db.WebsiteReview.RemoveRange(query2);
+            db.SaveChanges();
+
             if (memberInfo == null)
             {
                 return NotFound();

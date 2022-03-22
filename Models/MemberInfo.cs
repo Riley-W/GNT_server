@@ -28,7 +28,8 @@ namespace GNT_server.Models
         public int MemberID { get; set; }
         [Required(ErrorMessage = "姓名不能為空!")]
         public string Name { get; set; }
-        [Phone]
+
+        [RegularExpression(@"^09[0-9]{8}$", ErrorMessage = "請輸入09開頭電話號碼格式")]
         public string Phone { get; set; }
 
         public string Address { get; set; }
@@ -43,7 +44,9 @@ namespace GNT_server.Models
         public string Image { get; set; }
        
         [Required(ErrorMessage = "帳號不能為空!")]
+
         public string Account { get; set; }
+
         [Required(ErrorMessage = "密碼不能為空!")]
         public string Password { get; set; }
     
