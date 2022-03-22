@@ -17,7 +17,17 @@
         <AssociationConnector Association="projectDBModel.FK_Route_MemberInfo" ManuallyRouted="false" />
         <AssociationConnector Association="projectDBModel.FK_ShopReview_MemberInfo" ManuallyRouted="false" />
         <AssociationConnector Association="projectDBModel.FK_WebsiteReview_MemberInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo1" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo2" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo3" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo4" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo5" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo6" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo7" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo8" ManuallyRouted="false" />
         <AssociationConnector Association="projectDBModel.FK_ShopReview_ShopInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.ShopTag" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

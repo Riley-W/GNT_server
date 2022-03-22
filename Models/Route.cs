@@ -16,6 +16,7 @@ namespace GNT_server.Models
     {
         public int RouteID { get; set; }
         public Nullable<int> MemberID { get; set; }
+        public string Title { get; set; }
         public Nullable<System.DateTime> AddDate { get; set; }
         public string Dest1 { get; set; }
         public string Dest2 { get; set; }
@@ -29,5 +30,14 @@ namespace GNT_server.Models
         public Nullable<bool> Enable { get; set; }
     
         public virtual MemberInfo MemberInfo { get; set; }
+        public virtual ShopInfo ShopInfo { get; set; }
+        public virtual ShopInfo ShopInfo1 { get; set; }
+        public virtual ShopInfo ShopInfo2 { get; set; }
+        public virtual ShopInfo ShopInfo3 { get; set; }
+        public virtual ShopInfo ShopInfo4 { get; set; }
+        public virtual ShopInfo ShopInfo5 { get; set; }
+        public virtual ShopInfo ShopInfo6 { get; set; }
+        public virtual ShopInfo ShopInfo7 { get; set; }
+        public virtual ShopInfo ShopInfo8 { get; set; }
     }
 }
