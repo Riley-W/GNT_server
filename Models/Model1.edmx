@@ -333,7 +333,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="projectDBModelStoreContainer">
+        <EntityContainer Name="projectDBModel1StoreContainer">
           <EntitySet Name="AdminInfo" EntityType="Self.AdminInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MemberFavorite" EntityType="Self.MemberFavorite" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MemberInfo" EntityType="Self.MemberInfo" Schema="dbo" store:Type="Tables" />
@@ -412,7 +412,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="projectDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="projectDBModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AdminInfo">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -449,6 +449,7 @@
           <Property Name="Image" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Point" Type="Int32" />
           <NavigationProperty Name="MemberFavorite" Relationship="Self.FK_MemberFavorite_MemberInfo" FromRole="MemberInfo" ToRole="MemberFavorite" />
           <NavigationProperty Name="Route" Relationship="Self.FK_Route_MemberInfo" FromRole="MemberInfo" ToRole="Route" />
           <NavigationProperty Name="ShopReview" Relationship="Self.FK_ShopReview_MemberInfo" FromRole="MemberInfo" ToRole="ShopReview" />
@@ -832,17 +833,18 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="projectDBModelStoreContainer" CdmEntityContainer="projectDBEntities2">
           <EntitySetMapping Name="AdminInfo">
-            <EntityTypeMapping TypeName="projectDBModel.AdminInfo">
+            <EntityTypeMapping TypeName="projectDBModel1.AdminInfo">
               <MappingFragment StoreEntitySet="AdminInfo">
                 <ScalarProperty Name="Enable" ColumnName="Enable" />
                 <ScalarProperty Name="AdminID" ColumnName="AdminID" />
                 <ScalarProperty Name="Account" ColumnName="Account" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MemberFavorite">
-            <EntityTypeMapping TypeName="projectDBModel.MemberFavorite">
+            <EntityTypeMapping TypeName="projectDBModel1.MemberFavorite">
               <MappingFragment StoreEntitySet="MemberFavorite">
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="ShopID" ColumnName="ShopID" />
@@ -851,7 +853,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MemberInfo">
-            <EntityTypeMapping TypeName="projectDBModel.MemberInfo">
+            <EntityTypeMapping TypeName="projectDBModel1.MemberInfo">
               <MappingFragment StoreEntitySet="MemberInfo">
                 <ScalarProperty Name="Point" ColumnName="Point" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
@@ -866,11 +868,12 @@
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Account" ColumnName="Account" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Route">
-            <EntityTypeMapping TypeName="projectDBModel.Route">
+            <EntityTypeMapping TypeName="projectDBModel1.Route">
               <MappingFragment StoreEntitySet="Route">
                 <ScalarProperty Name="Enable" ColumnName="Enable" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -886,11 +889,12 @@
                 <ScalarProperty Name="Dest6" ColumnName="Dest6" />
                 <ScalarProperty Name="Dest7" ColumnName="Dest7" />
                 <ScalarProperty Name="Dest8" ColumnName="Dest8" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ShopInfo">
-            <EntityTypeMapping TypeName="projectDBModel.ShopInfo">
+            <EntityTypeMapping TypeName="projectDBModel1.ShopInfo">
               <MappingFragment StoreEntitySet="ShopInfo">
                 <ScalarProperty Name="Enable" ColumnName="Enable" />
                 <ScalarProperty Name="Click" ColumnName="Click" />
@@ -926,7 +930,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ShopReview">
-            <EntityTypeMapping TypeName="projectDBModel.ShopReview">
+            <EntityTypeMapping TypeName="projectDBModel1.ShopReview">
               <MappingFragment StoreEntitySet="ShopReview">
                 <ScalarProperty Name="Enable" ColumnName="Enable" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
@@ -957,7 +961,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WebsiteReview">
-            <EntityTypeMapping TypeName="projectDBModel.WebsiteReview">
+            <EntityTypeMapping TypeName="projectDBModel1.WebsiteReview">
               <MappingFragment StoreEntitySet="WebsiteReview">
                 <ScalarProperty Name="ReviewID" ColumnName="ReviewID" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
