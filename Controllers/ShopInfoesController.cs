@@ -11,9 +11,11 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using GNT_server.Models;
 using System.Web;
+using System.Web.Http.Cors;
 
 namespace GNT_server.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/ShopInfoes")]
     public class ShopInfoesController : ApiController
     {

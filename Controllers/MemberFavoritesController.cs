@@ -7,11 +7,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using GNT_server.Models;
 
 namespace GNT_server.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class MemberFavoritesController : ApiController
     {
         private projectDBEntities db = new projectDBEntities();

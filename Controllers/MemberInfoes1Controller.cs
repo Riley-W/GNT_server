@@ -9,12 +9,14 @@ using System.Net.Http;
 using System.Runtime.Remoting.Contexts;
 using System.Text.RegularExpressions;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using System.Web.Mvc;
 using GNT_server.Models;
 
 namespace GNT_server.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class MemberInfoes1Controller : ApiController
     {
         private projectDBEntities db = new projectDBEntities();
