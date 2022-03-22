@@ -232,11 +232,14 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AdminInfoesController.cs" />
+    <Compile Include="Controllers\memberController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ShopReviewsController.cs" />
     <Compile Include="Controllers\MemberFavoritesController.cs" />
     <Compile Include="Controllers\ShopInfoesController.cs" />
+    <Compile Include="Controllers\MemberInfoes1Controller.cs" />
+    <Compile Include="Controllers\RoutesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WebsiteReviewController.cs" />
     <Compile Include="Global.asax.cs">
@@ -361,6 +364,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\WebsiteReview\" />
+    <Folder Include="Views\asd\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
