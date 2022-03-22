@@ -11,7 +11,8 @@ namespace GNT_server.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ShopInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -30,13 +31,16 @@ namespace GNT_server.Models
             this.ShopReview = new HashSet<ShopReview>();
             this.Tag = new HashSet<Tag>();
         }
-    
+
         public int ShopID { get; set; }
+        [Required]
         public string Name { get; set; }
+
         public string Phone { get; set; }
         public string Address { get; set; }
         public Nullable<decimal> Longitude { get; set; }
         public Nullable<decimal> Latitude { get; set; }
+        [EmailAddress]
         public string Email { get; set; }
         public string Facebook { get; set; }
         public string Instagram { get; set; }

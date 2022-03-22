@@ -79,6 +79,7 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.16.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -235,6 +236,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ShopReviewsController.cs" />
     <Compile Include="Controllers\MemberFavoritesController.cs" />
+    <Compile Include="Controllers\ShopInfoesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -263,6 +265,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>projectDBModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Query.cs" />
     <Compile Include="Models\Route.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Formatting;
+using System.Data.Linq.SqlClient;
 using System.Web.Http;
 
 namespace GNT_server
@@ -24,6 +25,19 @@ namespace GNT_server
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
+
+            ); 
+             config.Routes.MapHttpRoute(
+                 name: "PutApi",
+                 routeTemplate: "api/{controller}/{id}",
+                 defaults: new { id = RouteParameter.Optional }
+
+             );
+            config.Routes.MapHttpRoute(
+                name: "PostApi",
+                routeTemplate: "api/{controller}",
+                defaults: new { id = RouteParameter.Optional }
+
             );
         }
     }
