@@ -1,7 +1,10 @@
 ﻿using Jose;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
 namespace GNT_server.Security
@@ -16,24 +19,37 @@ namespace GNT_server.Security
             {
                 if (request.Headers.Authorization == null || request.Headers.Authorization.Scheme != "Bearer")
                 {
-                    throw new System.Exception("Lost Token");
+                    setErrorResponse(actionContext, "驗證錯誤");
                 }
                 else
                 {
-                    var jwtObject = Jose.JWT.Decode<Dictionary<string, Object>>(
-                    request.Headers.Authorization.Parameter,
-                    Encoding.UTF8.GetBytes(secret),
-                    JwsAlgorithm.HS512);
-
-                    if (IsTokenExpired(jwtObject["Exp"].ToString()))
+                    try
                     {
-                        throw new System.Exception("Token Expired");
+                        var jwtObject = Jose.JWT.Decode<Dictionary<string, Object>>(
+                        request.Headers.Authorization.Parameter,
+                        Encoding.UTF8.GetBytes(secret),
+                        JwsAlgorithm.HS512);
+                        if (IsTokenExpired(jwtObject["Exp"].ToString()))
+                        {
+                            setErrorResponse(actionContext, "憑證過期");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        setErrorResponse(actionContext, e.Message);
                     }
                 }
             }
 
             base.OnActionExecuting(actionContext);
         }
+
+        private void setErrorResponse(HttpActionContext actionContext, string message)
+        {
+            var response = actionContext.Request.CreateErrorResponse(HttpStatusCode.Unauthorized, message);
+            actionContext.Response = response;
+        }
+
 
         //Login不需要驗證因為還沒有token
         public bool WithoutVerifyToken(string requestUri)
