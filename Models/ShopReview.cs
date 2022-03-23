@@ -11,13 +11,16 @@ namespace GNT_server.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ShopReview
     {
         public int MemberID { get; set; }
         public int ShopID { get; set; }
         public Nullable<System.DateTime> ReviewDate { get; set; }
+        [Required]
         public string RContent { get; set; }
+        [Required]
         public Nullable<int> Score { get; set; }
     
         public virtual MemberInfo MemberInfo { get; set; }
