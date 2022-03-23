@@ -20,6 +20,10 @@ namespace GNT_server.Controllers
     public class ShopInfoesController : ApiController
     {
         private projectDBEntities db = new projectDBEntities();
+        /// <summary>
+        /// 查詢所有店家(前台)
+        /// </summary>
+        /// <returns></returns>
         [Route("")]
         // GET: api/ShopInfoes
         public IQueryable<ShopInfo> GetShopInfo()
@@ -28,6 +32,11 @@ namespace GNT_server.Controllers
         }
 
         // GET: api/ShopInfoes/5
+        /// <summary>
+        /// 查詢店家ID(前台)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("{id:int}")]
         [ResponseType(typeof(ShopInfo))]
         public IHttpActionResult GetShopInfo(int id)
@@ -40,6 +49,11 @@ namespace GNT_server.Controllers
 
             return Ok(shopInfo);
         }
+        /// <summary>
+        /// 查詢四大分類店家(前台)
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         [Route("type/{type:length(1,50)}")]
         public IHttpActionResult GetShopInfoType(string type)
         {
@@ -106,6 +120,12 @@ namespace GNT_server.Controllers
         //}
         // PUT: api/ShopInfoes/5
         // api/{controller}/update/{id}
+        /// <summary>
+        /// 修改店家(後台)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="shopInfo"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("{id:int}")]
         [ResponseType(typeof(void))]
@@ -178,6 +198,11 @@ namespace GNT_server.Controllers
 
         // POST: api/ShopInfoes
         //api/{controller}/create
+        /// <summary>
+        /// 新增店家(後台)
+        /// </summary>
+        /// <param name="shopInfo"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("")]
         [ResponseType(typeof(ShopInfo))]

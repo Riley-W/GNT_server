@@ -25,6 +25,10 @@ namespace GNT_server.Controllers
         private projectDBEntities db = new projectDBEntities();
 
         // GET: api/MemberInfoes1
+        /// <summary>
+        /// 查詢所有會員(後台)
+        /// </summary>
+        /// <returns></returns>
         [Route("")]
         public IQueryable<MemberInfo> GetMemberInfo()
         {
@@ -32,6 +36,11 @@ namespace GNT_server.Controllers
         }
 
         // GET: api/MemberInfoes1/5
+        /// <summary>
+        /// 查詢會員(後台)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ResponseType(typeof(MemberInfo))]
         [Route("{id:int}")]
         public IHttpActionResult GetMemberInfo(int id)
@@ -46,6 +55,12 @@ namespace GNT_server.Controllers
         }
 
         // PUT: api/MemberInfoes1/5
+        /// <summary>
+        /// 修改會員資料(前台)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="memberInfo"></param>
+        /// <returns></returns>
         [ResponseType(typeof(void))]
         [Route("{id:int}")]
         public IHttpActionResult PutMemberInfo(int id, MemberInfo memberInfo)
@@ -82,6 +97,11 @@ namespace GNT_server.Controllers
         }
        
         // POST: api/MemberInfoes1
+        /// <summary>
+        /// 新增會員(前台)
+        /// </summary>
+        /// <param name="memberInfo"></param>
+        /// <returns></returns>
         [ResponseType(typeof(MemberInfo))]
         [Route("")]
         public IHttpActionResult PostMemberInfo(MemberInfo memberInfo)
@@ -119,6 +139,11 @@ namespace GNT_server.Controllers
         }
 
         // DELETE: api/MemberInfoes1/5
+        /// <summary>
+        /// 刪除會員(後台)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ResponseType(typeof(MemberInfo))]
         [Route("{id:int}")]
         public IHttpActionResult DeleteMemberInfo(int id)

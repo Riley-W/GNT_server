@@ -13,18 +13,29 @@ using GNT_server.Models;
 
 namespace GNT_server.Controllers
 {
+    
     [EnableCors(origins: "*", headers: "*", methods: "*")]
+    
     public class AdminInfoesController : ApiController
     {
         private projectDBEntities db = new projectDBEntities();
 
         // GET: api/AdminInfoes
+        /// <summary>
+        /// 查詢所有管理者(後台)
+        /// </summary>
+        /// <returns></returns>
         public IQueryable<AdminInfo> GetAdminInfo()
         {
             return db.AdminInfo;
         }
 
         // GET: api/AdminInfoes/5
+        /// <summary>
+        /// 查詢Admin by ID(後台)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ResponseType(typeof(AdminInfo))]
         public IHttpActionResult GetAdminInfo(int id)
         {
@@ -38,6 +49,12 @@ namespace GNT_server.Controllers
         }
 
         // PUT: api/AdminInfoes/5
+        /// <summary>
+        /// 修改Admin資料(後台)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="adminInfo"></param>
+        /// <returns></returns>
         [ResponseType(typeof(void))]
         public IHttpActionResult PutAdminInfo(int id, AdminInfo adminInfo)
         {
@@ -73,6 +90,11 @@ namespace GNT_server.Controllers
         }
 
         // POST: api/AdminInfoes
+        /// <summary>
+        /// 新增Admin(後台)
+        /// </summary>
+        /// <param name="adminInfo"></param>
+        /// <returns></returns>
         [ResponseType(typeof(AdminInfo))]
         public IHttpActionResult PostAdminInfo(AdminInfo adminInfo)
         {
