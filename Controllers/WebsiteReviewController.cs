@@ -11,6 +11,10 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using GNT_server.Models;
+using System.Net.Mail;//寄送mail
+using System.Net.Mime;//寄送mail
+using System.Configuration;
+
 
 namespace GNT_server.Controllers
 {
@@ -84,6 +88,8 @@ namespace GNT_server.Controllers
                 db.WebsiteReview.Add(WebsiteReview);
                 await db.SaveChangesAsync();
 
+                SendEmail();
+
                 //return CreatedAtRoute("DefaultApi", new { MemberID = WebsiteReview.MemberID, ReviewDate = WebsiteReview.ReviewDate, Type = WebsiteReview.Type, RContent = WebsiteReview.RContent, Status = WebsiteReview.Status}, WebsiteReview);
                 return Ok("資料新增完成。");
             }
@@ -139,6 +145,7 @@ namespace GNT_server.Controllers
             try 
             { 
                 await db.SaveChangesAsync();
+                SendEmail();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -163,5 +170,56 @@ namespace GNT_server.Controllers
             return db.WebsiteReview.Count(e => e.ReviewID == ReviewID) > 0;
         }
 
+        private void SendEmail()
+        {
+            try
+            {
+                SmtpClient mySmtpClient = new SmtpClient("smtp.gmail.com", 587);
+
+                //set smtp-client with basicAuthentication
+
+                //NetworkCredential LoginInfo = new NetworkCredential("goodnighttainan@gmail.com", "P@ssw0rd-iii87");
+                //NetworkCredential LoginInfo = new NetworkCredential(Convert.ToString(ConfigurationManager.AppSettings["goodnighttainan@gmail.com"]), Convert.ToString(ConfigurationManager.AppSettings["filgqxrexlhpuxso"]));
+                NetworkCredential LoginInfo = new NetworkCredential("goodnighttainan@gmail.com", "filgqxrexlhpuxso");
+
+                mySmtpClient.UseDefaultCredentials = true;
+
+                mySmtpClient.EnableSsl = true; //gmail預設開啟驗證
+                mySmtpClient.Credentials = LoginInfo;
+
+                //add from, to mail addresses
+                MailAddress from = new MailAddress("goodnighttainan@gmail.com", "好夜台南 Good Night Tainan", System.Text.Encoding.UTF8);
+                MailAddress to = new MailAddress("p55701312@gmail.com", "MailToID", System.Text.Encoding.UTF8);
+
+                MailMessage myMail = new MailMessage(from, to);
+
+                //add ReplyTo
+                MailAddress replyTo = new MailAddress("goodnighttainan@gmail.com");
+                myMail.ReplyToList.Add(replyTo);
+
+                //set subject and encoding
+                myMail.Subject = "【系統通知】好夜台南 Good Night Tainan 已收到您的意見回饋。";
+                myMail.SubjectEncoding = System.Text.Encoding.UTF8;
+
+                //set body message and encoding
+
+                myMail.Body = "<b>Test Mail</b><br>using <b>HTML</b>.";
+                myMail.BodyEncoding = System.Text.Encoding.UTF8;
+
+                //text or html;
+                myMail.IsBodyHtml = true;
+                
+                mySmtpClient.Send(myMail);
+
+            }
+            catch (SmtpException ex)
+            {
+                throw new ApplicationException("smtpException has occured: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
