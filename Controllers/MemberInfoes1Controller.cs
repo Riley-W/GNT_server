@@ -13,15 +13,19 @@ using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using System.Web.Mvc;
 using GNT_server.Models;
+using RouteAttribute = System.Web.Http.RouteAttribute;
+using RoutePrefixAttribute = System.Web.Http.RoutePrefixAttribute;
 
 namespace GNT_server.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [RoutePrefix("api/MemberInfoes1")]
     public class MemberInfoes1Controller : ApiController
     {
         private projectDBEntities db = new projectDBEntities();
 
         // GET: api/MemberInfoes1
+        [Route("")]
         public IQueryable<MemberInfo> GetMemberInfo()
         {
             return db.MemberInfo;
@@ -29,6 +33,7 @@ namespace GNT_server.Controllers
 
         // GET: api/MemberInfoes1/5
         [ResponseType(typeof(MemberInfo))]
+        [Route("{id:int}")]
         public IHttpActionResult GetMemberInfo(int id)
         {
             MemberInfo memberInfo = db.MemberInfo.Find(id);
@@ -42,6 +47,7 @@ namespace GNT_server.Controllers
 
         // PUT: api/MemberInfoes1/5
         [ResponseType(typeof(void))]
+        [Route("{id:int}")]
         public IHttpActionResult PutMemberInfo(int id, MemberInfo memberInfo)
         {
             if (!ModelState.IsValid)
@@ -77,6 +83,7 @@ namespace GNT_server.Controllers
        
         // POST: api/MemberInfoes1
         [ResponseType(typeof(MemberInfo))]
+        [Route("")]
         public IHttpActionResult PostMemberInfo(MemberInfo memberInfo)
         {
             if (!ModelState.IsValid)
@@ -113,6 +120,7 @@ namespace GNT_server.Controllers
 
         // DELETE: api/MemberInfoes1/5
         [ResponseType(typeof(MemberInfo))]
+        [Route("{id:int}")]
         public IHttpActionResult DeleteMemberInfo(int id)
         {
             MemberInfo memberInfo = db.MemberInfo.Find(id);

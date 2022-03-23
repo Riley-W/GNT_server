@@ -14,6 +14,7 @@ using GNT_server.Models;
 namespace GNT_server.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [RoutePrefix("api/Routes")]
     public class RoutesController : ApiController
     {
         private projectDBEntities db = new projectDBEntities();
@@ -26,6 +27,7 @@ namespace GNT_server.Controllers
 
         // GET: api/Routes/5
         [ResponseType(typeof(Route))]
+        [Route("{id:int}")]
         public IHttpActionResult GetRoute(int id)
         {
             Route route = db.Route.Find(id);
@@ -39,6 +41,7 @@ namespace GNT_server.Controllers
 
         // PUT: api/Routes/5
         [ResponseType(typeof(void))]
+        [Route("{id:int}")]
         public IHttpActionResult PutRoute(int id, Route route)
         {
             if (!ModelState.IsValid)
@@ -74,6 +77,7 @@ namespace GNT_server.Controllers
 
         // POST: api/Routes
         [ResponseType(typeof(Route))]
+        [Route("")]
         public IHttpActionResult PostRoute(Route route)
         {
             if (!ModelState.IsValid)
@@ -89,6 +93,7 @@ namespace GNT_server.Controllers
 
         // DELETE: api/Routes/5
         [ResponseType(typeof(Route))]
+        [Route("{id:int}")]
         public IHttpActionResult DeleteRoute(int id)
         {
             Route route = db.Route.Find(id);
