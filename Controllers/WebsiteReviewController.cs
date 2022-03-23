@@ -88,7 +88,7 @@ namespace GNT_server.Controllers
                 db.WebsiteReview.Add(WebsiteReview);
                 await db.SaveChangesAsync();
 
-                SendEmail();
+               // SendEmail();
 
                 //return CreatedAtRoute("DefaultApi", new { MemberID = WebsiteReview.MemberID, ReviewDate = WebsiteReview.ReviewDate, Type = WebsiteReview.Type, RContent = WebsiteReview.RContent, Status = WebsiteReview.Status}, WebsiteReview);
                 return Ok("資料新增完成。");
@@ -145,7 +145,9 @@ namespace GNT_server.Controllers
             try 
             { 
                 await db.SaveChangesAsync();
-                SendEmail();
+                var mailAddress = db.MemberInfo.Find(WebsiteReview.MemberID).Email.ToString();
+                var receiver = db.MemberInfo.Find(WebsiteReview.MemberID).Name.ToString();
+                SendEmail(mailAddress, receiver, WebsiteReview.RContent);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -170,7 +172,7 @@ namespace GNT_server.Controllers
             return db.WebsiteReview.Count(e => e.ReviewID == ReviewID) > 0;
         }
 
-        private void SendEmail()
+        private void SendEmail(string mailAddress, string receiver, string reviewContent)
         {
             try
             {
@@ -189,7 +191,7 @@ namespace GNT_server.Controllers
 
                 //add from, to mail addresses
                 MailAddress from = new MailAddress("goodnighttainan@gmail.com", "好夜台南 Good Night Tainan", System.Text.Encoding.UTF8);
-                MailAddress to = new MailAddress("p55701312@gmail.com", "MailToID", System.Text.Encoding.UTF8);
+                MailAddress to = new MailAddress(mailAddress, receiver, System.Text.Encoding.UTF8);
 
                 MailMessage myMail = new MailMessage(from, to);
 
@@ -203,7 +205,7 @@ namespace GNT_server.Controllers
 
                 //set body message and encoding
 
-                myMail.Body = "<b>Test Mail</b><br>using <b>HTML</b>.";
+                myMail.Body = "<h3>HI, " + receiver + ",</h3><p>    已收到您的意見回饋，感謝您使用【好夜台南 Good Night Tainan】，您寶貴的意見是我們進步的動力。</p><div align =\"center\" border=\"2px solid black\"> 意見回饋內容: " + reviewContent + "</div><div> -------------此為系統自動發送，請勿直接回覆。為了確保能收到來自【好夜台南 Good Night Tainan】的信件，請將goodnighttainan@gmail.com加入您的通訊錄-------------</div>";
                 myMail.BodyEncoding = System.Text.Encoding.UTF8;
 
                 //text or html;
@@ -221,5 +223,6 @@ namespace GNT_server.Controllers
                 throw ex;
             }
         }
+
     }
 }
