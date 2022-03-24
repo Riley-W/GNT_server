@@ -19,12 +19,21 @@ namespace GNT_server.Controllers
         private projectDBEntities db = new projectDBEntities();
 
         // GET: api/MemberFavorites
+        /// <summary>
+        /// 查詢所有最愛(後台)
+        /// </summary>
+        /// <returns></returns>
         public IQueryable<MemberFavorite> GetMemberFavorite()
         {
             return db.MemberFavorite;
         }
 
         // GET: api/MemberFavorites/5
+        /// <summary>
+        /// 查詢會員最愛(前台)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ResponseType(typeof(MemberFavorite))]
         public IHttpActionResult GetMemberFavorite(int id)
         {
@@ -38,6 +47,12 @@ namespace GNT_server.Controllers
         }
 
         // PUT: api/MemberFavorites/5
+        /// <summary>
+        /// 修改我的最愛(前台)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="memberFavorite"></param>
+        /// <returns></returns>
         [ResponseType(typeof(void))]
         public IHttpActionResult PutMemberFavorite(int id, MemberFavorite memberFavorite)
         {
@@ -73,6 +88,11 @@ namespace GNT_server.Controllers
         }
 
         // POST: api/MemberFavorites
+        /// <summary>
+        /// 新增我的最愛(前台)
+        /// </summary>
+        /// <param name="memberFavorite"></param>
+        /// <returns></returns>
         [ResponseType(typeof(MemberFavorite))]
         public IHttpActionResult PostMemberFavorite(MemberFavorite memberFavorite)
         {
@@ -103,6 +123,12 @@ namespace GNT_server.Controllers
         }
 
         // DELETE: api/MemberFavorites/5
+        /// <summary>
+        /// 刪除我的最愛(後台)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="shopid"></param>
+        /// <returns></returns>
         [ResponseType(typeof(MemberFavorite))]
         public IHttpActionResult DeleteMemberFavorite(int id,int shopid)
         {

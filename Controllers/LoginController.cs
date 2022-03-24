@@ -17,7 +17,11 @@ namespace GNT_server.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class LoginController : ApiController
     {
-
+        /// <summary>
+        /// Admin登入(後台)
+        /// </summary>
+        /// <param name="admininfo"></param>
+        /// <returns></returns>
         [HttpPost]
         public Object Post(AdminInfo admininfo)
         {

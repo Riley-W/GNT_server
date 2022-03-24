@@ -12,6 +12,7 @@ using System.Web.Http.Description;
 using Catel.Data;
 using GNT_server.Models;
 
+
 namespace GNT_server.Controllers
 {
     [RoutePrefix("api/shopreviews")]
@@ -19,6 +20,10 @@ namespace GNT_server.Controllers
     public class ShopReviewsController : ApiController
     {
         private projectDBEntities db = new projectDBEntities();
+        /// <summary>
+        /// 查詢所有評論(後台)
+        /// </summary>
+        /// <returns></returns>
         [Route("")]
         [HttpGet]
         // GET: api/ShopReviews
@@ -28,6 +33,11 @@ namespace GNT_server.Controllers
         }
 
         // GET: api/ShopReviews/5
+        /// <summary>
+        /// 查詢會員評論紀錄(後台)
+        /// </summary>
+        /// <param name="memberid"></param>
+        /// <returns></returns>
         [Route("{memberid:int}")] //搜尋會員評分紀錄
         [HttpGet]
         [ResponseType(typeof(ShopReview))]
@@ -44,7 +54,11 @@ namespace GNT_server.Controllers
             }
             return Ok(shopReview);
         }
-
+        /// <summary>
+        /// 關鍵字搜尋(後台)
+        /// </summary>
+        /// <param name="keywords"></param>
+        /// <returns></returns>
         [Route("keywords/{keywords}")] //模糊查尋會員評分內容
         [HttpGet]
         [ResponseType(typeof(ShopReview))]
@@ -63,6 +77,13 @@ namespace GNT_server.Controllers
         }
 
         // PUT: api/ShopReviews/5
+        /// <summary>
+        /// 會員修改評分紀錄(前台)
+        /// </summary>
+        /// <param name="memberid"></param>
+        /// <param name="shopid"></param>
+        /// <param name="shopReview"></param>
+        /// <returns></returns>
         [Route("{memberid}/{shopid}")] //修改會員評分紀錄
         [HttpPut]
         
@@ -108,6 +129,11 @@ namespace GNT_server.Controllers
         }
 
         // POST: api/ShopReviews
+        /// <summary>
+        /// 會員新增評論(前台)
+        /// </summary>
+        /// <param name="shopReview"></param>
+        /// <returns></returns>
         [Route("")]
         [ResponseType(typeof(ShopReview))]
         public IHttpActionResult PostShopReview(ShopReview shopReview) //新增評論
@@ -144,7 +170,12 @@ namespace GNT_server.Controllers
 
         }
 
-        
+        /// <summary>
+        /// Admin刪除會員評論(後台)
+        /// </summary>
+        /// <param name="memberid"></param>
+        /// <param name="shopid"></param>
+        /// <returns></returns>
         [Route("Admin/{memberid}/{shopid}")] //admin刪除會員評分紀錄
         [HttpDelete]
         [ResponseType(typeof(ShopReview))]
@@ -162,6 +193,12 @@ namespace GNT_server.Controllers
             return Ok("刪除成功");
         }
 
+        /// <summary>
+        /// 會員刪除評論(前台)
+        /// </summary>
+        /// <param name="memberid"></param>
+        /// <param name="shopid"></param>
+        /// <returns></returns>
         [Route("{memberid}/{shopid}")] //刪除會員評分紀錄
         [HttpDelete]
         [ResponseType(typeof(ShopReview))]

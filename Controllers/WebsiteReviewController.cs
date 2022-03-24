@@ -21,6 +21,10 @@ namespace GNT_server.Controllers
         private projectDBEntities db = new projectDBEntities();
 
         // GET: WebsiteReview
+        /// <summary>
+        /// 查詢所有意見回饋(後台)
+        /// </summary>
+        /// <returns></returns>
         [Route("")]
         public IQueryable<WebsiteReview> GetWebsiteReview()
         {   //QueryAll
@@ -28,18 +32,33 @@ namespace GNT_server.Controllers
 
         }
 
+        /// <summary>
+        /// 意見回饋類別查詢(後台) 
+        /// </summary>
+        /// <param name="Type"></param>
+        /// <returns></returns>
         [Route("type/{type}")]
         public IQueryable<WebsiteReview> GetWebsiteReviewByType(string Type)
         {   //QueryByType: 推薦店家 系統回饋 店家資訊更新 其他
             return db.WebsiteReview.Where(p => p.Type == Type);
         }
 
+        /// <summary>
+        /// 意見回饋狀態查詢(後台)
+        /// </summary>
+        /// <param name="Status"></param>
+        /// <returns></returns>
         [Route("status/{status}")]
         public IQueryable<WebsiteReview> GetWebsiteReviewByStatus(string Status)
         {   //QueryByStatus: 已處理 處理中 未處理
             return db.WebsiteReview.Where(p => p.Status == Status);
         }
 
+        /// <summary>
+        /// 意見回饋關鍵字查詢(後台)
+        /// </summary>
+        /// <param name="Keywords"></param>
+        /// <returns></returns>
         [Route("keywords/{keywords}")]
         public IQueryable<WebsiteReview> GetWebsiteReviewByKeywords(string Keywords)
         {   //QueryByKeywords: 
@@ -48,6 +67,11 @@ namespace GNT_server.Controllers
 
         }
 
+        /// <summary>
+        /// 意見回饋ID查詢(後台)
+        /// </summary>
+        /// <param name="ReviewID"></param>
+        /// <returns></returns>
         [Route("{ReviewID}")]
         [HttpGet]
         public IQueryable<WebsiteReview> GetWebsiteReviewByID(int ReviewID)
@@ -64,6 +88,11 @@ namespace GNT_server.Controllers
 
 
         // POST: ADD
+        /// <summary>
+        /// 新增意見回饋(前台)
+        /// </summary>
+        /// <param name="WebsiteReview"></param>
+        /// <returns></returns>
         [Route("")]
         [HttpPost]
         [ResponseType(typeof(WebsiteReview))]
@@ -92,6 +121,11 @@ namespace GNT_server.Controllers
         }
 
         //DELETE: 
+        /// <summary>
+        /// 刪除意見回饋(後台)
+        /// </summary>
+        /// <param name="ReviewID"></param>
+        /// <returns></returns>
         [Route("admin/{ReviewID}")]
         [HttpDelete]
         [ResponseType(typeof(WebsiteReview))]
@@ -113,6 +147,12 @@ namespace GNT_server.Controllers
 
 
         // PUT: EDIT
+        /// <summary>
+        /// 編輯意見回饋(後台)
+        /// </summary>
+        /// <param name="ReviewID"></param>
+        /// <param name="WebsiteReview"></param>
+        /// <returns></returns>
         [Route("admin/{ReviewID}")]
         [HttpPut]
         [ResponseType(typeof(void))]

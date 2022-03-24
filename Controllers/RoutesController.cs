@@ -20,12 +20,21 @@ namespace GNT_server.Controllers
         private projectDBEntities db = new projectDBEntities();
 
         // GET: api/Routes
+        /// <summary>
+        /// 查詢所有行程(後台)
+        /// </summary>
+        /// <returns></returns>
         public IQueryable<Route> GetRoute()
         {
             return db.Route;
         }
 
         // GET: api/Routes/5
+        /// <summary>
+        /// 查詢單筆行程(前台)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ResponseType(typeof(Route))]
         [Route("{id:int}")]
         public IHttpActionResult GetRoute(int id)
@@ -40,6 +49,12 @@ namespace GNT_server.Controllers
         }
 
         // PUT: api/Routes/5
+        /// <summary>
+        /// 修改行程(前台)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="route"></param>
+        /// <returns></returns>
         [ResponseType(typeof(void))]
         [Route("{id:int}")]
         public IHttpActionResult PutRoute(int id, Route route)
@@ -76,6 +91,11 @@ namespace GNT_server.Controllers
         }
 
         // POST: api/Routes
+        /// <summary>
+        /// 新增行程(前台)
+        /// </summary>
+        /// <param name="route"></param>
+        /// <returns></returns>
         [ResponseType(typeof(Route))]
         [Route("")]
         public IHttpActionResult PostRoute(Route route)
@@ -92,6 +112,11 @@ namespace GNT_server.Controllers
         }
 
         // DELETE: api/Routes/5
+        /// <summary>
+        /// 刪除行程(前台)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ResponseType(typeof(Route))]
         [Route("{id:int}")]
         public IHttpActionResult DeleteRoute(int id)
