@@ -296,6 +296,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\logo_full.png" />
     <Content Include="Global.asax" />
     <Content Include="Models\projectDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
