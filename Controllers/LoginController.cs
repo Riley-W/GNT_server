@@ -25,7 +25,7 @@ namespace GNT_server.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("AD")]
-        public Object Post(AdminInfo admininfo)
+        public IHttpActionResult Post(AdminInfo admininfo)
         {
             projectDBEntities db = new projectDBEntities();
             var result = (from a in db.AdminInfo
@@ -36,7 +36,7 @@ namespace GNT_server.Controllers
             {
                 JwtAuthUtil jwtAuthUtil = new JwtAuthUtil();
                 string jwtToken = jwtAuthUtil.GenerateToken(admininfo.Account);
-                return new
+                var loginmessage = new
                 {
                     status = true,
                     message = "登入成功",
@@ -44,14 +44,11 @@ namespace GNT_server.Controllers
                     token = jwtToken
 
                 };
+                return Ok(loginmessage);
             }
             else
             {
-                return new
-                {
-                    status = false,
-                    token = "Account Or Password Error"
-                };
+                return BadRequest("登入失敗");
             }
         }
 
@@ -63,30 +60,30 @@ namespace GNT_server.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("Member")]
-        public Object Post(MemberInfo memberinfo)
+        public IHttpActionResult Post(MemberInfo memberinfo)
         {
             projectDBEntities db = new projectDBEntities();
             var result = (from m in db.MemberInfo
                           where m.Account == memberinfo.Account
                           && m.Password == memberinfo.Password
                           select m).FirstOrDefault();
+
             if (result != null)
             {
-                return new
+                var loginmessage = new
                 {
                     status = true,
-                    name = memberinfo.Name,
+                    name = result.Name,
                     message = "登入成功"
                 };
+                return Ok(loginmessage);
             }
             else
             {
-                return new
-                {
-                    status = false,
-                    message = "登入失敗"
-                };
+
+                return BadRequest("登入失敗");
             }
         }
     }
 }
+
