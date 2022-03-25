@@ -14,6 +14,7 @@ using GNT_server.Models;
 namespace GNT_server.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [RoutePrefix("api/MemberFavorites")]
     public class MemberFavoritesController : ApiController
     {
         private projectDBEntities db = new projectDBEntities();
@@ -23,6 +24,7 @@ namespace GNT_server.Controllers
         /// 查詢所有最愛(後台)
         /// </summary>
         /// <returns></returns>
+        [Route("")]
         public IQueryable<MemberFavorite> GetMemberFavorite()
         {
             return db.MemberFavorite;
@@ -35,9 +37,10 @@ namespace GNT_server.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [ResponseType(typeof(MemberFavorite))]
-        public IHttpActionResult GetMemberFavorite(int id)
+        [Route("{id:int}")]
+        public IHttpActionResult GetMemberFavorite(int id,int shop)
         {
-            MemberFavorite memberFavorite = db.MemberFavorite.Find(id);
+            MemberFavorite memberFavorite = db.MemberFavorite.Find(id,shop);
             if (memberFavorite == null)
             {
                 return NotFound();
@@ -84,7 +87,7 @@ namespace GNT_server.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok("修改成功");
         }
 
         // POST: api/MemberFavorites
