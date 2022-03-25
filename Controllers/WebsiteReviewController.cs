@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -84,6 +85,10 @@ namespace GNT_server.Controllers
                 db.WebsiteReview.Add(WebsiteReview);
                 await db.SaveChangesAsync();
 
+                var mailAddress = db.MemberInfo.Find(WebsiteReview.MemberID).Email.ToString();
+                var receiver = db.MemberInfo.Find(WebsiteReview.MemberID).Name.ToString();
+                SendEmail(mailAddress, receiver, WebsiteReview.RContent);
+
                 //return CreatedAtRoute("DefaultApi", new { MemberID = WebsiteReview.MemberID, ReviewDate = WebsiteReview.ReviewDate, Type = WebsiteReview.Type, RContent = WebsiteReview.RContent, Status = WebsiteReview.Status}, WebsiteReview);
                 return Ok("資料新增完成。");
             }
@@ -139,6 +144,7 @@ namespace GNT_server.Controllers
             try 
             { 
                 await db.SaveChangesAsync();
+
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -162,6 +168,59 @@ namespace GNT_server.Controllers
         {
             return db.WebsiteReview.Count(e => e.ReviewID == ReviewID) > 0;
         }
+
+        private void SendEmail(string mailAddress, string receiver, string reviewContent)
+        {
+            try
+            {
+                SmtpClient mySmtpClient = new SmtpClient("smtp.gmail.com", 587);
+
+                //set smtp-client with basicAuthentication
+
+                //NetworkCredential LoginInfo = new NetworkCredential("goodnighttainan@gmail.com", "P@ssw0rd-iii87");
+                //NetworkCredential LoginInfo = new NetworkCredential(Convert.ToString(ConfigurationManager.AppSettings["goodnighttainan@gmail.com"]), Convert.ToString(ConfigurationManager.AppSettings["filgqxrexlhpuxso"]));
+                NetworkCredential LoginInfo = new NetworkCredential("goodnighttainan@gmail.com", "filgqxrexlhpuxso");
+
+                mySmtpClient.UseDefaultCredentials = true;
+
+                mySmtpClient.EnableSsl = true; //gmail預設開啟驗證
+                mySmtpClient.Credentials = LoginInfo;
+
+                //add from, to mail addresses
+                MailAddress from = new MailAddress("goodnighttainan@gmail.com", "好夜台南 Good Night Tainan", System.Text.Encoding.UTF8);
+                MailAddress to = new MailAddress(mailAddress, receiver, System.Text.Encoding.UTF8);
+
+                MailMessage myMail = new MailMessage(from, to);
+
+                //add ReplyTo
+                MailAddress replyTo = new MailAddress("goodnighttainan@gmail.com");
+                myMail.ReplyToList.Add(replyTo);
+
+                //set subject and encoding
+                myMail.Subject = "【系統通知】好夜台南 Good Night Tainan 已收到您的意見回饋。";
+                myMail.SubjectEncoding = System.Text.Encoding.UTF8;
+
+                //set body message and encoding
+
+                myMail.Body = "<h3>HI, " + receiver + ",</h3><p>    已收到您的意見回饋，感謝您使用【好夜台南 Good Night Tainan】，您寶貴的意見是我們進步的動力。</p><div align =\"center\" border=\"2px solid black\"> 意見回饋內容: " + reviewContent + "</div><div> -------------此為系統自動發送，請勿直接回覆。為了確保能收到來自【好夜台南 Good Night Tainan】的信件，請將goodnighttainan@gmail.com加入您的通訊錄-------------</div>";
+                myMail.BodyEncoding = System.Text.Encoding.UTF8;
+
+                //text or html;
+                myMail.IsBodyHtml = true;
+
+                mySmtpClient.Send(myMail);
+
+            }
+            catch (SmtpException ex)
+            {
+                throw new ApplicationException("smtpException has occured: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
     }
 }

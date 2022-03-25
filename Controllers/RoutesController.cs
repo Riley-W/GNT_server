@@ -20,6 +20,7 @@ namespace GNT_server.Controllers
         private projectDBEntities db = new projectDBEntities();
 
         // GET: api/Routes
+        [Route("")]
         public IQueryable<Route> GetRoute()
         {
             return db.Route;
