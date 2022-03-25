@@ -61,9 +61,9 @@ namespace GNT_server.Controllers
             if (type == "bar")
                 realtype = "酒吧";
             else if (type == "snack")
-                realtype = "宵夜小吃";
+                realtype = "小吃宵夜";
             else if (type == "dessert")
-                realtype = "深夜甜點";
+                realtype = "咖啡甜點";
             else if (type == "viewpoint")
                 realtype = "夜間景點";
             else

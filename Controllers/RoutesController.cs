@@ -24,6 +24,7 @@ namespace GNT_server.Controllers
         /// 查詢所有行程(後台)
         /// </summary>
         /// <returns></returns>
+        [Route("")]
         public IQueryable<Route> GetRoute()
         {
             return db.Route;

@@ -15,6 +15,7 @@ using System.Web.Http.Cors;
 namespace GNT_server.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [RoutePrefix("api/Login")]
     public class LoginController : ApiController
     {
         /// <summary>
@@ -23,6 +24,7 @@ namespace GNT_server.Controllers
         /// <param name="admininfo"></param>
         /// <returns></returns>
         [HttpPost]
+        [Route("AD")]
         public Object Post(AdminInfo admininfo)
         {
             projectDBEntities db = new projectDBEntities();
@@ -30,17 +32,17 @@ namespace GNT_server.Controllers
                           where a.Account == admininfo.Account
                           && a.Password == admininfo.Password
                           select a).FirstOrDefault();
-            if (result!=null)
+            if (result != null)
             {
                 JwtAuthUtil jwtAuthUtil = new JwtAuthUtil();
                 string jwtToken = jwtAuthUtil.GenerateToken(admininfo.Account);
                 return new
                 {
                     status = true,
-                    message="登入成功",
+                    message = "登入成功",
                     expiretime = ExpiredTime.ETime,
                     token = jwtToken
-                    
+
                 };
             }
             else
@@ -49,6 +51,40 @@ namespace GNT_server.Controllers
                 {
                     status = false,
                     token = "Account Or Password Error"
+                };
+            }
+        }
+
+
+        /// <summary>
+        /// Member登入(前台)
+        /// </summary>
+        /// <param name="memberinfo"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("Member")]
+        public Object Post(MemberInfo memberinfo)
+        {
+            projectDBEntities db = new projectDBEntities();
+            var result = (from m in db.MemberInfo
+                          where m.Account == memberinfo.Account
+                          && m.Password == memberinfo.Password
+                          select m).FirstOrDefault();
+            if (result != null)
+            {
+                return new
+                {
+                    status = true,
+                    name = memberinfo.Name,
+                    message = "登入成功"
+                };
+            }
+            else
+            {
+                return new
+                {
+                    status = false,
+                    message = "登入失敗"
                 };
             }
         }
