@@ -87,7 +87,7 @@ namespace GNT_server.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok("修改成功");
         }
 
         // POST: api/MemberFavorites
