@@ -278,6 +278,12 @@
     <Compile Include="Models\ShopReview.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ShopTag.cs">
+      <DependentUpon>projectDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>projectDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Tag.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>
@@ -329,6 +335,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include=".editorconfig" />
     <EntityDeploy Include="Models\projectDBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>projectDBModel.Designer.cs</LastGenOutput>
@@ -336,7 +343,6 @@
     <Content Include="Models\projectDBModel.edmx.diagram">
       <DependentUpon>projectDBModel.edmx</DependentUpon>
     </Content>
-    <Content Include=".editorconfig" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

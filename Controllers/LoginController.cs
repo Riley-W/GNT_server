@@ -23,6 +23,7 @@ namespace GNT_server.Controllers
         /// </summary>
         /// <param name="admininfo"></param>
         /// <returns></returns>
+        ///[ResponseType(typeof(AdminInfo))]
         [HttpPost]
         [Route("AD")]
         public IHttpActionResult Post(AdminInfo admininfo)
