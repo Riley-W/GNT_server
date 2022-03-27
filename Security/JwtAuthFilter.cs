@@ -54,9 +54,11 @@ namespace GNT_server.Security
         //Login不需要驗證因為還沒有token
         public bool WithoutVerifyToken(string requestUri)
         {
-            if (requestUri.EndsWith("/Login"))
+            if (requestUri.Contains("/Login"))
                 return true;
             else if(requestUri.Contains("Admin"))
+                return false;
+            else if (requestUri.Contains("admin"))
                 return false;
             return true;
         }

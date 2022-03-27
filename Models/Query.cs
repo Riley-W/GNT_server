@@ -7,25 +7,20 @@ namespace GNT_server.Models
 {
     public class Query
     {
+        public  projectDBEntities db = new projectDBEntities();
         public static string QueryFromList(string tag)
         {
-            List<string>QueryList = new List<string>() 
+
+            string[] Qtags = tag.Split(',');
+            int tagmax = Qtags.Count();
+            List<ShopTag> Queryshoplist = new List<ShopTag>();
+            for (int i = 0; i < tagmax; i++)
             {
-                "餐酒館",//0
-                "西班牙",//1
-                "調酒" ,//2
-               "酒吧",//3
-                "日式酒店",//4
-                "老宅" ,//5
-                "精釀啤酒",//6
-                "居酒屋" ,//7
-                "水果調酒",//8
-                "創意調酒", //9
-                "經典調酒"//10
-            };
-            int tagmax = QueryList.Count();
-            string[] querytags = tag.Split(',');
-            string newquerystring="";
+                var shopid = from s in db.ShopTag
+                              where s.TagID == i
+                              select s;
+                Queryshoplist.Add(shopid);
+            }
             List<string> Searchstringlist = new List<string>();
             for (int i = 0; i <= tagmax; i++)
             {
