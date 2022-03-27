@@ -29,11 +29,14 @@ namespace GNT_server.Controllers
         /// 查詢所有會員(後台)
         /// </summary>
         /// <returns></returns>
-        [Route("")]
-        public IQueryable<MemberInfo> GetMemberInfo()
+        [Route("{Admin}")]
+        public IQueryable<MemberInfo> GetMemberInfoAdmin()
         {
             return db.MemberInfo;
         }
+
+
+
 
         // GET: api/MemberInfoes1/5
         /// <summary>
@@ -42,7 +45,7 @@ namespace GNT_server.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [ResponseType(typeof(MemberInfo))]
-        [Route("{id:int}")]
+        [Route("{Admin}/{id:int}")]
         public IHttpActionResult GetMemberInfo(int id)
         {
             MemberInfo memberInfo = db.MemberInfo.Find(id);
@@ -95,7 +98,49 @@ namespace GNT_server.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-       
+
+        // PUT: api/MemberInfoes1/5
+        /// <summary>
+        /// 修改會員資料(後台)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="memberInfo"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(void))]
+        [Route("{Admin}/{id:int}")]
+        public IHttpActionResult PutMemberInfoAdmin(int id, MemberInfo memberInfo)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != memberInfo.MemberID)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(memberInfo).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!MemberInfoExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
         // POST: api/MemberInfoes1
         /// <summary>
         /// 新增會員(前台)
@@ -121,6 +166,7 @@ namespace GNT_server.Controllers
                 return BadRequest("電話已被註冊");
             }
             
+
            
 
 
@@ -135,7 +181,51 @@ namespace GNT_server.Controllers
             db.MemberInfo.Add(memberInfo);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = memberInfo.MemberID }, memberInfo);
+            return Ok("會員新增成功");
+        }
+
+        // POST: api/MemberInfoes1
+        /// <summary>
+        /// 新增會員(後台)
+        /// </summary>
+        /// <param name="memberInfo"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(MemberInfo))]
+        [Route("{Admin}/")]
+        public IHttpActionResult PostMemberInfoAdmin(MemberInfo memberInfo)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var exist = db.MemberInfo.Any(m => m.Phone == memberInfo.Phone);
+            var exists = db.MemberInfo.Any(m => m.Account == memberInfo.Account);
+            if (exists == true)
+            {
+                return BadRequest("帳號已被使用");
+            }
+            else if (exist == true)
+            {
+                return BadRequest("電話已被註冊");
+            }
+
+
+
+
+
+
+            DateTime date = DateTime.Now;
+            memberInfo.RegisterDate = date;
+            memberInfo.BlackList = false;
+
+
+
+
+            db.MemberInfo.Add(memberInfo);
+            db.SaveChanges();
+
+            return Ok("會員新增成功");
         }
 
         // DELETE: api/MemberInfoes1/5
@@ -145,7 +235,7 @@ namespace GNT_server.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [ResponseType(typeof(MemberInfo))]
-        [Route("{id:int}")]
+        [Route("{Admin}/{id:int}")]
         public IHttpActionResult DeleteMemberInfo(int id)
         {
             MemberInfo memberInfo = db.MemberInfo.Find(id);
