@@ -85,7 +85,10 @@ namespace GNT_server.Controllers
             var GetReviewByIDCount = db.WebsiteReview.Where(p => p.ReviewID == ReviewID).Count();
             if (GetReviewByIDCount < 1)
             {
-                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NoContent) { Content = new StringContent("找無此ID。") });
+                //throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NoContent) { Content = new StringContent("找無此ID。") });
+                return GetReviewByID;
+
+
             }
             return GetReviewByID;
 
@@ -264,9 +267,16 @@ namespace GNT_server.Controllers
                 myMail.Subject = "【好夜台南 Good Night Tainan】 已收到意見回饋";
                 myMail.SubjectEncoding = System.Text.Encoding.UTF8;
 
-                //set body message and encoding
+                //insert logo
+                //LinkedResource logo = new LinkedResource(@"C:\Users\YU\Desktop\全端養成班\期末專題\Git\Merge_3_add jsonignore\GNT_server\fonts\好夜台南_v3_01.jpeg");
+                string Server_MapPath = System.Web.HttpContext.Current.Server.MapPath("/");
+                Attachment logo = new Attachment(Server_MapPath +　"/fonts/好夜台南_v3_01.jpeg");
+                logo.ContentId = "logo.jpeg";
+                myMail.Attachments.Add(logo);
+                //logo.ContentType = new ContentType(MediaTypeNames.Image.Jpeg);
 
-                myMail.Body = "<div style=\" padding: 24px; margin: auto 50px; border: 2px transparent solid; text-align: center  \">" + "<h2>HI, " + receiver + ",</h2><p>    意見回饋已收到，感謝您使用【好夜台南 Good Night Tainan】，您寶貴的意見是我們進步的動力。 </p><div style=\"border: 4px #E08E45 solid; background-color:#F8F4A6; border-radius: 12px; margin: 24px 200px ; padding: 24px; text-align: left; font-size: 16px; color : black\"> △回饋時間:" + receiveDate + "<br>△回饋內容: " + reviewContent + "<br><br><br><br>瀏覽<a href=\"https://riley-w.github.io/goodNightTainan_front/\">【好夜台南 Good Night Tainan】</a></div></div><div style=\"line-height:15px ; color: grey; margin-top: 20px\"> -----------------------------此為系統自動發送，請勿直接回覆。為了確保能收到來自【好夜台南 Good Night Tainan】的信件，請將goodnighttainan@gmail.com加入您的通訊錄-----------------------------</div>";
+                //set body message and encoding
+                myMail.Body = "<div style=\"background-color: #E1E1E1;font-family: Microsoft JhengHei;text-align: center; padding: 70px 120px\"><a href=\"https://riley-w.github.io/goodNightTainan_front/\"><img src=\"cid:logo.jpeg\" width=\"400px\";></a><div style=\" padding: 24px; margin: 24px 120px; border: 2px transparent solid; text-align: center;font-family: Microsoft JhengHei; background-color: white\" >" + "<h2>HI, " + receiver + ",</h2><p>    意見回饋已收到，感謝您使用【好夜台南 Good Night Tainan】，您寶貴的意見是我們進步的動力。 </p><div style=\"border: 1px #CCC solid;background-color: #F5F5F5; border-radius: 3px;  margin: 36px 48px;padding: 36px; text-align: left; font-size: 14px;line-height:200%\" width=\"600px\"> △ 回饋時間: " + receiveDate + "<br>△ 回饋內容: " + reviewContent + "<div style=\"text-align: center\"></div></div></div><div style=\"line-height:15px ; color: grey; padding: 20px\"> **此為系統自動發送，請勿直接回覆。為了確保能收到來自【好夜台南 Good Night Tainan】的信件，請將goodnighttainan@gmail.com加入您的通訊錄**</div></div>";
 
                 myMail.BodyEncoding = System.Text.Encoding.UTF8;
 
@@ -316,9 +326,18 @@ namespace GNT_server.Controllers
                 myMail.Subject = "【好夜台南 Good Night Tainan】 已回覆意見回饋";
                 myMail.SubjectEncoding = System.Text.Encoding.UTF8;
 
-                //set body message and encoding
+                //insert logo
+                //LinkedResource logo = new LinkedResource(@"C:\Users\YU\Desktop\全端養成班\期末專題\Git\Merge_3_add jsonignore\GNT_server\fonts\好夜台南_v3_01.jpeg");
+                string Server_MapPath = System.Web.HttpContext.Current.Server.MapPath("/");
+                Attachment logo = new Attachment(Server_MapPath + "/fonts/好夜台南_v3_01.jpeg");
+                logo.ContentId = "logo.jpeg";
+                myMail.Attachments.Add(logo);
+                //logo.ContentType = new ContentType(MediaTypeNames.Image.Jpeg);
 
-                myMail.Body = "<div style=\" padding: 24px; margin: auto 50px; border: 2px transparent solid; text-align: center  \">" + "<h2>HI, " + receiver + ",</h2><p>    感謝您來信【好夜台南 Good Night Tainan】，您的意見回饋已處理： </p><div style=\"border: 4px #E08E45 solid; background-color:#F8F4A6; border-radius: 12px; margin: 24px 200px ; padding: 24px; text-align: left; font-size: 16px; color : black\"> △回饋時間:" + receiveDate + "<br>△回饋內容: " + reviewContent + "<br>---------------------------------------------------------------------------------------------------<br>△系統回覆: " + Reply + "<br><br><br><br>瀏覽<a href=\"https://riley-w.github.io/goodNightTainan_front/\">【好夜台南 Good Night Tainan】</a></div></div><div style=\"line-height:15px ; color: grey; margin-top: 20px\"> -----------------------------此為系統自動發送，請勿直接回覆。為了確保能收到來自【好夜台南 Good Night Tainan】的信件，請將goodnighttainan@gmail.com加入您的通訊錄-----------------------------</div>";
+
+                //set body message and encoding
+                myMail.Body = "<div style=\"background-color: #E1E1E1;font-family: Microsoft JhengHei;text-align: center; padding: 70px 120px\"><a href=\"https://riley-w.github.io/goodNightTainan_front/\"><img src=\"cid:logo.jpeg\" width=\"400px\";></a><div style=\" padding: 24px; margin: 24px 120px; border: 2px transparent solid; text-align: center;font-family: Microsoft JhengHei; background-color: white\" >" + "<h2>HI, " + receiver + ",</h2><p>感謝您來信【好夜台南 Good Night Tainan】，您的意見回饋已處理： </p><div style=\"border: 1px #CCC solid;background-color: #F5F5F5; border-radius: 3px;  margin: 36px 48px;padding: 36px; text-align: left; font-size: 14px;line-height:200%\" width=\"600px\"> △ 回饋時間: " + receiveDate + "<br>△ 回饋內容: " + reviewContent + "<br>---------------------------------------------------------------------------<br>△ 系統回覆: " + Reply +"</div></div><div style=\"line-height:15px; color: grey; padding: 20px\"> **此為系統自動發送，請勿直接回覆。為了確保能收到來自【好夜台南 Good Night Tainan】的信件，請將goodnighttainan@gmail.com加入您的通訊錄**</div></div>";
+
                 myMail.BodyEncoding = System.Text.Encoding.UTF8;
 
                 //text or html;
