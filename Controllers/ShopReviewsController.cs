@@ -49,7 +49,7 @@ namespace GNT_server.Controllers
             {
                 //return NotFound();
                 //return Content(HttpStatusCode.NotFound, "無此ID"); //錯誤訊息
-                return BadRequest("無此會員");
+                return BadRequest("無此會員評分紀錄");
 
             }
             return Ok(shopReview);
@@ -74,6 +74,28 @@ namespace GNT_server.Controllers
 
             }
             return Ok(shopReview);
+        }
+
+        /// <summary>
+        /// 計算店家平均分數(前台渲染)
+        /// </summary>
+        /// <param name="shopid"></param>
+        /// <returns></returns>
+        [Route("score/{shopid}")] //計算店家平均分數
+        [HttpGet]
+        [ResponseType(typeof(ShopReview))]
+        public IHttpActionResult GetShopReviewScore(int shopid)
+        {
+            var shopreview = db.ShopReview.Where(s => s.ShopID == shopid);
+            var score = shopreview.Select(c => c.Score).Average();
+            if(score == null)
+            {
+                return BadRequest("該店家無平均分數");
+            }
+            else
+            {
+                return Ok(score);
+            }
         }
 
         // PUT: api/ShopReviews/5
