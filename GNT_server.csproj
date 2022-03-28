@@ -235,6 +235,7 @@
     <Compile Include="Controllers\AdminInfoesController.cs" />
     <Compile Include="Controllers\memberController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\RoutesAdminController.cs" />
     <Compile Include="Controllers\ShopReviewsController.cs" />
     <Compile Include="Controllers\MemberFavoritesController.cs" />
     <Compile Include="Controllers\ShopInfoesController.cs" />

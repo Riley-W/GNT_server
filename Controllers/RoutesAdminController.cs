@@ -14,12 +14,12 @@ using GNT_server.Models;
 namespace GNT_server.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    [RoutePrefix("api/Routes")]
-    public class RoutesController : ApiController
+    [RoutePrefix("api/RoutesAdmin")]
+    public class RoutesAdminController : ApiController
     {
         private projectDBEntities db = new projectDBEntities();
 
-        // GET: api/Routes
+        // GET: api/RoutesAdmin
         /// <summary>
         /// 查詢所有會員的行程(後台)
         /// </summary>
@@ -30,14 +30,14 @@ namespace GNT_server.Controllers
             return db.Route;
         }
 
-        // GET: api/Routes/5
+        // GET: api/RoutesAdmin/5
         /// <summary>
-        /// 查詢單個會員的行程(前台)
+        /// 查詢單個會員的行程(後台)
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [ResponseType(typeof(Route))]
-        [Route("{id:int}")]
+        [Route("{Admin}/{id:int}")]
         public IHttpActionResult GetRoute(int id)
         {
             Route route = db.Route.Find(id);
@@ -49,17 +49,15 @@ namespace GNT_server.Controllers
             return Ok(route);
         }
 
-     
-
-        // PUT: api/Routes/5
+        // PUT: api/RoutesAdmin/5
         /// <summary>
-        /// 修改行程(前台)
+        /// 修改行程(後台)
         /// </summary>
         /// <param name="id"></param>
         /// <param name="route"></param>
         /// <returns></returns>
         [ResponseType(typeof(void))]
-        [Route("{id:int}")]
+        [Route("{Admin}/{id:int}")]
         public IHttpActionResult PutRoute(int id, Route route)
         {
             if (!ModelState.IsValid)
@@ -93,17 +91,14 @@ namespace GNT_server.Controllers
             return Ok("行程修改成功");
         }
 
-       
-
-
-        // POST: api/Routes
+        // POST: api/RoutesAdmin
         /// <summary>
-        /// 新增行程(前台)
+        /// 新增行程(後台)
         /// </summary>
         /// <param name="route"></param>
         /// <returns></returns>
         [ResponseType(typeof(Route))]
-        [Route("")]
+        [Route("{Admin}")]
         public IHttpActionResult PostRoute(Route route)
         {
             if (!ModelState.IsValid)
@@ -117,16 +112,14 @@ namespace GNT_server.Controllers
             return Ok("行程新增成功");
         }
 
-  
-
-        // DELETE: api/Routes/5
+        // DELETE: api/RoutesAdmin/5
         /// <summary>
-        /// 刪除會員自己的行程(前台)
+        /// 刪除行程(後台)
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [ResponseType(typeof(Route))]
-        [Route("{id:int}")]
+        [Route("{Admin}/{id:int}")]
         public IHttpActionResult DeleteRoute(int id)
         {
             Route route = db.Route.Find(id);
@@ -154,7 +147,5 @@ namespace GNT_server.Controllers
         {
             return db.Route.Count(e => e.RouteID == id) > 0;
         }
-
-        
     }
 }
