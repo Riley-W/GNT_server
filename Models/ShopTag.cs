@@ -9,16 +9,18 @@
 
 namespace GNT_server.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class ShopTag
     {
         public int ShopTagID { get; set; }
         public int ShopID { get; set; }
         public int TagID { get; set; }
-    
+        [JsonIgnore]
         public virtual ShopInfo ShopInfo { get; set; }
+        [JsonIgnore]
         public virtual Tag Tag { get; set; }
     }
 }
