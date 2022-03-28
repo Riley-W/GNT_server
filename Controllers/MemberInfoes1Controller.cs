@@ -29,7 +29,7 @@ namespace GNT_server.Controllers
         /// 查詢所有會員(後台)
         /// </summary>
         /// <returns></returns>
-        [Route("{Admin}")]
+        [Route("Admin")]
         public IQueryable<MemberInfo> GetMemberInfoAdmin()
         {
             return db.MemberInfo;
@@ -45,7 +45,7 @@ namespace GNT_server.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [ResponseType(typeof(MemberInfo))]
-        [Route("{Admin}/{id:int}")]
+        [Route("Admin/{id:int}")]
         public IHttpActionResult GetMemberInfo(int id)
         {
             MemberInfo memberInfo = db.MemberInfo.Find(id);
@@ -107,7 +107,7 @@ namespace GNT_server.Controllers
         /// <param name="memberInfo"></param>
         /// <returns></returns>
         [ResponseType(typeof(void))]
-        [Route("{Admin}/{id:int}")]
+        [Route("Admin/{id:int}")]
         public IHttpActionResult PutMemberInfoAdmin(int id, MemberInfo memberInfo)
         {
             if (!ModelState.IsValid)
@@ -191,7 +191,7 @@ namespace GNT_server.Controllers
         /// <param name="memberInfo"></param>
         /// <returns></returns>
         [ResponseType(typeof(MemberInfo))]
-        [Route("{Admin}/")]
+        [Route("Admin")]
         public IHttpActionResult PostMemberInfoAdmin(MemberInfo memberInfo)
         {
             if (!ModelState.IsValid)
@@ -235,7 +235,7 @@ namespace GNT_server.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [ResponseType(typeof(MemberInfo))]
-        [Route("{Admin}/{id:int}")]
+        [Route("Admin/{id:int}")]
         public IHttpActionResult DeleteMemberInfo(int id)
         {
             MemberInfo memberInfo = db.MemberInfo.Find(id);

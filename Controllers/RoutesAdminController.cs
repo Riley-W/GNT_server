@@ -24,7 +24,7 @@ namespace GNT_server.Controllers
         /// 查詢所有會員的行程(後台)
         /// </summary>
         /// <returns></returns>
-        [Route("{Admin}")]
+        [Route("Admin")]
         public IQueryable<Route> GetRoute()
         {
             return db.Route;
@@ -37,7 +37,7 @@ namespace GNT_server.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [ResponseType(typeof(Route))]
-        [Route("{Admin}/{id:int}")]
+        [Route("Admin/{id:int}")]
         public IHttpActionResult GetRoute(int id)
         {
             Route route = db.Route.Find(id);
@@ -57,7 +57,7 @@ namespace GNT_server.Controllers
         /// <param name="route"></param>
         /// <returns></returns>
         [ResponseType(typeof(void))]
-        [Route("{Admin}/{id:int}")]
+        [Route("Admin/{id:int}")]
         public IHttpActionResult PutRoute(int id, Route route)
         {
             if (!ModelState.IsValid)
@@ -98,7 +98,7 @@ namespace GNT_server.Controllers
         /// <param name="route"></param>
         /// <returns></returns>
         [ResponseType(typeof(Route))]
-        [Route("{Admin}")]
+        [Route("Admin")]
         public IHttpActionResult PostRoute(Route route)
         {
             if (!ModelState.IsValid)
@@ -119,7 +119,7 @@ namespace GNT_server.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [ResponseType(typeof(Route))]
-        [Route("{Admin}/{id:int}")]
+        [Route("Admin/{id:int}")]
         public IHttpActionResult DeleteRoute(int id)
         {
             Route route = db.Route.Find(id);

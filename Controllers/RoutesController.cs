@@ -24,7 +24,7 @@ namespace GNT_server.Controllers
         /// 查詢所有會員的行程(後台)
         /// </summary>
         /// <returns></returns>
-        [Route("{Admin}")]
+        [Route("Admin")]
         public IQueryable<Route> GetRoute()
         {
             return db.Route;
