@@ -77,55 +77,55 @@ namespace GNT_server.Controllers
             }
             return Ok(shopInfo);
         }
-        [HttpGet]//待更正為動態生成
-        [Route("tag")]//api/ShopInfoes/tag?tag=2,5
-        public IHttpActionResult GetShopInfoTag(string tag)
-        {
-            string[] Qtags = tag.Split(',');
-            int tagmax = Qtags.Count();
-            List<IEnumerable<int>> Queryshoplist = new List<IEnumerable<int>>();
-            int Qint;
-            List<int> queryshoplist = new List<int>();
-            List<int> alltagmatchlist = new List<int>();
-            List<ShopInfo> allmatchshops = new List<ShopInfo>();
-            for (int i = 0; i < tagmax; i++)
-            {
-                Int32.TryParse(Qtags[i], out Qint);
-                var result = from s in db.ShopTag
-                             where s.TagID == Qint
-                             select s.ShopID;
-                Queryshoplist.Add((IEnumerable<int>)result);
-            }
-            foreach (ShopTag shoptag in Queryshoplist)
-            {
-                queryshoplist.Add(shoptag.ShopID);
-            }
-            int max=queryshoplist.Max();
-            for (int i = 0; i <= max; i++)
-            {
-                if (queryshoplist.Contains(i))
-                {
-                    if (queryshoplist.Count(n => n == i) == tagmax)
-                    {
-                        alltagmatchlist.Add(i);
-                    }
-                }
-            }
-            for(int i = 1; i < alltagmatchlist.Count(); i++)
-            {
-                var result = from s in db.ShopInfo
-                             where s.ShopID == alltagmatchlist[i]
-                             select s;
-                allmatchshops.Add((ShopInfo)result);
-            }
+        //[HttpGet]//待更正為動態生成
+        //[Route("tag")]//api/ShopInfoes/tag?tag=2,5
+        //public IHttpActionResult GetShopInfoTag(string tag)
+        //{
+        //    string[] Qtags = tag.Split(',');
+        //    int tagmax = Qtags.Count();
+        //    List<IEnumerable<int>> Queryshoplist = new List<IEnumerable<int>>();
+        //    int Qint;
+        //    List<int> queryshoplist = new List<int>();
+        //    List<int> alltagmatchlist = new List<int>();
+        //    List<ShopInfo> allmatchshops = new List<ShopInfo>();
+        //    for (int i = 0; i < tagmax; i++)
+        //    {
+        //        Int32.TryParse(Qtags[i], out Qint);
+        //        var result = from s in db.ShopTag
+        //                     where s.TagID == Qint
+        //                     select s.ShopID;
+        //        Queryshoplist.Add((IEnumerable<int>)result);
+        //    }
+        //    foreach (ShopTag shoptag in Queryshoplist)
+        //    {
+        //        queryshoplist.Add(shoptag.ShopID);
+        //    }
+        //    int max=queryshoplist.Max();
+        //    for (int i = 0; i <= max; i++)
+        //    {
+        //        if (queryshoplist.Contains(i))
+        //        {
+        //            if (queryshoplist.Count(n => n == i) == tagmax)
+        //            {
+        //                alltagmatchlist.Add(i);
+        //            }
+        //        }
+        //    }
+        //    for(int i = 1; i < alltagmatchlist.Count(); i++)
+        //    {
+        //        var result = from s in db.ShopInfo
+        //                     where s.ShopID == alltagmatchlist[i]
+        //                     select s;
+        //        allmatchshops.Add((ShopInfo)result);
+        //    }
             
 
-            if (allmatchshops.Count()==0)
-            {
-                return NotFound();
-            }
-            return Ok(allmatchshops);
-        }
+        //    if (allmatchshops.Count()==0)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(allmatchshops);
+        //}
         //[HttpGet]
         //[Route("typeandtag")]//api/ShopInfoes/typeandtag?type=bar&tag=2,5
         //public IHttpActionResult GetShopInfoTypeAndTag(string type, string tag)
