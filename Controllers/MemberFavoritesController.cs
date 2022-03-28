@@ -29,24 +29,27 @@ namespace GNT_server.Controllers
         {
             return db.MemberFavorite;
         }
+        
 
         // GET: api/MemberFavorites/5
         /// <summary>
         /// 查詢會員最愛(前台)
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="shop"></param>
         /// <returns></returns>
         [ResponseType(typeof(MemberFavorite))]
-        [Route("{id:int}")]
-        public IHttpActionResult GetMemberFavorite(int id,int shop)
+        [Route("{Memberid:int}")]
+        public IHttpActionResult GetMemberFavorite(int id)
         {
-            MemberFavorite memberFavorite = db.MemberFavorite.Find(id,shop);
-            if (memberFavorite == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(memberFavorite);
+            //MemberFavorite memberFavorite = db.MemberFavorite.Find(id);
+            //if (memberFavorite == null)
+            //{
+            //    return NotFound();
+            //}
+            var query = db.MemberFavorite.Where(o => o.MemberID == id);
+     
+            return Ok(query);
         }
 
         // PUT: api/MemberFavorites/5
@@ -97,13 +100,14 @@ namespace GNT_server.Controllers
         /// <param name="memberFavorite"></param>
         /// <returns></returns>
         [ResponseType(typeof(MemberFavorite))]
+        [Route("")]
         public IHttpActionResult PostMemberFavorite(MemberFavorite memberFavorite)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
+            memberFavorite.Status = true;
             db.MemberFavorite.Add(memberFavorite);
 
             try
@@ -122,7 +126,7 @@ namespace GNT_server.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = memberFavorite.MemberID }, memberFavorite);
+            return Ok("我的最愛新增成功");
         }
 
         // DELETE: api/MemberFavorites/5
@@ -132,6 +136,7 @@ namespace GNT_server.Controllers
         /// <param name="id"></param>
         /// <param name="shopid"></param>
         /// <returns></returns>
+        [Route("{id:int}/{shopid:int}")]
         [ResponseType(typeof(MemberFavorite))]
         public IHttpActionResult DeleteMemberFavorite(int id,int shopid)
         {
@@ -141,7 +146,11 @@ namespace GNT_server.Controllers
                 return NotFound();
             }
 
-            db.MemberFavorite.Remove(memberFavorite);
+            var query = from a in db.MemberFavorite
+                        where (a.MemberID == id &
+                                a.ShopID == shopid )
+                        select a;
+            db.MemberFavorite.RemoveRange(query);
             db.SaveChanges();
 
             return Ok(memberFavorite);
