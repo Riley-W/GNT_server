@@ -96,7 +96,7 @@ namespace GNT_server.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok("會員資料修改成功");
         }
 
         // PUT: api/MemberInfoes1/5
@@ -138,7 +138,7 @@ namespace GNT_server.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok("會員資料修改成功");
         }
 
         // POST: api/MemberInfoes1

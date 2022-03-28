@@ -90,7 +90,7 @@ namespace GNT_server.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok("行程修改成功");
         }
 
        
@@ -114,7 +114,7 @@ namespace GNT_server.Controllers
             db.Route.Add(route);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = route.RouteID }, route);
+            return Ok("行程新增成功");
         }
 
   

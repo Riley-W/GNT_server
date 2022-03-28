@@ -74,7 +74,7 @@ namespace GNT_server.Controllers
                 var loginmessage = new
                 {
                     status = true,
-                    name = result.Name,
+                    name = result.MemberID,
                     message = "登入成功"
                 };
                 return Ok(loginmessage);
