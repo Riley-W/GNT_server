@@ -83,7 +83,7 @@ namespace GNT_server.Controllers
         {
             string[] Qtags = tag.Split(',');
             int tagmax = Qtags.Count();
-            List<ShopTag> Queryshoplist = new List<ShopTag>();
+            List<IEnumerable<int>> Queryshoplist = new List<IEnumerable<int>>();
             int Qint;
             List<int> queryshoplist = new List<int>();
             List<int> alltagmatchlist = new List<int>();
@@ -93,8 +93,8 @@ namespace GNT_server.Controllers
                 Int32.TryParse(Qtags[i], out Qint);
                 var result = from s in db.ShopTag
                              where s.TagID == Qint
-                             select s;
-                Queryshoplist.Add((ShopTag)result);
+                             select s.ShopID;
+                Queryshoplist.Add((IEnumerable<int>)result);
             }
             foreach (ShopTag shoptag in Queryshoplist)
             {
