@@ -81,43 +81,77 @@ namespace GNT_server.Controllers
         [Route("tag")]//api/ShopInfoes/tag?tag=2,5
         public IHttpActionResult GetShopInfoTag(string tag)
         {
-            string Qstring = Query.QueryFromList(tag);
+            string[] Qtags = tag.Split(',');
+            int tagmax = Qtags.Count();
+            List<ShopTag> Queryshoplist = new List<ShopTag>();
+            int Qint;
+            List<int> queryshoplist = new List<int>();
+            List<int> alltagmatchlist = new List<int>();
+            List<ShopInfo> allmatchshops = new List<ShopInfo>();
+            for (int i = 0; i < tagmax; i++)
+            {
+                Int32.TryParse(Qtags[i], out Qint);
+                var result = from s in db.ShopTag
+                             where s.TagID == Qint
+                             select s;
+                Queryshoplist.Add((ShopTag)result);
+            }
+            foreach (ShopTag shoptag in Queryshoplist)
+            {
+                queryshoplist.Add(shoptag.ShopID);
+            }
+            int max=queryshoplist.Max();
+            for (int i = 0; i <= max; i++)
+            {
+                if (queryshoplist.Contains(i))
+                {
+                    if (queryshoplist.Count(n => n == i) == tagmax)
+                    {
+                        alltagmatchlist.Add(i);
+                    }
+                }
+            }
+            for(int i = 1; i < alltagmatchlist.Count(); i++)
+            {
+                var result = from s in db.ShopInfo
+                             where s.ShopID == alltagmatchlist[i]
+                             select s;
+                allmatchshops.Add((ShopInfo)result);
+            }
+            
 
-            var shopInfo = from s in db.ShopInfo
-                           where s.Tag.Contains(Qstring)
-                           select s;
-            if (shopInfo == null)
+            if (allmatchshops.Count()==0)
             {
                 return NotFound();
             }
-            return Ok(shopInfo);
+            return Ok(allmatchshops);
         }
-        [HttpGet]
-        [Route("typeandtag")]//api/ShopInfoes/typeandtag?type=bar&tag=2,5
-        public IHttpActionResult GetShopInfoTypeAndTag(string type, string tag)
-        {
-            string Qstring = Query.QueryFromList(tag);
-            string realtype;
-            if (type == "bar")
-                realtype = "酒吧";
-            else if (type == "snack")
-                realtype = "宵夜小吃";
-            else if (type == "dessert")
-                realtype = "深夜甜點";
-            else if (type == "viewpoint")
-                realtype = "夜間景點";
-            else
-                realtype = "";
-            var shopInfo = from s in db.ShopInfo
-                           where s.Tag.Contains(Qstring)
-                           && s.Type == realtype
-                           select s;
-            if (shopInfo == null)
-            {
-                return NotFound();
-            }
-            return Ok(shopInfo);
-        }
+        //[HttpGet]
+        //[Route("typeandtag")]//api/ShopInfoes/typeandtag?type=bar&tag=2,5
+        //public IHttpActionResult GetShopInfoTypeAndTag(string type, string tag)
+        //{
+        //    List<int> Qstring = Query.QueryFromList(tag);
+        //    string realtype;
+        //    if (type == "bar")
+        //        realtype = "酒吧";
+        //    else if (type == "snack")
+        //        realtype = "宵夜小吃";
+        //    else if (type == "dessert")
+        //        realtype = "深夜甜點";
+        //    else if (type == "viewpoint")
+        //        realtype = "夜間景點";
+        //    else
+        //        realtype = "";
+        //    var shopInfo = from s in db.ShopInfo
+        //                   where s.Tag.Contains(Qstring)
+        //                   && s.Type == realtype
+        //                   select s;
+        //    if (shopInfo == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(shopInfo);
+        //}
     //    PUT: api/ShopInfoes/5
     //     api/{controller}/{id}
 /// <summary>
