@@ -240,6 +240,7 @@
     <Compile Include="Controllers\ShopInfoesController.cs" />
     <Compile Include="Controllers\MemberInfoes1Controller.cs" />
     <Compile Include="Controllers\RoutesController.cs" />
+    <Compile Include="Controllers\ShopTagController.cs" />
     <Compile Include="Controllers\WebsiteReviewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
