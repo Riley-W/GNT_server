@@ -9,6 +9,7 @@
 
 namespace GNT_server.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -24,6 +25,7 @@ namespace GNT_server.Models
         public string TagName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<ShopTag> ShopTag { get; set; }
     }
 }

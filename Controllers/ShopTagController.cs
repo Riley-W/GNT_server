@@ -24,7 +24,7 @@ namespace GNT_server.Controllers
         /// </summary>
         /// <param name="shopid"></param>
         /// <returns></returns>
-        [Route("Admin/{shopid:int}")]
+        [Route("{shopid:int}")]
         [ResponseType(typeof(ShopInfo))]
         public IHttpActionResult GetShopInfo(int shopid)
         {
