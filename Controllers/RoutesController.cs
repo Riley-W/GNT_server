@@ -42,10 +42,7 @@ namespace GNT_server.Controllers
         
         public IHttpActionResult GetRoute(int memberID)
         {
-            //Route route = db.Route.Find(RouteID);
-            //var alldata = PredicateBuilder.True<Route>();
-
-            //alldata = alldata.And(o => o.MemberID == RouteID);
+            
             var result = db.Route.Where(o=>o.MemberID==memberID);
             
             if (result == null)
@@ -60,7 +57,7 @@ namespace GNT_server.Controllers
 
         // PUT: api/Routes/5
         /// <summary>
-        /// 修改行程(前台)route裡面請必須輸入"RouteID"
+        /// 修改行程(前台)route裡面請必須輸入"RouteID" 即可更改Dest1~8或title
         /// </summary>
         /// <param name="Routeid"></param>
         /// <param name="route"></param>
@@ -145,6 +142,29 @@ namespace GNT_server.Controllers
             }
 
             db.Route.Remove(route);
+            db.SaveChanges();
+
+            return Ok("刪除成功");
+        }
+
+        // DELETE: api/Routes/5
+        /// <summary>
+        /// 刪除會員全部的行程(前台)
+        /// </summary>
+        /// <param name="Memberid"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(Route))]
+        [Route("{Memberid:int}")]
+        public IHttpActionResult RouteAll(int Memberid)
+        {
+            var selectall = db.Route.Where(r => r.MemberID == Memberid);
+
+            if (selectall == null)
+            {
+                return NotFound();
+            }
+
+            db.Route.RemoveRange(selectall);
             db.SaveChanges();
 
             return Ok("刪除成功");

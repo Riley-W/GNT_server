@@ -30,42 +30,45 @@ namespace GNT_server.Controllers
             return db.Route;
         }
 
-        // GET: api/RoutesAdmin/5
+        // GET: api/Routes/5
         /// <summary>
         /// 查詢單個會員的行程(後台)
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="memberID"></param>
         /// <returns></returns>
         [ResponseType(typeof(Route))]
-        [Route("Admin/{id:int}")]
-        public IHttpActionResult GetRoute(int id)
+        [Route("{memberID:int}")]
+
+        public IHttpActionResult GetRoute(int memberID)
         {
-            Route route = db.Route.Find(id);
-            if (route == null)
+            
+            var result = db.Route.Where(o => o.MemberID == memberID);
+
+            if (result == null)
             {
                 return NotFound();
             }
 
-            return Ok(route);
+            return Ok(result);
         }
 
         // PUT: api/RoutesAdmin/5
         /// <summary>
-        /// 修改行程(後台)
+        /// 修改行程(後台)route裡面請必須輸入"RouteID" 即可更改Dest1~8或title
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="Routeid"></param>
         /// <param name="route"></param>
         /// <returns></returns>
         [ResponseType(typeof(void))]
         [Route("Admin/{RouteID:int}")]
-        public IHttpActionResult PutRoute(int id, Route route)
+        public IHttpActionResult PutRoute(int Routeid, Route route)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != route.RouteID)
+            if (Routeid != route.RouteID)
             {
                 return BadRequest();
             }
@@ -78,7 +81,7 @@ namespace GNT_server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RouteExists(id))
+                if (!RouteExists(Routeid))
                 {
                     return NotFound();
                 }
@@ -93,7 +96,7 @@ namespace GNT_server.Controllers
 
         // POST: api/RoutesAdmin
         /// <summary>
-        /// 新增行程(後台)
+        /// 新增行程(後台) 需帶入"memberID","Title","Dest"
         /// </summary>
         /// <param name="route"></param>
         /// <returns></returns>
@@ -105,6 +108,8 @@ namespace GNT_server.Controllers
             {
                 return BadRequest(ModelState);
             }
+            DateTime date = DateTime.Now;
+            route.AddDate = date;
 
             db.Route.Add(route);
             db.SaveChanges();
@@ -116,13 +121,13 @@ namespace GNT_server.Controllers
         /// <summary>
         /// 刪除行程(後台)
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="Routeid"></param>
         /// <returns></returns>
         [ResponseType(typeof(Route))]
         [Route("Admin/{RouteID:int}")]
-        public IHttpActionResult DeleteRoute(int id)
+        public IHttpActionResult DeleteRoute(int Routeid)
         {
-            Route route = db.Route.Find(id);
+            Route route = db.Route.Find(Routeid);
             if (route == null)
             {
                 return NotFound();
@@ -132,6 +137,29 @@ namespace GNT_server.Controllers
             db.SaveChanges();
 
             return Ok(route);
+        }
+
+
+        /// <summary>
+        /// 刪除會員全部的行程(後台)
+        /// </summary>
+        /// <param name="Memberid"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(Route))]
+        [Route("Admin/{Memberid:int}")]
+        public IHttpActionResult RouteAll(int Memberid)
+        {
+            var selectall = db.Route.Where(r => r.MemberID == Memberid);
+
+            if (selectall == null)
+            {
+                return NotFound();
+            }
+
+            db.Route.RemoveRange(selectall);
+            db.SaveChanges();
+
+            return Ok("刪除成功");
         }
 
         protected override void Dispose(bool disposing)
