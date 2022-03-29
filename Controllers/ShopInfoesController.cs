@@ -27,9 +27,43 @@ namespace GNT_server.Controllers
         /// <returns></returns>
         [Route("")]
         // GET: api/ShopInfoes
-        public IQueryable<ShopInfo> GetShopInfo()
+        public IHttpActionResult GetAllShopInfo()
         {
-            return db.ShopInfo;
+            string tags = "";
+            int iint = 0;
+            var result = from s in db.ShopInfo
+                         select s;
+
+            foreach(var a in result)
+            {
+                if (!string.IsNullOrEmpty(a.TagIds))
+                {
+                    string[] ids = a.TagIds.Split(',');
+                    foreach (string i in ids)
+                    {
+                        Int32.TryParse(i, out iint);
+                        var tagname = from t in db.Tag
+                                      where t.TagID == iint
+                                      select t.TagName;
+                       foreach(string tn in tagname)
+                        {
+                            tags = tn + ",";
+                        }
+                        if (tags.Trim().Substring(tags.Trim().Length - 1, 1) == ",")
+                        {
+                            tags = tags.Trim().Substring(0, tags.Trim().Length - 1);
+                        }
+                    }
+                    a.TagIds = tags;
+                }
+                
+            }
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
         }
 
         // GET: api/ShopInfoes/5
