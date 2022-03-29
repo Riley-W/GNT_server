@@ -81,7 +81,7 @@ namespace GNT_server.Controllers
 
 
         /// <summary>
-        /// 查詢店家依據(店名，地址，tag)(前台)
+        /// 查詢店家依據 店名、地址、tag、type (前台)
         /// </summary>
         /// <param name="tag"></param>
         /// <param name="address"></param>
@@ -94,15 +94,15 @@ namespace GNT_server.Controllers
         public IHttpActionResult GetShopInfoTag(string tag,string address, string name,string type)
         {
             var alldata = PredicateBuilder.True<ShopInfo>();
-            if (!string.IsNullOrEmpty(address))
+            if (!string.IsNullOrWhiteSpace(address))
             {
                 alldata = alldata.And(a => a.Address.Contains(address));
             }
-            if (!string.IsNullOrEmpty(name))
+            if (!string.IsNullOrWhiteSpace(name))
             {
                 alldata = alldata.And(a => a.Name.Contains(name));
             }
-            if (!string.IsNullOrEmpty(type))
+            if (!string.IsNullOrWhiteSpace(type))
             {
                 string realtype;
                 if (type == "bar")
@@ -116,17 +116,22 @@ namespace GNT_server.Controllers
                 else
                     realtype = "";
                 if(realtype!="")
-                    alldata = alldata.And(a => a.Name.Contains(realtype));
+                    alldata = alldata.And(a => a.Type.Contains(realtype));
             }
-            string[] Tag = tag.Split(',');
-            if (Tag != null)
+            if (!string.IsNullOrWhiteSpace(tag))
             {
-                foreach (var Qint in Tag)
+                string[] Tag = tag.Split(',');
+                if (Tag != null)
                 {
-                    alldata = alldata.And(a => a.TagIDs.Contains(Qint));
+                    foreach (var Qint in Tag)
+                    {
+                        alldata = alldata.And(a => a.TagIds.Contains(Qint));
+
+                    }
 
                 }
-                var result = db.ShopTag.Where(alldata);
+            
+                var result = db.ShopInfo.Where(alldata);
 
                 return Ok(result);
             }

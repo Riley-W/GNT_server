@@ -247,11 +247,52 @@
     <Compile Include="Controllers\ShopInfoesController.cs" />
     <Compile Include="Controllers\MemberInfoes1Controller.cs" />
     <Compile Include="Controllers\RoutesController.cs" />
-    <Compile Include="Controllers\ShopTagController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Controllers\WebsiteReviewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdminInfo.cs">
+      <DependentUpon>projectDBmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MemberFavorite.cs">
+      <DependentUpon>projectDBmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MemberInfo.cs">
+      <DependentUpon>projectDBmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\projectDBmodel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>projectDBmodel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\projectDBmodel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>projectDBmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\projectDBmodel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>projectDBmodel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Route.cs">
+      <DependentUpon>projectDBmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShopInfo.cs">
+      <DependentUpon>projectDBmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShopReview.cs">
+      <DependentUpon>projectDBmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>projectDBmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tag.cs">
+      <DependentUpon>projectDBmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WebsiteReview.cs">
+      <DependentUpon>projectDBmodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\ExpiredTime.cs" />
@@ -269,6 +310,16 @@
     <Content Include="fonts\好夜台南_v3_01.jpeg" />
     <Content Include="fonts\好夜台南_v3_01.png" />
     <Content Include="Global.asax" />
+    <Content Include="Models\projectDBmodel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>projectDBmodel.edmx</DependentUpon>
+      <LastGenOutput>projectDBmodel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\projectDBmodel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>projectDBmodel.edmx</DependentUpon>
+      <LastGenOutput>projectDBmodel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -291,6 +342,13 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include=".editorconfig" />
+    <EntityDeploy Include="Models\projectDBmodel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>projectDBmodel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\projectDBmodel.edmx.diagram">
+      <DependentUpon>projectDBmodel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -314,7 +372,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\asd\" />
     <Folder Include="Views\WebsiteReview\" />
   </ItemGroup>
