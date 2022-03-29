@@ -29,26 +29,27 @@ namespace GNT_server.Controllers
         {
             return db.MemberFavorite;
         }
-        
+
 
         // GET: api/MemberFavorites/5
         /// <summary>
         /// 查詢會員最愛(前台)
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="shop"></param>
+        /// <param name=Memberid></param>
         /// <returns></returns>
         [ResponseType(typeof(MemberFavorite))]
-        [Route("{Memberid:int}")]
-        public IHttpActionResult GetMemberFavorite(int id)
+        [Route("{Memberid:int}")]       
+        public IHttpActionResult GetMemberFavorite(int Memberid)
         {
+            
             //MemberFavorite memberFavorite = db.MemberFavorite.Find(id);
             //if (memberFavorite == null)
             //{
             //    return NotFound();
             //}
-            var query = db.MemberFavorite.Where(o => o.MemberID == id);
-     
+            var query = db.MemberFavorite.Where(o => o.MemberID == Memberid);
+            //var querys = db.MemberFavorite.Where(o => o.ShopID == shopid );
+
             return Ok(query);
         }
 
@@ -95,7 +96,8 @@ namespace GNT_server.Controllers
 
         // POST: api/MemberFavorites
         /// <summary>
-        /// 新增我的最愛(前台)
+        /// 新增我的最愛(前台) 請帶入memberid: shopid:
+        /// 
         /// </summary>
         /// <param name="memberFavorite"></param>
         /// <returns></returns>
@@ -133,21 +135,21 @@ namespace GNT_server.Controllers
         /// <summary>
         /// 刪除我的最愛(後台)
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="Memberid"></param>
         /// <param name="shopid"></param>
         /// <returns></returns>
-        [Route("{id:int}/{shopid:int}")]
+        [Route("{Memberid:int}/{shopid:int}")]
         [ResponseType(typeof(MemberFavorite))]
-        public IHttpActionResult DeleteMemberFavorite(int id,int shopid)
+        public IHttpActionResult DeleteMemberFavorite(int Memberid, int shopid)
         {
-            MemberFavorite memberFavorite = db.MemberFavorite.Find(id,shopid);
+            MemberFavorite memberFavorite = db.MemberFavorite.Find(Memberid, shopid);
             if (memberFavorite == null)
             {
                 return NotFound();
             }
 
             var query = from a in db.MemberFavorite
-                        where (a.MemberID == id &
+                        where (a.MemberID == Memberid &
                                 a.ShopID == shopid )
                         select a;
             db.MemberFavorite.RemoveRange(query);
