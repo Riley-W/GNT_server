@@ -57,7 +57,7 @@ namespace GNT_server.Controllers
         /// <param name="route"></param>
         /// <returns></returns>
         [ResponseType(typeof(void))]
-        [Route("Admin/{id:int}")]
+        [Route("Admin/{RouteID:int}")]
         public IHttpActionResult PutRoute(int id, Route route)
         {
             if (!ModelState.IsValid)
@@ -119,7 +119,7 @@ namespace GNT_server.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [ResponseType(typeof(Route))]
-        [Route("Admin/{id:int}")]
+        [Route("Admin/{RouteID:int}")]
         public IHttpActionResult DeleteRoute(int id)
         {
             Route route = db.Route.Find(id);
