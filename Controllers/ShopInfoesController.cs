@@ -224,7 +224,7 @@ namespace GNT_server.Controllers
             if (result != null)
                 return Ok(result);
 
-            return return Content(HttpStatusCode.NotFound, "查無店家");
+             return Content(HttpStatusCode.NotFound, "查無店家");
         }
 
 
@@ -261,7 +261,7 @@ namespace GNT_server.Controllers
             {
                 if (!ShopInfoExists(id))
                 {
-                    return return Content(HttpStatusCode.NotFound, "查無店家");
+                    return Content(HttpStatusCode.NotFound, "查無店家");
                 }
                 else
                 {
