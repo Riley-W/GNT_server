@@ -12,10 +12,12 @@ namespace GNT_server.Models
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Route
     {
         public int RouteID { get; set; }
+        [Required(ErrorMessage = "會員ID不能為空")]
         public Nullable<int> MemberID { get; set; }
         public string Title { get; set; }
         public Nullable<System.DateTime> AddDate { get; set; }

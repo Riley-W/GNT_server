@@ -29,7 +29,7 @@ namespace GNT_server.Controllers
         /// 查詢所有會員(後台)
         /// </summary>
         /// <returns></returns>
-        [Route("{Admin}")]
+        [Route("Admin")]
         public IQueryable<MemberInfo> GetMemberInfoAdmin()
         {
             return db.MemberInfo;
@@ -42,13 +42,13 @@ namespace GNT_server.Controllers
         /// <summary>
         /// 查詢會員(後台)
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="Memberid"></param>
         /// <returns></returns>
         [ResponseType(typeof(MemberInfo))]
-        [Route("{Admin}/{id:int}")]
-        public IHttpActionResult GetMemberInfo(int id)
+        [Route("Admin/{id:int}")]
+        public IHttpActionResult GetMemberInfo(int Memberid)
         {
-            MemberInfo memberInfo = db.MemberInfo.Find(id);
+            MemberInfo memberInfo = db.MemberInfo.Find(Memberid);
             if (memberInfo == null)
             {
                 return NotFound();
@@ -61,19 +61,19 @@ namespace GNT_server.Controllers
         /// <summary>
         /// 修改會員資料(前台)
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="Memberid"></param>
         /// <param name="memberInfo"></param>
         /// <returns></returns>
         [ResponseType(typeof(void))]
         [Route("{id:int}")]
-        public IHttpActionResult PutMemberInfo(int id, MemberInfo memberInfo)
+        public IHttpActionResult PutMemberInfo(int Memberid, MemberInfo memberInfo)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != memberInfo.MemberID)
+            if (Memberid != memberInfo.MemberID)
             {
                 return BadRequest();
             }
@@ -86,7 +86,7 @@ namespace GNT_server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MemberInfoExists(id))
+                if (!MemberInfoExists(Memberid))
                 {
                     return NotFound();
                 }
@@ -101,21 +101,21 @@ namespace GNT_server.Controllers
 
         // PUT: api/MemberInfoes1/5
         /// <summary>
-        /// 修改會員資料(後台)
+        /// 修改會員資料(後台) 需要帶入會員ID
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="Memberid"></param>
         /// <param name="memberInfo"></param>
         /// <returns></returns>
         [ResponseType(typeof(void))]
-        [Route("{Admin}/{id:int}")]
-        public IHttpActionResult PutMemberInfoAdmin(int id, MemberInfo memberInfo)
+        [Route("Admin/{id:int}")]
+        public IHttpActionResult PutMemberInfoAdmin(int Memberid, MemberInfo memberInfo)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != memberInfo.MemberID)
+            if (Memberid != memberInfo.MemberID)
             {
                 return BadRequest();
             }
@@ -128,7 +128,7 @@ namespace GNT_server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MemberInfoExists(id))
+                if (!MemberInfoExists(Memberid))
                 {
                     return NotFound();
                 }
@@ -191,7 +191,7 @@ namespace GNT_server.Controllers
         /// <param name="memberInfo"></param>
         /// <returns></returns>
         [ResponseType(typeof(MemberInfo))]
-        [Route("{Admin}/")]
+        [Route("Admin")]
         public IHttpActionResult PostMemberInfoAdmin(MemberInfo memberInfo)
         {
             if (!ModelState.IsValid)
@@ -232,17 +232,17 @@ namespace GNT_server.Controllers
         /// <summary>
         /// 刪除會員(後台)
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="Memberid"></param>
         /// <returns></returns>
         [ResponseType(typeof(MemberInfo))]
-        [Route("{Admin}/{id:int}")]
-        public IHttpActionResult DeleteMemberInfo(int id)
+        [Route("Admin/{Memberid:int}")]
+        public IHttpActionResult DeleteMemberInfo(int Memberid)
         {
-            MemberInfo memberInfo = db.MemberInfo.Find(id);
-            var query = db.Route.Where(o => o.MemberID == id);
+            MemberInfo memberInfo = db.MemberInfo.Find(Memberid);
+            var query = db.Route.Where(o => o.MemberID == Memberid);
             db.Route.RemoveRange(query);
             db.SaveChanges();
-            var query2 = db.WebsiteReview.Where(o => o.MemberID == id);
+            var query2 = db.WebsiteReview.Where(o => o.MemberID == Memberid);
             db.WebsiteReview.RemoveRange(query2);
             db.SaveChanges();
 
