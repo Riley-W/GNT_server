@@ -155,7 +155,7 @@ namespace GNT_server.Controllers
             db.MemberFavorite.RemoveRange(query);
             db.SaveChanges();
 
-            return Ok(memberFavorite);
+            return Ok("刪除成功");
         }
 
         protected override void Dispose(bool disposing)
