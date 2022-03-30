@@ -12,7 +12,7 @@ namespace GNT_server.Models
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class ShopInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,10 +27,9 @@ namespace GNT_server.Models
             //this.Route5 = new HashSet<Route>();
             //this.Route6 = new HashSet<Route>();
             //this.Route7 = new HashSet<Route>();
-            this.ShopReview = new HashSet<ShopReview>();
-            this.ShopTag = new HashSet<ShopTag>();
+            //this.ShopReview = new HashSet<ShopReview>();
         }
-    
+
         public int ShopID { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
@@ -59,7 +58,8 @@ namespace GNT_server.Models
         public string Sunday { get; set; }
         public Nullable<int> Click { get; set; }
         public Nullable<bool> Enable { get; set; }
-    
+        public string TagIds { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [JsonIgnore]
         public virtual ICollection<MemberFavorite> MemberFavorite { get; set; }
@@ -88,9 +88,7 @@ namespace GNT_server.Models
         [JsonIgnore]
         public virtual ICollection<Route> Route7 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShopReview> ShopReview { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [JsonIgnore]
-        public virtual ICollection<ShopTag> ShopTag { get; set; }
+        public virtual ICollection<ShopReview> ShopReview { get; set; }
     }
 }

@@ -9,6 +9,7 @@
 
 namespace GNT_server.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -26,15 +27,23 @@ namespace GNT_server.Models
         public Nullable<int> Dest6 { get; set; }
         public Nullable<int> Dest7 { get; set; }
         public Nullable<int> Dest8 { get; set; }
-    
+
+        [JsonIgnore]
         public virtual MemberInfo MemberInfo { get; set; }
         public virtual ShopInfo ShopInfo { get; set; }
+        [JsonIgnore]
         public virtual ShopInfo ShopInfo1 { get; set; }
+        [JsonIgnore]
         public virtual ShopInfo ShopInfo2 { get; set; }
+        [JsonIgnore]
         public virtual ShopInfo ShopInfo3 { get; set; }
+        [JsonIgnore]
         public virtual ShopInfo ShopInfo4 { get; set; }
+        [JsonIgnore]
         public virtual ShopInfo ShopInfo5 { get; set; }
+        [JsonIgnore]
         public virtual ShopInfo ShopInfo6 { get; set; }
+        [JsonIgnore]
         public virtual ShopInfo ShopInfo7 { get; set; }
     }
 }

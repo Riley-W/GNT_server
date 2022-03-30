@@ -88,6 +88,7 @@
           <Property Name="Sunday" Type="nvarchar" MaxLength="50" />
           <Property Name="Click" Type="int" />
           <Property Name="Enable" Type="bit" />
+          <Property Name="TagIds" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="ShopReview">
           <Key>
@@ -99,14 +100,6 @@
           <Property Name="ReviewDate" Type="date" />
           <Property Name="RContent" Type="nvarchar" MaxLength="2000" />
           <Property Name="Score" Type="int" />
-        </EntityType>
-        <EntityType Name="ShopTag">
-          <Key>
-            <PropertyRef Name="ShopTagID" />
-          </Key>
-          <Property Name="ShopTagID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ShopID" Type="int" Nullable="false" />
-          <Property Name="TagID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -120,9 +113,10 @@
         </EntityType>
         <EntityType Name="Tag">
           <Key>
-            <PropertyRef Name="TagID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="TagID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tag" Type="nvarchar" MaxLength="50" />
           <Property Name="TagName" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="WebsiteReview">
@@ -293,30 +287,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ShopTag_ShopInfo">
-          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="1" />
-          <End Role="ShopTag" Type="Self.ShopTag" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ShopInfo">
-              <PropertyRef Name="ShopID" />
-            </Principal>
-            <Dependent Role="ShopTag">
-              <PropertyRef Name="ShopID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ShopTag_Tag">
-          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
-          <End Role="ShopTag" Type="Self.ShopTag" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tag">
-              <PropertyRef Name="TagID" />
-            </Principal>
-            <Dependent Role="ShopTag">
-              <PropertyRef Name="TagID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_WebsiteReview_MemberInfo">
           <End Role="MemberInfo" Type="Self.MemberInfo" Multiplicity="0..1" />
           <End Role="WebsiteReview" Type="Self.WebsiteReview" Multiplicity="*" />
@@ -336,7 +306,6 @@
           <EntitySet Name="Route" EntityType="Self.Route" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShopInfo" EntityType="Self.ShopInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShopReview" EntityType="Self.ShopReview" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ShopTag" EntityType="Self.ShopTag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebsiteReview" EntityType="Self.WebsiteReview" Schema="dbo" store:Type="Tables" />
@@ -391,14 +360,6 @@
           <AssociationSet Name="FK_ShopReview_ShopInfo" Association="Self.FK_ShopReview_ShopInfo">
             <End Role="ShopInfo" EntitySet="ShopInfo" />
             <End Role="ShopReview" EntitySet="ShopReview" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ShopTag_ShopInfo" Association="Self.FK_ShopTag_ShopInfo">
-            <End Role="ShopInfo" EntitySet="ShopInfo" />
-            <End Role="ShopTag" EntitySet="ShopTag" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ShopTag_Tag" Association="Self.FK_ShopTag_Tag">
-            <End Role="Tag" EntitySet="Tag" />
-            <End Role="ShopTag" EntitySet="ShopTag" />
           </AssociationSet>
           <AssociationSet Name="FK_WebsiteReview_MemberInfo" Association="Self.FK_WebsiteReview_MemberInfo">
             <End Role="MemberInfo" EntitySet="MemberInfo" />
@@ -508,6 +469,7 @@
           <Property Name="Sunday" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Click" Type="Int32" />
           <Property Name="Enable" Type="Boolean" />
+          <Property Name="TagIds" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MemberFavorite" Relationship="Self.FK_MemberFavorite_ShopInfo" FromRole="ShopInfo" ToRole="MemberFavorite" />
           <NavigationProperty Name="Route" Relationship="Self.FK_Route_ShopInfo1" FromRole="ShopInfo" ToRole="Route" />
           <NavigationProperty Name="Route1" Relationship="Self.FK_Route_ShopInfo2" FromRole="ShopInfo" ToRole="Route" />
@@ -518,7 +480,6 @@
           <NavigationProperty Name="Route6" Relationship="Self.FK_Route_ShopInfo7" FromRole="ShopInfo" ToRole="Route" />
           <NavigationProperty Name="Route7" Relationship="Self.FK_Route_ShopInfo8" FromRole="ShopInfo" ToRole="Route" />
           <NavigationProperty Name="ShopReview" Relationship="Self.FK_ShopReview_ShopInfo" FromRole="ShopInfo" ToRole="ShopReview" />
-          <NavigationProperty Name="ShopTag" Relationship="Self.FK_ShopTag_ShopInfo" FromRole="ShopInfo" ToRole="ShopTag" />
         </EntityType>
         <EntityType Name="ShopReview">
           <Key>
@@ -533,16 +494,6 @@
           <NavigationProperty Name="MemberInfo" Relationship="Self.FK_ShopReview_MemberInfo" FromRole="ShopReview" ToRole="MemberInfo" />
           <NavigationProperty Name="ShopInfo" Relationship="Self.FK_ShopReview_ShopInfo" FromRole="ShopReview" ToRole="ShopInfo" />
         </EntityType>
-        <EntityType Name="ShopTag">
-          <Key>
-            <PropertyRef Name="ShopTagID" />
-          </Key>
-          <Property Name="ShopTagID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ShopID" Type="Int32" Nullable="false" />
-          <Property Name="TagID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ShopInfo" Relationship="Self.FK_ShopTag_ShopInfo" FromRole="ShopTag" ToRole="ShopInfo" />
-          <NavigationProperty Name="Tag" Relationship="Self.FK_ShopTag_Tag" FromRole="ShopTag" ToRole="Tag" />
-        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -555,11 +506,11 @@
         </EntityType>
         <EntityType Name="Tag">
           <Key>
-            <PropertyRef Name="TagID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="TagID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tag1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TagName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ShopTag" Relationship="Self.FK_ShopTag_Tag" FromRole="Tag" ToRole="ShopTag" />
         </EntityType>
         <EntityType Name="WebsiteReview">
           <Key>
@@ -742,30 +693,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ShopTag_ShopInfo">
-          <End Role="ShopInfo" Type="Self.ShopInfo" Multiplicity="1" />
-          <End Role="ShopTag" Type="Self.ShopTag" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ShopInfo">
-              <PropertyRef Name="ShopID" />
-            </Principal>
-            <Dependent Role="ShopTag">
-              <PropertyRef Name="ShopID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ShopTag_Tag">
-          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
-          <End Role="ShopTag" Type="Self.ShopTag" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tag">
-              <PropertyRef Name="TagID" />
-            </Principal>
-            <Dependent Role="ShopTag">
-              <PropertyRef Name="TagID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="projectDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AdminInfo" EntityType="Self.AdminInfo" />
           <EntitySet Name="MemberFavorite" EntityType="Self.MemberFavorite" />
@@ -773,7 +700,6 @@
           <EntitySet Name="Route" EntityType="Self.Route" />
           <EntitySet Name="ShopInfo" EntityType="Self.ShopInfo" />
           <EntitySet Name="ShopReview" EntityType="Self.ShopReview" />
-          <EntitySet Name="ShopTag" EntityType="Self.ShopTag" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Tag" EntityType="Self.Tag" />
           <EntitySet Name="WebsiteReview" EntityType="Self.WebsiteReview" />
@@ -832,14 +758,6 @@
           <AssociationSet Name="FK_ShopReview_ShopInfo" Association="Self.FK_ShopReview_ShopInfo">
             <End Role="ShopInfo" EntitySet="ShopInfo" />
             <End Role="ShopReview" EntitySet="ShopReview" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ShopTag_ShopInfo" Association="Self.FK_ShopTag_ShopInfo">
-            <End Role="ShopInfo" EntitySet="ShopInfo" />
-            <End Role="ShopTag" EntitySet="ShopTag" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ShopTag_Tag" Association="Self.FK_ShopTag_Tag">
-            <End Role="Tag" EntitySet="Tag" />
-            <End Role="ShopTag" EntitySet="ShopTag" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -933,6 +851,7 @@
                 <ScalarProperty Name="Sunday" ColumnName="Sunday" />
                 <ScalarProperty Name="Click" ColumnName="Click" />
                 <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="TagIds" ColumnName="TagIds" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -944,15 +863,6 @@
                 <ScalarProperty Name="ReviewDate" ColumnName="ReviewDate" />
                 <ScalarProperty Name="RContent" ColumnName="RContent" />
                 <ScalarProperty Name="Score" ColumnName="Score" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ShopTag">
-            <EntityTypeMapping TypeName="projectDBModel.ShopTag">
-              <MappingFragment StoreEntitySet="ShopTag">
-                <ScalarProperty Name="ShopTagID" ColumnName="ShopTagID" />
-                <ScalarProperty Name="ShopID" ColumnName="ShopID" />
-                <ScalarProperty Name="TagID" ColumnName="TagID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -970,7 +880,8 @@
           <EntitySetMapping Name="Tag">
             <EntityTypeMapping TypeName="projectDBModel.Tag">
               <MappingFragment StoreEntitySet="Tag">
-                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Tag1" ColumnName="Tag" />
                 <ScalarProperty Name="TagName" ColumnName="TagName" />
               </MappingFragment>
             </EntityTypeMapping>

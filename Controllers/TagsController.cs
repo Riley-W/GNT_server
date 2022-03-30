@@ -119,7 +119,7 @@ namespace GNT_server.Controllers
 
         private bool TagExists(int id)
         {
-            return db.Tag.Count(e => e.TagID == id) > 0;
+            return db.Tag.Count(e => e.ID == id) > 0;
         }
     }
 }

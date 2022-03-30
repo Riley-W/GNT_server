@@ -4,17 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="39e4e7b17c4148c284bbdea6f683d013" Name="Diagram1">
-        <EntityTypeShape EntityType="projectDBModel.AdminInfo" Width="1.5" PointX="5.75" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="projectDBModel.MemberFavorite" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="projectDBModel.MemberInfo" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="projectDBModel.Route" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="projectDBModel.ShopInfo" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="projectDBModel.ShopReview" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="projectDBModel.ShopTag" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="projectDBModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="projectDBModel.Tag" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="projectDBModel.WebsiteReview" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+      <Diagram DiagramId="aa5d9791b3444a26a1b9ea79dbb9c5ab" Name="Diagram1" ZoomLevel="92">
+        <EntityTypeShape EntityType="projectDBModel.AdminInfo" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.MemberFavorite" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.MemberInfo" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.Route" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.ShopInfo" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.ShopReview" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.Tag" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.WebsiteReview" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
         <AssociationConnector Association="projectDBModel.FK_MemberFavorite_MemberInfo" ManuallyRouted="false" />
         <AssociationConnector Association="projectDBModel.FK_MemberFavorite_ShopInfo" ManuallyRouted="false" />
         <AssociationConnector Association="projectDBModel.FK_Route_MemberInfo" ManuallyRouted="false" />
@@ -29,8 +28,6 @@
         <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo7" ManuallyRouted="false" />
         <AssociationConnector Association="projectDBModel.FK_Route_ShopInfo8" ManuallyRouted="false" />
         <AssociationConnector Association="projectDBModel.FK_ShopReview_ShopInfo" ManuallyRouted="false" />
-        <AssociationConnector Association="projectDBModel.FK_ShopTag_ShopInfo" ManuallyRouted="false" />
-        <AssociationConnector Association="projectDBModel.FK_ShopTag_Tag" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,6 +12,7 @@ using System.Web.Http.Description;
 using GNT_server.Models;
 using System.Web;
 using System.Web.Http.Cors;
+using LinqKit;
 
 namespace GNT_server.Controllers
 {
@@ -26,9 +27,43 @@ namespace GNT_server.Controllers
         /// <returns></returns>
         [Route("")]
         // GET: api/ShopInfoes
-        public IQueryable<ShopInfo> GetShopInfo()
+        public IHttpActionResult GetAllShopInfo()
         {
-            return db.ShopInfo;
+            string tags = "";
+            var result = from s in db.ShopInfo
+                         select s;
+
+            foreach (var a in result)
+            {
+                if (!string.IsNullOrEmpty(a.TagIds))
+                {
+                    string[] ids = a.TagIds.Split(',');
+                    foreach (string i in ids)
+                    {
+                        var tagname = from t in db.Tag
+                                      where t.Tag1 == i
+                                      select t.TagName;
+                        foreach (string tn in tagname)
+                        {
+                            tags +=tn ;
+                            tags += ",";
+                        }
+                        
+                    }
+                    if (tags.Trim().Substring(tags.Trim().Length - 1, 1) == ",")
+                    {
+                        tags = tags.Trim().Substring(0, tags.Trim().Length - 1);
+                    }
+                    a.TagIds = tags;
+                }
+
+            }
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
         }
 
         // GET: api/ShopInfoes/5
@@ -41,13 +76,42 @@ namespace GNT_server.Controllers
         [ResponseType(typeof(ShopInfo))]
         public IHttpActionResult GetShopInfo(int id)
         {
-            ShopInfo shopInfo = db.ShopInfo.Find(id);
-            if (shopInfo == null)
+            string tags = "";
+            var result = from s in db.ShopInfo
+                         where s.ShopID==id
+                         select s;
+
+            foreach (var a in result)
+            {
+                if (!string.IsNullOrEmpty(a.TagIds))
+                {
+                    string[] ids = a.TagIds.Split(',');
+                    foreach (string i in ids)
+                    {
+                        var tagname = from t in db.Tag
+                                      where t.Tag1 == i
+                                      select t.TagName;
+                        foreach (string tn in tagname)
+                        {
+                            tags += tn;
+                            tags += ",";
+                        }
+
+                    }
+                    if (tags.Trim().Substring(tags.Trim().Length - 1, 1) == ",")
+                    {
+                        tags = tags.Trim().Substring(0, tags.Trim().Length - 1);
+                    }
+                    a.TagIds = tags;
+                }
+
+            }
+            if (result == null)
             {
                 return NotFound();
             }
 
-            return Ok(shopInfo);
+            return Ok(result);
         }
         /// <summary>
         /// 查詢四大分類店家(前台)
@@ -68,100 +132,112 @@ namespace GNT_server.Controllers
                 realtype = "夜間景點";
             else
                 realtype = "";
-            var shopInfo = from s in db.ShopInfo
-                           where s.Type == realtype
-                           select s;
-            if (shopInfo == null)
+            string tags = "";
+            var result = from s in db.ShopInfo
+                         where s.Type == realtype
+                         select s;
+
+            foreach (var a in result)
+            {
+                if (!string.IsNullOrEmpty(a.TagIds))
+                {
+                    string[] ids = a.TagIds.Split(',');
+                    foreach (string i in ids)
+                    {
+                        var tagname = from t in db.Tag
+                                      where t.Tag1 == i
+                                      select t.TagName;
+                        foreach (string tn in tagname)
+                        {
+                            tags += tn;
+                            tags += ",";
+                        }
+
+                    }
+                    if (tags.Trim().Substring(tags.Trim().Length - 1, 1) == ",")
+                    {
+                        tags = tags.Trim().Substring(0, tags.Trim().Length - 1);
+                    }
+                    a.TagIds = tags;
+                }
+
+            }
+            if (result == null)
             {
                 return NotFound();
             }
-            return Ok(shopInfo);
-        }
-        //[HttpGet]//待更正為動態生成
-        //[Route("tag")]//api/ShopInfoes/tag?tag=2,5
-        //public IHttpActionResult GetShopInfoTag(string tag)
-        //{
-        //    string[] Qtags = tag.Split(',');
-        //    int tagmax = Qtags.Count();
-        //    List<IEnumerable<int>> Queryshoplist = new List<IEnumerable<int>>();
-        //    int Qint;
-        //    List<int> queryshoplist = new List<int>();
-        //    List<int> alltagmatchlist = new List<int>();
-        //    List<ShopInfo> allmatchshops = new List<ShopInfo>();
-        //    for (int i = 0; i < tagmax; i++)
-        //    {
-        //        Int32.TryParse(Qtags[i], out Qint);
-        //        var result = from s in db.ShopTag
-        //                     where s.TagID == Qint
-        //                     select s.ShopID;
-        //        Queryshoplist.Add((IEnumerable<int>)result);
-        //    }
-        //    foreach (ShopTag shoptag in Queryshoplist)
-        //    {
-        //        queryshoplist.Add(shoptag.ShopID);
-        //    }
-        //    int max=queryshoplist.Max();
-        //    for (int i = 0; i <= max; i++)
-        //    {
-        //        if (queryshoplist.Contains(i))
-        //        {
-        //            if (queryshoplist.Count(n => n == i) == tagmax)
-        //            {
-        //                alltagmatchlist.Add(i);
-        //            }
-        //        }
-        //    }
-        //    for(int i = 1; i < alltagmatchlist.Count(); i++)
-        //    {
-        //        var result = from s in db.ShopInfo
-        //                     where s.ShopID == alltagmatchlist[i]
-        //                     select s;
-        //        allmatchshops.Add((ShopInfo)result);
-        //    }
-            
 
-        //    if (allmatchshops.Count()==0)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(allmatchshops);
-        //}
-        //[HttpGet]
-        //[Route("typeandtag")]//api/ShopInfoes/typeandtag?type=bar&tag=2,5
-        //public IHttpActionResult GetShopInfoTypeAndTag(string type, string tag)
-        //{
-        //    List<int> Qstring = Query.QueryFromList(tag);
-        //    string realtype;
-        //    if (type == "bar")
-        //        realtype = "酒吧";
-        //    else if (type == "snack")
-        //        realtype = "宵夜小吃";
-        //    else if (type == "dessert")
-        //        realtype = "深夜甜點";
-        //    else if (type == "viewpoint")
-        //        realtype = "夜間景點";
-        //    else
-        //        realtype = "";
-        //    var shopInfo = from s in db.ShopInfo
-        //                   where s.Tag.Contains(Qstring)
-        //                   && s.Type == realtype
-        //                   select s;
-        //    if (shopInfo == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(shopInfo);
-        //}
-    //    PUT: api/ShopInfoes/5
-    //     api/{controller}/{id}
-/// <summary>
-/// 修改店家(後台)
-/// </summary>
-/// <param name="id"></param>
-/// <param name="shopInfo"></param>
-/// <returns></returns>
-[HttpPut]
-        [Route("{id:int}")]
+            return Ok(result);
+        }
+        /// <summary>
+        /// 查詢店家依據 店名、地址、tag、type (前台)
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="address"></param>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        [HttpGet]//待更正為動態生成
+        [Route("search")]//api/ShopInfoes/search?tag=2,5
+        [Obsolete]
+        public IHttpActionResult GetShopInfoTag(string tag, string address, string name, string type)
+        {
+            var alldata = PredicateBuilder.True<ShopInfo>();
+            if (address != "null")
+            {
+                alldata = alldata.And(a => a.Address.Contains(address));
+            }
+            if (name != "null")
+            {
+                alldata = alldata.And(a => a.Name.Contains(name));
+            }
+            if (type != "null")
+            {
+                string realtype;
+                if (type == "bar")
+                    realtype = "酒吧";
+                else if (type == "snack")
+                    realtype = "小吃宵夜";
+                else if (type == "dessert")
+                    realtype = "咖啡甜點";
+                else if (type == "viewpoint")
+                    realtype = "夜間景點";
+                else
+                    realtype = "";
+                if (realtype != "")
+                    alldata = alldata.And(a => a.Type.Contains(realtype));
+            }
+            if (tag != "null")
+            {
+                string[] Tag = tag.Split(',');
+                if (Tag != null)
+                {
+                    foreach (string Qint in Tag)
+                    {
+                        alldata = alldata.And(a => a.TagIds.Contains(Qint));
+                    }
+                }
+            }
+
+            var result = db.ShopInfo.Where(alldata);
+
+            if (result != null)
+                return Ok(result);
+
+            return NotFound();
+        }
+
+
+        //    PUT: api/ShopInfoes/5
+        //     api/{controller}/{id}
+        /// <summary>
+        /// 修改店家(後台)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="shopInfo"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("Admin/{id:int}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutShopInfo(int id, ShopInfo shopInfo)
         {
@@ -195,50 +271,16 @@ namespace GNT_server.Controllers
 
             return Ok("修改成功");
         }
-        //[HttpPatch]
-        //[ResponseType(typeof(void))]
-        //public IHttpActionResult PatchShopInfo(int id, ShopInfo shopInfo)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    if (id != shopInfo.ShopID)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    db.Entry(shopInfo).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!ShopInfoExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
 
         // POST: api/ShopInfoes
-        //api/{controller}/create
+        //api/{controller}
         /// <summary>
         /// 新增店家(後台)
         /// </summary>
         /// <param name="shopInfo"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("")]
+        [Route("Admin")]
         [ResponseType(typeof(ShopInfo))]
         public IHttpActionResult PostShopInfo(ShopInfo shopInfo)
         {

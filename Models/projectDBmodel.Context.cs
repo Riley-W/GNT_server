@@ -31,7 +31,6 @@ namespace GNT_server.Models
         public virtual DbSet<Route> Route { get; set; }
         public virtual DbSet<ShopInfo> ShopInfo { get; set; }
         public virtual DbSet<ShopReview> ShopReview { get; set; }
-        public virtual DbSet<ShopTag> ShopTag { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tag> Tag { get; set; }
         public virtual DbSet<WebsiteReview> WebsiteReview { get; set; }

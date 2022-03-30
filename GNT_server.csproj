@@ -50,13 +50,19 @@
       <HintPath>packages\Catel.Core.5.12.22\lib\net47\Catel.Core.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="jose-jwt, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\jose-jwt.3.2.0\lib\net461\jose-jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="LinqKit, Version=1.2.2.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
+      <HintPath>packages\LinqKit.1.2.2\lib\net45\LinqKit.dll</HintPath>
+    </Reference>
+    <Reference Include="LinqKit.Core, Version=1.2.2.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
+      <HintPath>packages\LinqKit.Core.1.2.2\lib\net45\LinqKit.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.16.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -241,7 +247,6 @@
     <Compile Include="Controllers\ShopInfoesController.cs" />
     <Compile Include="Controllers\MemberInfoes1Controller.cs" />
     <Compile Include="Controllers\RoutesController.cs" />
-    <Compile Include="Controllers\ShopTagController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Controllers\WebsiteReviewController.cs" />
     <Compile Include="Global.asax.cs">
@@ -271,7 +276,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>projectDBModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Query.cs" />
     <Compile Include="Models\Route.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>
@@ -279,9 +283,6 @@
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ShopReview.cs">
-      <DependentUpon>projectDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ShopTag.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
