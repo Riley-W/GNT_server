@@ -14,7 +14,8 @@ namespace GNT_server.Models
     
     public partial class Tag
     {
-        public int TagID { get; set; }
+        public int ID { get; set; }
+        public string Tag1 { get; set; }
         public string TagName { get; set; }
     }
 }

@@ -113,9 +113,10 @@
         </EntityType>
         <EntityType Name="Tag">
           <Key>
-            <PropertyRef Name="TagID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="TagID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tag" Type="nvarchar" MaxLength="50" />
           <Property Name="TagName" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="WebsiteReview">
@@ -505,9 +506,10 @@
         </EntityType>
         <EntityType Name="Tag">
           <Key>
-            <PropertyRef Name="TagID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="TagID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tag1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TagName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="WebsiteReview">
@@ -878,7 +880,8 @@
           <EntitySetMapping Name="Tag">
             <EntityTypeMapping TypeName="projectDBModel.Tag">
               <MappingFragment StoreEntitySet="Tag">
-                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Tag1" ColumnName="Tag" />
                 <ScalarProperty Name="TagName" ColumnName="TagName" />
               </MappingFragment>
             </EntityTypeMapping>

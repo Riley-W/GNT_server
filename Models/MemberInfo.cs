@@ -18,10 +18,10 @@ namespace GNT_server.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MemberInfo()
         {
-            this.MemberFavorite = new HashSet<MemberFavorite>();
-            this.Route = new HashSet<Route>();
-            this.ShopReview = new HashSet<ShopReview>();
-            this.WebsiteReview = new HashSet<WebsiteReview>();
+            //this.MemberFavorite = new HashSet<MemberFavorite>();
+            //this.Route = new HashSet<Route>();
+            //this.ShopReview = new HashSet<ShopReview>();
+            //this.WebsiteReview = new HashSet<WebsiteReview>();
         }
     
         public int MemberID { get; set; }

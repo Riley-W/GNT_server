@@ -30,33 +30,33 @@ namespace GNT_server.Controllers
         public IHttpActionResult GetAllShopInfo()
         {
             string tags = "";
-            int iint = 0;
             var result = from s in db.ShopInfo
                          select s;
 
-            foreach(var a in result)
+            foreach (var a in result)
             {
                 if (!string.IsNullOrEmpty(a.TagIds))
                 {
                     string[] ids = a.TagIds.Split(',');
                     foreach (string i in ids)
                     {
-                        Int32.TryParse(i, out iint);
                         var tagname = from t in db.Tag
-                                      where t.TagID == iint
+                                      where t.Tag1 == i
                                       select t.TagName;
-                       foreach(string tn in tagname)
+                        foreach (string tn in tagname)
                         {
-                            tags = tn + ",";
+                            tags +=tn ;
+                            tags += ",";
                         }
-                        if (tags.Trim().Substring(tags.Trim().Length - 1, 1) == ",")
-                        {
-                            tags = tags.Trim().Substring(0, tags.Trim().Length - 1);
-                        }
+                        
+                    }
+                    if (tags.Trim().Substring(tags.Trim().Length - 1, 1) == ",")
+                    {
+                        tags = tags.Trim().Substring(0, tags.Trim().Length - 1);
                     }
                     a.TagIds = tags;
                 }
-                
+
             }
             if (result == null)
             {
@@ -76,13 +76,42 @@ namespace GNT_server.Controllers
         [ResponseType(typeof(ShopInfo))]
         public IHttpActionResult GetShopInfo(int id)
         {
-            ShopInfo shopInfo = db.ShopInfo.Find(id);
-            if (shopInfo == null)
+            string tags = "";
+            var result = from s in db.ShopInfo
+                         where s.ShopID==id
+                         select s;
+
+            foreach (var a in result)
+            {
+                if (!string.IsNullOrEmpty(a.TagIds))
+                {
+                    string[] ids = a.TagIds.Split(',');
+                    foreach (string i in ids)
+                    {
+                        var tagname = from t in db.Tag
+                                      where t.Tag1 == i
+                                      select t.TagName;
+                        foreach (string tn in tagname)
+                        {
+                            tags += tn;
+                            tags += ",";
+                        }
+
+                    }
+                    if (tags.Trim().Substring(tags.Trim().Length - 1, 1) == ",")
+                    {
+                        tags = tags.Trim().Substring(0, tags.Trim().Length - 1);
+                    }
+                    a.TagIds = tags;
+                }
+
+            }
+            if (result == null)
             {
                 return NotFound();
             }
 
-            return Ok(shopInfo);
+            return Ok(result);
         }
         /// <summary>
         /// 查詢四大分類店家(前台)
@@ -103,17 +132,43 @@ namespace GNT_server.Controllers
                 realtype = "夜間景點";
             else
                 realtype = "";
-            var shopInfo = from s in db.ShopInfo
-                           where s.Type == realtype
-                           select s;
-            if (shopInfo == null)
+            string tags = "";
+            var result = from s in db.ShopInfo
+                         where s.Type == realtype
+                         select s;
+
+            foreach (var a in result)
+            {
+                if (!string.IsNullOrEmpty(a.TagIds))
+                {
+                    string[] ids = a.TagIds.Split(',');
+                    foreach (string i in ids)
+                    {
+                        var tagname = from t in db.Tag
+                                      where t.Tag1 == i
+                                      select t.TagName;
+                        foreach (string tn in tagname)
+                        {
+                            tags += tn;
+                            tags += ",";
+                        }
+
+                    }
+                    if (tags.Trim().Substring(tags.Trim().Length - 1, 1) == ",")
+                    {
+                        tags = tags.Trim().Substring(0, tags.Trim().Length - 1);
+                    }
+                    a.TagIds = tags;
+                }
+
+            }
+            if (result == null)
             {
                 return NotFound();
             }
-            return Ok(shopInfo);
+
+            return Ok(result);
         }
-
-
         /// <summary>
         /// 查詢店家依據 店名、地址、tag、type (前台)
         /// </summary>
@@ -125,18 +180,18 @@ namespace GNT_server.Controllers
         [HttpGet]//待更正為動態生成
         [Route("search")]//api/ShopInfoes/search?tag=2,5
         [Obsolete]
-        public IHttpActionResult GetShopInfoTag(string tag,string address, string name,string type)
+        public IHttpActionResult GetShopInfoTag(string tag, string address, string name, string type)
         {
             var alldata = PredicateBuilder.True<ShopInfo>();
-            if (!string.IsNullOrWhiteSpace(address))
+            if (address != "null")
             {
                 alldata = alldata.And(a => a.Address.Contains(address));
             }
-            if (!string.IsNullOrWhiteSpace(name))
+            if (name != "null")
             {
                 alldata = alldata.And(a => a.Name.Contains(name));
             }
-            if (!string.IsNullOrWhiteSpace(type))
+            if (type != "null")
             {
                 string realtype;
                 if (type == "bar")
@@ -149,28 +204,30 @@ namespace GNT_server.Controllers
                     realtype = "夜間景點";
                 else
                     realtype = "";
-                if(realtype!="")
+                if (realtype != "")
                     alldata = alldata.And(a => a.Type.Contains(realtype));
             }
-            if (!string.IsNullOrWhiteSpace(tag))
+            if (tag != "null")
             {
                 string[] Tag = tag.Split(',');
                 if (Tag != null)
                 {
-                    foreach (var Qint in Tag)
+                    foreach (string Qint in Tag)
                     {
                         alldata = alldata.And(a => a.TagIds.Contains(Qint));
-
                     }
-
                 }
-            
-                var result = db.ShopInfo.Where(alldata);
-
-                return Ok(result);
             }
+
+            var result = db.ShopInfo.Where(alldata);
+
+            if (result != null)
+                return Ok(result);
+
             return NotFound();
         }
+
+
         //    PUT: api/ShopInfoes/5
         //     api/{controller}/{id}
         /// <summary>
@@ -180,7 +237,7 @@ namespace GNT_server.Controllers
         /// <param name="shopInfo"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("{id:int}")]
+        [Route("Admin/{id:int}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutShopInfo(int id, ShopInfo shopInfo)
         {
@@ -214,6 +271,7 @@ namespace GNT_server.Controllers
 
             return Ok("修改成功");
         }
+
         // POST: api/ShopInfoes
         //api/{controller}
         /// <summary>
@@ -222,7 +280,7 @@ namespace GNT_server.Controllers
         /// <param name="shopInfo"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("")]
+        [Route("Admin")]
         [ResponseType(typeof(ShopInfo))]
         public IHttpActionResult PostShopInfo(ShopInfo shopInfo)
         {

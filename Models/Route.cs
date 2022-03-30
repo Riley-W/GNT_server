@@ -30,7 +30,6 @@ namespace GNT_server.Models
 
         [JsonIgnore]
         public virtual MemberInfo MemberInfo { get; set; }
-        [JsonIgnore]
         public virtual ShopInfo ShopInfo { get; set; }
         [JsonIgnore]
         public virtual ShopInfo ShopInfo1 { get; set; }

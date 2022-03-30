@@ -12,7 +12,7 @@ namespace GNT_server.Models
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class ShopInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -29,7 +29,7 @@ namespace GNT_server.Models
             //this.Route7 = new HashSet<Route>();
             //this.ShopReview = new HashSet<ShopReview>();
         }
-    
+
         public int ShopID { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
@@ -59,7 +59,7 @@ namespace GNT_server.Models
         public Nullable<int> Click { get; set; }
         public Nullable<bool> Enable { get; set; }
         public string TagIds { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [JsonIgnore]
         public virtual ICollection<MemberFavorite> MemberFavorite { get; set; }
