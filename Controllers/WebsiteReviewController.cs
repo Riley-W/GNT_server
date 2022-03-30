@@ -33,7 +33,11 @@ namespace GNT_server.Controllers
         [Route("")]
         public IQueryable<WebsiteReview> GetWebsiteReview()
         {   //QueryAll
-            return db.WebsiteReview;
+            var result = from w in db.WebsiteReview
+                         orderby w.ReviewDate descending
+                         select w;
+
+            return result;
 
         }
 
@@ -45,7 +49,12 @@ namespace GNT_server.Controllers
         [Route("type/{type}")]
         public IQueryable<WebsiteReview> GetWebsiteReviewByType(string Type)
         {   //QueryByType: 推薦店家 系統回饋 店家資訊更新 其他
-            return db.WebsiteReview.Where(p => p.Type == Type);
+            var result = from w in db.WebsiteReview
+                         where w.Type==Type
+                         orderby w.ReviewDate descending
+                         select w;
+
+            return result;
         }
 
         /// <summary>
@@ -56,7 +65,12 @@ namespace GNT_server.Controllers
         [Route("status/{status}")]
         public IQueryable<WebsiteReview> GetWebsiteReviewByStatus(string Status)
         {   //QueryByStatus: 已處理 處理中 未處理
-            return db.WebsiteReview.Where(p => p.Status == Status);
+            var result = from w in db.WebsiteReview
+                         where w.Status == Status
+                         orderby w.ReviewDate descending
+                         select w;
+
+            return result;
         }
 
         /// <summary>
@@ -67,7 +81,7 @@ namespace GNT_server.Controllers
         [Route("keywords/{keywords}")]
         public IQueryable<WebsiteReview> GetWebsiteReviewByKeywords(string Keywords)
         {   //QueryByKeywords: 
-
+            //以下還沒改
             return db.WebsiteReview.Where(p => p.ReviewDate.ToString().Contains(Keywords) || p.Type.Contains(Keywords) || p.RContent.Contains(Keywords) || p.Status.Contains(Keywords) || p.Remark.Contains(Keywords));
 
         }
@@ -117,6 +131,7 @@ namespace GNT_server.Controllers
             //}
             else
             {
+                WebsiteReview.ReviewDate = DateTime.Now;
                 WebsiteReview.Status = "未處理";
                 db.WebsiteReview.Add(WebsiteReview);
                 await db.SaveChangesAsync();

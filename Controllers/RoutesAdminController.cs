@@ -130,7 +130,7 @@ namespace GNT_server.Controllers
             Route route = db.Route.Find(Routeid);
             if (route == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "找無此行程");
             }
 
             db.Route.Remove(route);
@@ -146,14 +146,14 @@ namespace GNT_server.Controllers
         /// <param name="Memberid"></param>
         /// <returns></returns>
         [ResponseType(typeof(Route))]
-        [Route("Admin/{Memberid:int}")]
+        [Route("Admin/deletAll/{Memberid:int}")]
         public IHttpActionResult RouteAll(int Memberid)
         {
             var selectall = db.Route.Where(r => r.MemberID == Memberid);
 
             if (selectall == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "無行程可以刪除");
             }
 
             db.Route.RemoveRange(selectall);

@@ -35,7 +35,7 @@ namespace GNT_server.Controllers
         /// <summary>
         /// 查詢會員最愛(前台)
         /// </summary>
-        /// <param name=Memberid></param>
+        /// <param name="Memberid"></param>
         /// <returns></returns>
         [ResponseType(typeof(MemberFavorite))]
         [Route("{Memberid:int}")]       
@@ -53,46 +53,7 @@ namespace GNT_server.Controllers
             return Ok(query);
         }
 
-        // PUT: api/MemberFavorites/5
-        /// <summary>
-        /// 修改我的最愛(前台)
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="memberFavorite"></param>
-        /// <returns></returns>
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutMemberFavorite(int id, MemberFavorite memberFavorite)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
-            if (id != memberFavorite.MemberID)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(memberFavorite).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MemberFavoriteExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return Ok("修改成功");
-        }
 
         // POST: api/MemberFavorites
         /// <summary>
@@ -120,7 +81,7 @@ namespace GNT_server.Controllers
             {
                 if (MemberFavoriteExists(memberFavorite.MemberID))
                 {
-                    return Conflict();
+                    return BadRequest("錯誤: 我的最愛已存在");
                 }
                 else
                 {
@@ -145,7 +106,7 @@ namespace GNT_server.Controllers
             MemberFavorite memberFavorite = db.MemberFavorite.Find(Memberid, shopid);
             if (memberFavorite == null)
             {
-                return NotFound();
+                return BadRequest("錯誤: 無該筆資料"); ;
             }
 
             var query = from a in db.MemberFavorite

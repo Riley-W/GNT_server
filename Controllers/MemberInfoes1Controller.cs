@@ -45,13 +45,14 @@ namespace GNT_server.Controllers
         /// <param name="Memberid"></param>
         /// <returns></returns>
         [ResponseType(typeof(MemberInfo))]
-        [Route("Admin/{id:int}")]
+        [Route("Admin/{Memberid:int}")]
         public IHttpActionResult GetMemberInfo(int Memberid)
         {
             MemberInfo memberInfo = db.MemberInfo.Find(Memberid);
             if (memberInfo == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "找無此會員");
+
             }
 
             return Ok(memberInfo);
@@ -65,7 +66,7 @@ namespace GNT_server.Controllers
         /// <param name="memberInfo"></param>
         /// <returns></returns>
         [ResponseType(typeof(void))]
-        [Route("{id:int}")]
+        [Route("{Memberid:int}")]
         public IHttpActionResult PutMemberInfo(int Memberid, MemberInfo memberInfo)
         {
             if (!ModelState.IsValid)
@@ -107,7 +108,7 @@ namespace GNT_server.Controllers
         /// <param name="memberInfo"></param>
         /// <returns></returns>
         [ResponseType(typeof(void))]
-        [Route("Admin/{id:int}")]
+        [Route("Admin/{Memberid:int}")]
         public IHttpActionResult PutMemberInfoAdmin(int Memberid, MemberInfo memberInfo)
         {
             if (!ModelState.IsValid)
@@ -186,7 +187,7 @@ namespace GNT_server.Controllers
 
         // POST: api/MemberInfoes1
         /// <summary>
-        /// 新增會員(後台)
+        /// 新增會員(後台) 暫時無須此功能
         /// </summary>
         /// <param name="memberInfo"></param>
         /// <returns></returns>
@@ -194,6 +195,7 @@ namespace GNT_server.Controllers
         [Route("Admin")]
         public IHttpActionResult PostMemberInfoAdmin(MemberInfo memberInfo)
         {
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -248,13 +250,13 @@ namespace GNT_server.Controllers
 
             if (memberInfo == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "找無此會員");
             }
 
             db.MemberInfo.Remove(memberInfo);
             db.SaveChanges();
 
-            return Ok(memberInfo);
+            return Ok("已刪除");
         }
 
         protected override void Dispose(bool disposing)

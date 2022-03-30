@@ -32,20 +32,21 @@ namespace GNT_server.Models
 
         [JsonIgnore]
         public virtual MemberInfo MemberInfo { get; set; }
+        //[JsonIgnore]
         public virtual ShopInfo ShopInfo { get; set; }
-        [JsonIgnore]
+        //[JsonIgnore]
         public virtual ShopInfo ShopInfo1 { get; set; }
-        [JsonIgnore]
+        //[JsonIgnore]
         public virtual ShopInfo ShopInfo2 { get; set; }
-        [JsonIgnore]
+        //[JsonIgnore]
         public virtual ShopInfo ShopInfo3 { get; set; }
-        [JsonIgnore]
+        //[JsonIgnore]
         public virtual ShopInfo ShopInfo4 { get; set; }
-        [JsonIgnore]
+        //[JsonIgnore]
         public virtual ShopInfo ShopInfo5 { get; set; }
-        [JsonIgnore]
+        //[JsonIgnore]
         public virtual ShopInfo ShopInfo6 { get; set; }
-        [JsonIgnore]
+        //[JsonIgnore]
         public virtual ShopInfo ShopInfo7 { get; set; }
     }
 }
