@@ -50,7 +50,7 @@ namespace GNT_server.Controllers
         public IQueryable<WebsiteReview> GetWebsiteReviewByType(string Type)
         {   //QueryByType: 推薦店家 系統回饋 店家資訊更新 其他
             var result = from w in db.WebsiteReview
-                         where w.Type==Type
+                         where w.Type == Type
                          orderby w.ReviewDate descending
                          select w;
 
@@ -81,8 +81,14 @@ namespace GNT_server.Controllers
         [Route("keywords/{keywords}")]
         public IQueryable<WebsiteReview> GetWebsiteReviewByKeywords(string Keywords)
         {   //QueryByKeywords: 
-            //以下還沒改
-            return db.WebsiteReview.Where(p => p.ReviewDate.ToString().Contains(Keywords) || p.Type.Contains(Keywords) || p.RContent.Contains(Keywords) || p.Status.Contains(Keywords) || p.Remark.Contains(Keywords));
+            
+            var result = from w in db.WebsiteReview
+                         where (w.ReviewDate.ToString().Contains(Keywords) || w.Type.Contains(Keywords) ||
+                         w.RContent.Contains(Keywords) || w.Status.Contains(Keywords) || w.Remark.Contains(Keywords))
+                         orderby w.ReviewDate descending
+                         select w;
+
+            return result;
 
         }
 

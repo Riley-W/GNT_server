@@ -12,13 +12,17 @@ namespace GNT_server.Models
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class WebsiteReview
     {
         public int ReviewID { get; set; }
+        [Required]
         public Nullable<int> MemberID { get; set; }
         public Nullable<System.DateTime> ReviewDate { get; set; }
+        [Required]
         public string Type { get; set; }
+        [Required]
         public string RContent { get; set; }
         public string Status { get; set; }
         public string Remark { get; set; }
