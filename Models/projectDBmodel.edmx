@@ -593,7 +593,7 @@
               <PropertyRef Name="ShopID" />
             </Principal>
             <Dependent Role="Route">
-              <PropertyRef Name="Dest2" />
+              <PropertyRef Name="Dest1" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -605,7 +605,7 @@
               <PropertyRef Name="ShopID" />
             </Principal>
             <Dependent Role="Route">
-              <PropertyRef Name="Dest3" />
+              <PropertyRef Name="Dest2" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -617,7 +617,7 @@
               <PropertyRef Name="ShopID" />
             </Principal>
             <Dependent Role="Route">
-              <PropertyRef Name="Dest4" />
+              <PropertyRef Name="Dest3" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -629,7 +629,7 @@
               <PropertyRef Name="ShopID" />
             </Principal>
             <Dependent Role="Route">
-              <PropertyRef Name="Dest5" />
+              <PropertyRef Name="Dest4" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -641,7 +641,7 @@
               <PropertyRef Name="ShopID" />
             </Principal>
             <Dependent Role="Route">
-              <PropertyRef Name="Dest6" />
+              <PropertyRef Name="Dest5" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -653,7 +653,7 @@
               <PropertyRef Name="ShopID" />
             </Principal>
             <Dependent Role="Route">
-              <PropertyRef Name="Dest7" />
+              <PropertyRef Name="Dest6" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -665,7 +665,7 @@
               <PropertyRef Name="ShopID" />
             </Principal>
             <Dependent Role="Route">
-              <PropertyRef Name="Dest8" />
+              <PropertyRef Name="Dest7" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
