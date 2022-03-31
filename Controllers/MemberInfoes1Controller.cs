@@ -58,6 +58,36 @@ namespace GNT_server.Controllers
             return Ok(memberInfo);
         }
 
+
+        // GET:
+        /// <summary>
+        /// 查詢為"黑名單"的會員 (後台)
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(MemberInfo))]
+        [Route("Admin/BlackList")]
+        public IQueryable<MemberInfo> GetMemberInfoInBlacklist()
+        {
+            return db.MemberInfo.Where(p => p.BlackList == true);
+        }
+
+        // GET:
+        /// <summary>
+        /// 依"關鍵字"查詢會員 (後台)
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(MemberInfo))]
+        [Route("Admin/Keywords/{Keywords}")]
+        public IQueryable<MemberInfo> GetMemberInfoByKeywords(string Keywords)
+        {
+            return db.MemberInfo.Where(p => (p.Name.Contains(Keywords) || p.Phone.Contains(Keywords) ||
+            p.Address.Contains(Keywords) || p.Gender.Contains(Keywords) || p.BirthDate.ToString().Contains(Keywords))
+            || p.Email.Contains(Keywords));
+        }
+
+
+
+
         // PUT: api/MemberInfoes1/5
         /// <summary>
         /// 修改會員資料(前台)

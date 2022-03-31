@@ -428,7 +428,7 @@
           <Property Name="Dest7" Type="Int32" />
           <Property Name="Dest8" Type="Int32" />
           <NavigationProperty Name="MemberInfo" Relationship="Self.FK_Route_MemberInfo" FromRole="Route" ToRole="MemberInfo" />
-          <NavigationProperty Name="ShopInfo" Relationship="Self.FK_Route_ShopInfo1" FromRole="Route" ToRole="ShopInfo" />
+          <NavigationProperty Name="ShopInfo" Relationship="projectDBModel.FK_Route_ShopInfo1" FromRole="Route" ToRole="ShopInfo" />
           <NavigationProperty Name="ShopInfo1" Relationship="Self.FK_Route_ShopInfo2" FromRole="Route" ToRole="ShopInfo" />
           <NavigationProperty Name="ShopInfo2" Relationship="Self.FK_Route_ShopInfo3" FromRole="Route" ToRole="ShopInfo" />
           <NavigationProperty Name="ShopInfo3" Relationship="Self.FK_Route_ShopInfo4" FromRole="Route" ToRole="ShopInfo" />
