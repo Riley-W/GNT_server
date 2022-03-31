@@ -268,7 +268,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>projectDBModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Query.cs" />
     <Compile Include="Models\Route.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>
@@ -278,6 +277,7 @@
     <Compile Include="Models\ShopReview.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\shopreviewmethod.cs" />
     <Compile Include="Models\ShopTag.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>

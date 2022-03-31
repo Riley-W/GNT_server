@@ -13,6 +13,7 @@ using Catel.Data;
 using GNT_server.Models;
 
 
+
 namespace GNT_server.Controllers
 {
     [RoutePrefix("api/shopreviews")]
@@ -27,9 +28,11 @@ namespace GNT_server.Controllers
         [Route("")]
         [HttpGet]
         // GET: api/ShopReviews
-        public IQueryable<ShopReview> GetShopReview()
+        public List<object> GetShopReview()
         {
-            return db.ShopReview;
+            var shopReview = from s in db.ShopReview
+                             select s;
+            return shopreviewmethod.changetime(shopReview);
         }
 
         // GET: api/ShopReviews/5
@@ -43,13 +46,10 @@ namespace GNT_server.Controllers
         [ResponseType(typeof(ShopReview))]
         public IHttpActionResult GetShopReview(int memberid)
         {
-            
-            var shopReview = db.ShopReview.Where(s => s.MemberID == memberid);
-            //var memberId = db.MemberInfo.Where(m => m.MemberID == memberid);
-            //var memberName = memberId.Select(n => n.Name);
 
-            //return Ok(memberName);
-            //return Ok(shopReview);
+            var shopReview = db.ShopReview.Where(s => s.MemberID == memberid);
+
+
             var shopReviewCount = db.ShopReview.Where(s => s.MemberID == memberid).ToList();
             if (shopReviewCount.Count == 0)
             {
@@ -58,7 +58,8 @@ namespace GNT_server.Controllers
                 return BadRequest("無此會員評分紀錄");
 
             }
-            return Ok(shopReview);
+            //datelist = shopreviewtransform.changetime(shopReview);
+            return Ok(shopreviewmethod.changetime(shopReview));
         }
         /// <summary>
         /// 關鍵字搜尋(後台)
@@ -79,7 +80,7 @@ namespace GNT_server.Controllers
                 return BadRequest("無此資料");
 
             }
-            return Ok(shopReview);
+            return Ok(shopreviewmethod.changetime(shopReview));
         }
 
         /// <summary>
@@ -116,7 +117,7 @@ namespace GNT_server.Controllers
         /// <returns></returns>
         [Route("{memberid}/{shopid}")] //修改會員評分紀錄
         [HttpPut]
-        
+
         [ResponseType(typeof(void))]
         public IHttpActionResult PutShopReview(int memberid, int shopid, ShopReview shopReview)
         {
@@ -125,12 +126,7 @@ namespace GNT_server.Controllers
                 return BadRequest(ModelState);
             }
 
-            //if (memberid != shopReview.MemberID || shopid != shopReview.ShopID) //
-            //{
-            //    //return BadRequest();
-            //    //return Content(HttpStatusCode.BadRequest, "會員ID或店家ID錯誤");
-            //    return BadRequest("店家ID錯誤");
-            //}
+
             shopReview.ReviewDate = DateTime.Now;
             db.Entry(shopReview).State = EntityState.Modified;
 
@@ -145,7 +141,8 @@ namespace GNT_server.Controllers
                     //return NotFound();
                     return BadRequest("查無此會員紀錄");
                 }
-                else if (!ShopReviewExists(shopid)) {
+                else if (!ShopReviewExists(shopid))
+                {
                     return BadRequest("該會員無此店家評論");
                 }
                 else
@@ -169,11 +166,11 @@ namespace GNT_server.Controllers
         public IHttpActionResult PostShopReview(ShopReview shopReview) //新增評論
         {
             //if (!ModelState.IsValid)
-            if(shopReview.RContent == null)
+            if (shopReview.RContent == null)
             {
                 return BadRequest("內容必填");
             }
-            else if(shopReview.Score == null)
+            else if (shopReview.Score == null)
             {
                 return BadRequest("評分必填");
             }
