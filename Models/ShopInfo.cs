@@ -31,18 +31,24 @@ namespace GNT_server.Models
         }
 
         public int ShopID { get; set; }
+        [Required]
         public string Name { get; set; }
         public string Phone { get; set; }
+        [Required]
         public string Address { get; set; }
+        [Required]
         public Nullable<decimal> Longitude { get; set; }
+        [Required]
         public Nullable<decimal> Latitude { get; set; }
         public string Email { get; set; }
         public string Facebook { get; set; }
         public string Instagram { get; set; }
         public string Min { get; set; }
         public string Note { get; set; }
+        [Required]
         public string Type { get; set; }
         public string Status { get; set; }
+        [Required]
         public string Image1 { get; set; }
         public string Image2 { get; set; }
         public string Image3 { get; set; }
@@ -58,6 +64,7 @@ namespace GNT_server.Models
         public string Sunday { get; set; }
         public Nullable<int> Click { get; set; }
         public Nullable<bool> Enable { get; set; }
+        [Required]
         public string TagIds { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
