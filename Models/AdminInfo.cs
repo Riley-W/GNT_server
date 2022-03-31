@@ -15,7 +15,9 @@ namespace GNT_server.Models
     public partial class AdminInfo
     {
         public int AdminID { get; set; }
+        [Required]
         public string Account { get; set; }
+        [Required]
         public string Password { get; set; }
     }
 }

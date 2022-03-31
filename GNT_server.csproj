@@ -255,6 +255,7 @@
     <Compile Include="Models\AdminInfo.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Global.cs" />
     <Compile Include="Models\MemberFavorite.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>
@@ -276,6 +277,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>projectDBModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\RequiredAttribute.cs" />
     <Compile Include="Models\Route.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>

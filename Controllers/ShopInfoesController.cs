@@ -32,35 +32,58 @@ namespace GNT_server.Controllers
             string tags = "";
             var result = from s in db.ShopInfo
                          select s;
-
-            foreach (var a in result)
+            string a = "";
+            List<string> taglist = new List<string>();
+            if (Global.TagList.Count == 0)
             {
-                if (!string.IsNullOrEmpty(a.TagIds))
+                var tagname = from t in db.Tag
+                              select new
+                              {
+                                  TID = t.Tag1,
+                                  TName = t.TagName
+                              };
+                foreach (var tname in tagname)
                 {
-                    string[] ids = a.TagIds.Split(',');
+                    a = tname.TID + "," + tname.TName;
+                    taglist.Add(a);
+                }
+                Global.TagList = taglist;
+            }
+            else
+            {
+                taglist = Global.TagList;
+            }
+            foreach (var r in result)
+            {
+                tags = "";
+                if (!string.IsNullOrEmpty(r.TagIds))
+                {
+                    string[] ids = r.TagIds.Split(',');
                     foreach (string i in ids)
                     {
-                        var tagname = from t in db.Tag
-                                      where t.Tag1 == i
-                                      select t.TagName;
-                        foreach (string tn in tagname)
+                        for (int j = 0; j < taglist.Count(); j++)
                         {
-                            tags +=tn ;
-                            tags += ",";
+                            if (taglist[j].Contains(i))
+                            {
+                                string[] tag = taglist[j].Split(',');
+                                tags += tag[1]+",";
+                                break;
+                            }
                         }
-                        
+
                     }
                     if (tags.Trim().Substring(tags.Trim().Length - 1, 1) == ",")
                     {
                         tags = tags.Trim().Substring(0, tags.Trim().Length - 1);
                     }
-                    a.TagIds = tags;
+                    r.TagIds = tags;
+                    
                 }
 
             }
             if (result == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "查無此店家");
             }
 
             return Ok(result);
@@ -80,21 +103,43 @@ namespace GNT_server.Controllers
             var result = from s in db.ShopInfo
                          where s.ShopID==id
                          select s;
-
-            foreach (var a in result)
+            string a = "";
+            List<string> taglist = new List<string>();
+            if (Global.TagList.Count == 0)
             {
-                if (!string.IsNullOrEmpty(a.TagIds))
+                var tagname = from t in db.Tag
+                              select new
+                              {
+                                  TID = t.Tag1,
+                                  TName = t.TagName
+                              };
+                foreach (var tname in tagname)
                 {
-                    string[] ids = a.TagIds.Split(',');
+                    a = tname.TID + "," + tname.TName;
+                    taglist.Add(a);
+                }
+                Global.TagList = taglist;
+            }
+            else
+            {
+                taglist = Global.TagList;
+            }
+            foreach (var r in result)
+            {
+                tags = "";
+                if (!string.IsNullOrEmpty(r.TagIds))
+                {
+                    string[] ids = r.TagIds.Split(',');
                     foreach (string i in ids)
                     {
-                        var tagname = from t in db.Tag
-                                      where t.Tag1 == i
-                                      select t.TagName;
-                        foreach (string tn in tagname)
+                        for (int j = 0; j < taglist.Count(); j++)
                         {
-                            tags += tn;
-                            tags += ",";
+                            if (taglist[j].Contains(i))
+                            {
+                                string[] tag = taglist[j].Split(',');
+                                tags += tag[1] + ",";
+                                break;
+                            }
                         }
 
                     }
@@ -102,7 +147,8 @@ namespace GNT_server.Controllers
                     {
                         tags = tags.Trim().Substring(0, tags.Trim().Length - 1);
                     }
-                    a.TagIds = tags;
+                    r.TagIds = tags;
+
                 }
 
             }
@@ -134,23 +180,45 @@ namespace GNT_server.Controllers
                 realtype = "";
             string tags = "";
             var result = from s in db.ShopInfo
-                         where s.Type == realtype
+                         where s.Type== realtype
                          select s;
-
-            foreach (var a in result)
+            string a = "";
+            List<string> taglist = new List<string>();
+            if (Global.TagList.Count == 0)
             {
-                if (!string.IsNullOrEmpty(a.TagIds))
+                var tagname = from t in db.Tag
+                              select new
+                              {
+                                  TID = t.Tag1,
+                                  TName = t.TagName
+                              };
+                foreach (var tname in tagname)
                 {
-                    string[] ids = a.TagIds.Split(',');
+                    a = tname.TID + "," + tname.TName;
+                    taglist.Add(a);
+                }
+                Global.TagList = taglist;
+            }
+            else
+            {
+                taglist = Global.TagList;
+            }
+            foreach (var r in result)
+            {
+                tags = "";
+                if (!string.IsNullOrEmpty(r.TagIds))
+                {
+                    string[] ids = r.TagIds.Split(',');
                     foreach (string i in ids)
                     {
-                        var tagname = from t in db.Tag
-                                      where t.Tag1 == i
-                                      select t.TagName;
-                        foreach (string tn in tagname)
+                        for (int j = 0; j < taglist.Count(); j++)
                         {
-                            tags += tn;
-                            tags += ",";
+                            if (taglist[j].Contains(i))
+                            {
+                                string[] tag = taglist[j].Split(',');
+                                tags += tag[1] + ",";
+                                break;
+                            }
                         }
 
                     }
@@ -158,7 +226,8 @@ namespace GNT_server.Controllers
                     {
                         tags = tags.Trim().Substring(0, tags.Trim().Length - 1);
                     }
-                    a.TagIds = tags;
+                    r.TagIds = tags;
+
                 }
 
             }
