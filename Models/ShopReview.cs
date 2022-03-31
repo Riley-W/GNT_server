@@ -20,6 +20,7 @@ namespace GNT_server.Models
         public Nullable<System.DateTime> ReviewDate { get; set; }
         public string RContent { get; set; }
         public Nullable<int> Score { get; set; }
+
         [JsonIgnore]
         public virtual MemberInfo MemberInfo { get; set; }
         [JsonIgnore]
