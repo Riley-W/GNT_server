@@ -277,7 +277,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>projectDBModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\RequiredAttribute.cs" />
     <Compile Include="Models\Route.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>
