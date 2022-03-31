@@ -31,13 +31,13 @@ namespace GNT_server.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("")]
-        public IQueryable<WebsiteReview> GetWebsiteReview()
+        public IHttpActionResult GetWebsiteReview()
         {   //QueryAll
             var result = from w in db.WebsiteReview
                          orderby w.ReviewDate descending
                          select w;
 
-            return result;
+            return Ok(DateTransfer.TransfertoDate(result));
 
         }
 
@@ -47,14 +47,14 @@ namespace GNT_server.Controllers
         /// <param name="Type"></param>
         /// <returns></returns>
         [Route("type/{type}")]
-        public IQueryable<WebsiteReview> GetWebsiteReviewByType(string Type)
+        public IHttpActionResult GetWebsiteReviewByType(string Type)
         {   //QueryByType: 推薦店家 系統回饋 店家資訊更新 其他
             var result = from w in db.WebsiteReview
                          where w.Type == Type
                          orderby w.ReviewDate descending
                          select w;
 
-            return result;
+            return Ok(DateTransfer.TransfertoDate(result));
         }
 
         /// <summary>
@@ -63,14 +63,14 @@ namespace GNT_server.Controllers
         /// <param name="Status"></param>
         /// <returns></returns>
         [Route("status/{status}")]
-        public IQueryable<WebsiteReview> GetWebsiteReviewByStatus(string Status)
+        public IHttpActionResult GetWebsiteReviewByStatus(string Status)
         {   //QueryByStatus: 已處理 處理中 未處理
             var result = from w in db.WebsiteReview
                          where w.Status == Status
                          orderby w.ReviewDate descending
                          select w;
 
-            return result;
+            return Ok(DateTransfer.TransfertoDate(result));
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace GNT_server.Controllers
         /// <param name="Keywords"></param>
         /// <returns></returns>
         [Route("keywords/{keywords}")]
-        public IQueryable<WebsiteReview> GetWebsiteReviewByKeywords(string Keywords)
+        public IHttpActionResult GetWebsiteReviewByKeywords(string Keywords)
         {   //QueryByKeywords: 
             
             var result = from w in db.WebsiteReview
@@ -88,7 +88,7 @@ namespace GNT_server.Controllers
                          orderby w.ReviewDate descending
                          select w;
 
-            return result;
+            return Ok(DateTransfer.TransfertoDate(result));
 
         }
 
@@ -99,18 +99,18 @@ namespace GNT_server.Controllers
         /// <returns></returns>
         [Route("{ReviewID}")]
         [HttpGet]
-        public IQueryable<WebsiteReview> GetWebsiteReviewByID(int ReviewID)
+        public IHttpActionResult GetWebsiteReviewByID(int ReviewID)
         {   //QueryByID
             var GetReviewByID = db.WebsiteReview.Where(p => p.ReviewID == ReviewID);
             var GetReviewByIDCount = db.WebsiteReview.Where(p => p.ReviewID == ReviewID).Count();
             if (GetReviewByIDCount < 1)
             {
                 //throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NoContent) { Content = new StringContent("找無此ID。") });
-                return GetReviewByID;
+                return Ok(DateTransfer.TransfertoDate(GetReviewByID));
 
 
             }
-            return GetReviewByID;
+            return Ok(DateTransfer.TransfertoDate(GetReviewByID));
 
         }
 
@@ -375,6 +375,6 @@ namespace GNT_server.Controllers
                 throw ex;
             }
         }
-
     }
+
 }
