@@ -279,6 +279,7 @@
     <Compile Include="Models\Route.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Routeget.cs" />
     <Compile Include="Models\ShopInfo.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>
