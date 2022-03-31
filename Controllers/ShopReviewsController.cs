@@ -43,7 +43,13 @@ namespace GNT_server.Controllers
         [ResponseType(typeof(ShopReview))]
         public IHttpActionResult GetShopReview(int memberid)
         {
+            
             var shopReview = db.ShopReview.Where(s => s.MemberID == memberid);
+            //var memberId = db.MemberInfo.Where(m => m.MemberID == memberid);
+            //var memberName = memberId.Select(n => n.Name);
+
+            //return Ok(memberName);
+            //return Ok(shopReview);
             var shopReviewCount = db.ShopReview.Where(s => s.MemberID == memberid).ToList();
             if (shopReviewCount.Count == 0)
             {
@@ -86,15 +92,17 @@ namespace GNT_server.Controllers
         [ResponseType(typeof(ShopReview))]
         public IHttpActionResult GetShopReviewScore(int shopid)
         {
-            var shopreview = db.ShopReview.Where(s => s.ShopID == shopid);
+            var shopreview = db.ShopReview.Where(s => s.ShopID == shopid).ToList();
+            //return Ok(shopreview);
             var score = shopreview.Select(c => c.Score).Average();
-            if(score == null)
+            if (score == null)
             {
                 return BadRequest("該店家無平均分數");
             }
             else
             {
-                return Ok(score);
+                double aveScore = Math.Round((double)score, 1);
+                return Ok(aveScore);
             }
         }
 
@@ -123,7 +131,7 @@ namespace GNT_server.Controllers
             //    //return Content(HttpStatusCode.BadRequest, "會員ID或店家ID錯誤");
             //    return BadRequest("店家ID錯誤");
             //}
-
+            shopReview.ReviewDate = DateTime.Now;
             db.Entry(shopReview).State = EntityState.Modified;
 
             try
@@ -169,7 +177,7 @@ namespace GNT_server.Controllers
             {
                 return BadRequest("評分必填");
             }
-
+            shopReview.ReviewDate = DateTime.Now;
             db.ShopReview.Add(shopReview);
 
             try
