@@ -286,6 +286,7 @@
     <Compile Include="Models\ShopReview.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\shopreviewmethod.cs" />
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>
