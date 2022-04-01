@@ -90,15 +90,12 @@ namespace GNT_server.Controllers
             return Ok(result);
         }
         /// <summary>
-        /// 查詢店家依據 店名、地址、tag、type (前台)
+        /// 查詢店家依據  Enable 請給bool
         /// </summary>
-        /// <param name="tag"></param>
-        /// <param name="address"></param>
-        /// <param name="name"></param>
-        /// <param name="type"></param>
+        /// <param name="isEnable"></param>
         /// <returns></returns>
-        [HttpGet]//待更正為動態生成
-        [Route("Enable")]//api/ShopInfoes/search?tag=2,5
+        [HttpGet]
+        [Route("Enable")]//api/ShopInfoes/Enable?isEnable=2,5
         public IHttpActionResult GetAllEnableShopInfo(bool isEnable)
         {
             var result = from s in db.ShopInfo
@@ -124,7 +121,7 @@ namespace GNT_server.Controllers
         /// <param name="name"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        [HttpGet]//待更正為動態生成
+        [HttpGet]
         [Route("search")]//api/ShopInfoes/search?tag=2,5
         [Obsolete]
         public IHttpActionResult GetShopInfoTag(string tag, string address, string name, string type)
