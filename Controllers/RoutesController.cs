@@ -31,9 +31,9 @@ namespace GNT_server.Controllers
             var route = from r in db.Route
                         select r;
 
-            Routeget aa = new Routeget();
+            RouteTransfer aa = new RouteTransfer();
 
-            return (Routeget.changetime(route));
+            return (RouteTransfer.changetime(route));
         }
 
         // GET: api/Routes/5
@@ -55,7 +55,7 @@ namespace GNT_server.Controllers
                 return NotFound();
             }
 
-            return Ok(Routeget.changetime(result));
+            return Ok(RouteTransfer.changetime(result));
             
         }
 

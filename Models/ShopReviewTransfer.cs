@@ -5,7 +5,7 @@ using System.Web;
 
 namespace GNT_server.Models
 {
-    public class shopreviewmethod
+    public class ShopReviewTransfer
     {
         public static List<object> changetime(IQueryable<ShopReview> shopreview)
         {

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace GNT_server.Models
 {
-    public class Routeget
+    public class RouteTransfer
     {
         public static List<object> changetime(IQueryable<Route> route)
         {

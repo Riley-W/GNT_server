@@ -30,7 +30,7 @@ namespace GNT_server.Controllers
             var route = from r in db.Route
                         select r;
 
-            return Routeget.changetime(route);
+            return RouteTransfer.changetime(route);
 
         }
 
@@ -53,7 +53,7 @@ namespace GNT_server.Controllers
                 return NotFound();
             }
 
-            return Ok(Routeget.changetime(result));
+            return Ok(RouteTransfer.changetime(result));
         }
 
         // PUT: api/RoutesAdmin/5

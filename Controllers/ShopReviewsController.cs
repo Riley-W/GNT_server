@@ -32,7 +32,7 @@ namespace GNT_server.Controllers
         {
             var shopReview = from s in db.ShopReview
                              select s;
-            return shopreviewmethod.changetime(shopReview);
+            return ShopReviewTransfer.changetime(shopReview);
         }
 
         // GET: api/ShopReviews/5
@@ -59,7 +59,7 @@ namespace GNT_server.Controllers
 
             }
             //datelist = shopreviewtransform.changetime(shopReview);
-            return Ok(shopreviewmethod.changetime(shopReview));
+            return Ok(ShopReviewTransfer.changetime(shopReview));
         }
         /// <summary>
         /// 關鍵字搜尋(後台)
@@ -80,7 +80,7 @@ namespace GNT_server.Controllers
                 return BadRequest("無此資料");
 
             }
-            return Ok(shopreviewmethod.changetime(shopReview));
+            return Ok(ShopReviewTransfer.changetime(shopReview));
         }
 
         /// <summary>
