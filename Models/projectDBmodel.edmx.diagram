@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="projectDBModel.AdminInfo" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="projectDBModel.MemberFavorite" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="projectDBModel.MemberInfo" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="projectDBModel.Route" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.Route" Width="1.5" PointX="8" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="projectDBModel.ShopInfo" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="projectDBModel.ShopReview" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="projectDBModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />

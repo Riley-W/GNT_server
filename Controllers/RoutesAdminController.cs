@@ -25,9 +25,15 @@ namespace GNT_server.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("Admin")]
-        public IQueryable<Route> GetRoute()
+        public object GetRoute()
         {
-            return db.Route;
+            var route = from r in db.Route
+                        select r;
+
+            Routeget aa = new Routeget();
+
+            return aa.get(route);
+
         }
 
         // GET: api/Routes/5
@@ -49,7 +55,9 @@ namespace GNT_server.Controllers
                 return NotFound();
             }
 
-            return Ok(result);
+            Routeget aa = new Routeget();
+
+            return Ok(aa.get(result).ToString());
         }
 
         // PUT: api/RoutesAdmin/5

@@ -12,7 +12,7 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using GNT_server.Models;
-using System.Net.Mail;//寄送mail
+
 using System.Net.Mime;//寄送mail
 using System.Configuration;
 
