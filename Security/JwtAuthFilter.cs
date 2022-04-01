@@ -29,7 +29,9 @@ namespace GNT_server.Security
                         request.Headers.Authorization.Parameter,
                         Encoding.UTF8.GetBytes(secret),
                         JwsAlgorithm.HS512);
-                        if (IsTokenExpired(jwtObject["Exp"].ToString()))
+                        long exptime = 0;
+                        Int64.TryParse(jwtObject["Exp"].ToString(), out exptime);
+                        if (IsTokenExpired(exptime))
                         {
                             setErrorResponse(actionContext, "憑證過期");
                         }
@@ -64,9 +66,10 @@ namespace GNT_server.Security
         }
 
         //驗證token時效
-        public bool IsTokenExpired(string dateTime)
+        public bool IsTokenExpired(long dateTime)
         {
-            return Convert.ToDateTime(dateTime) < DateTime.Now;
+            DateTime expireddate = ExpiredTime.startTime.AddMilliseconds(dateTime);
+            return Convert.ToDateTime(expireddate) < DateTime.Now;
         }
 
 
