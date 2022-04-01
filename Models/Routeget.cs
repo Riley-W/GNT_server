@@ -7,7 +7,7 @@ namespace GNT_server.Models
 {
     public class Routeget
     {
-        public List<object> get(IQueryable<Route> route)
+        public static List<object> changetime(IQueryable<Route> route)
         {
             string reDate;
             List<object> aa = new List<object>();
@@ -20,6 +20,7 @@ namespace GNT_server.Models
                     string[] dd = reDate.Split(' ');
                     aa.Add(new
                     {
+                        RouteID=ss.RouteID,
                         MemberID = ss.MemberID,
                         Title = ss.Title,
                         AddDate = dd[0],

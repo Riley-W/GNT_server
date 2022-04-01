@@ -25,14 +25,12 @@ namespace GNT_server.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("Admin")]
-        public object GetRoute()
+        public List<object> GetRoute()
         {
             var route = from r in db.Route
                         select r;
 
-            Routeget aa = new Routeget();
-
-            return aa.get(route);
+            return Routeget.changetime(route);
 
         }
 
@@ -55,9 +53,7 @@ namespace GNT_server.Controllers
                 return NotFound();
             }
 
-            Routeget aa = new Routeget();
-
-            return Ok(aa.get(result).ToString());
+            return Ok(Routeget.changetime(result));
         }
 
         // PUT: api/RoutesAdmin/5
