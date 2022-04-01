@@ -29,64 +29,17 @@ namespace GNT_server.Controllers
         // GET: api/ShopInfoes
         public IHttpActionResult GetAllShopInfo()
         {
-            string tags = "";
             var result = from s in db.ShopInfo
                          select s;
-            string a = "";
-            List<string> taglist = new List<string>();
-            if (Global.TagList.Count == 0)
-            {
-                var tagname = from t in db.Tag
-                              select new
-                              {
-                                  TID = t.Tag1,
-                                  TName = t.TagName
-                              };
-                foreach (var tname in tagname)
-                {
-                    a = tname.TID + "," + tname.TName;
-                    taglist.Add(a);
-                }
-                Global.TagList = taglist;
-            }
-            else
-            {
-                taglist = Global.TagList;
-            }
-            foreach (var r in result)
-            {
-                tags = "";
-                if (!string.IsNullOrEmpty(r.TagIds))
-                {
-                    string[] ids = r.TagIds.Split(',');
-                    foreach (string i in ids)
-                    {
-                        for (int j = 0; j < taglist.Count(); j++)
-                        {
-                            if (taglist[j].Contains(i))
-                            {
-                                string[] tag = taglist[j].Split(',');
-                                tags += tag[1]+",";
-                                break;
-                            }
-                        }
-
-                    }
-                    if (tags.Trim().Substring(tags.Trim().Length - 1, 1) == ",")
-                    {
-                        tags = tags.Trim().Substring(0, tags.Trim().Length - 1);
-                    }
-                    r.TagIds = tags;
-                    
-                }
-
-            }
-            if (result == null)
+            var tagname = from t in db.Tag
+                          select t;
+            var ChineseTagresult = ShopInfoTransfer.ChangeTagtoChinese(result, tagname);
+            if (ChineseTagresult == null)
             {
                 return Content(HttpStatusCode.NotFound, "查無此店家");
             }
 
-            return Ok(result);
+            return Ok(ChineseTagresult);
         }
 
         // GET: api/ShopInfoes/5
@@ -99,65 +52,19 @@ namespace GNT_server.Controllers
         [ResponseType(typeof(ShopInfo))]
         public IHttpActionResult GetShopInfo(int id)
         {
-            string tags = "";
             var result = from s in db.ShopInfo
                          where s.ShopID==id
                          select s;
-            string a = "";
-            List<string> taglist = new List<string>();
-            if (Global.TagList.Count == 0)
-            {
-                var tagname = from t in db.Tag
-                              select new
-                              {
-                                  TID = t.Tag1,
-                                  TName = t.TagName
-                              };
-                foreach (var tname in tagname)
-                {
-                    a = tname.TID + "," + tname.TName;
-                    taglist.Add(a);
-                }
-                Global.TagList = taglist;
-            }
-            else
-            {
-                taglist = Global.TagList;
-            }
-            foreach (var r in result)
-            {
-                tags = "";
-                if (!string.IsNullOrEmpty(r.TagIds))
-                {
-                    string[] ids = r.TagIds.Split(',');
-                    foreach (string i in ids)
-                    {
-                        for (int j = 0; j < taglist.Count(); j++)
-                        {
-                            if (taglist[j].Contains(i))
-                            {
-                                string[] tag = taglist[j].Split(',');
-                                tags += tag[1] + ",";
-                                break;
-                            }
-                        }
+            var tagname = from t in db.Tag
+                          select t;
+            var ChineseTagresult = ShopInfoTransfer.ChangeTagtoChinese(result, tagname);
 
-                    }
-                    if (tags.Trim().Substring(tags.Trim().Length - 1, 1) == ",")
-                    {
-                        tags = tags.Trim().Substring(0, tags.Trim().Length - 1);
-                    }
-                    r.TagIds = tags;
-
-                }
-
-            }
-            if (result == null)
+            if (ChineseTagresult == null)
             {
                 return Content(HttpStatusCode.NotFound, "查無此店家");
             }
 
-            return Ok(result);
+            return Ok(ChineseTagresult);
         }
         /// <summary>
         /// 查詢四大分類店家(前台)
@@ -167,76 +74,47 @@ namespace GNT_server.Controllers
         [Route("type/{type:length(1,50)}")]
         public IHttpActionResult GetShopInfoType(string type)
         {
-            string realtype;
-            if (type == "bar")
-                realtype = "酒吧";
-            else if (type == "snack")
-                realtype = "小吃宵夜";
-            else if (type == "dessert")
-                realtype = "咖啡甜點";
-            else if (type == "viewpoint")
-                realtype = "夜間景點";
-            else
-                realtype = "";
-            string tags = "";
+            string realtype=ShopInfoTransfer.TypeTransfer(type);
             var result = from s in db.ShopInfo
                          where s.Type== realtype
                          select s;
-            string a = "";
-            List<string> taglist = new List<string>();
-            if (Global.TagList.Count == 0)
-            {
-                var tagname = from t in db.Tag
-                              select new
-                              {
-                                  TID = t.Tag1,
-                                  TName = t.TagName
-                              };
-                foreach (var tname in tagname)
-                {
-                    a = tname.TID + "," + tname.TName;
-                    taglist.Add(a);
-                }
-                Global.TagList = taglist;
-            }
-            else
-            {
-                taglist = Global.TagList;
-            }
-            foreach (var r in result)
-            {
-                tags = "";
-                if (!string.IsNullOrEmpty(r.TagIds))
-                {
-                    string[] ids = r.TagIds.Split(',');
-                    foreach (string i in ids)
-                    {
-                        for (int j = 0; j < taglist.Count(); j++)
-                        {
-                            if (taglist[j].Contains(i))
-                            {
-                                string[] tag = taglist[j].Split(',');
-                                tags += tag[1] + ",";
-                                break;
-                            }
-                        }
+            var tagname = from t in db.Tag
+                          select t;
+            var ChineseTagresult = ShopInfoTransfer.ChangeTagtoChinese(result, tagname);
 
-                    }
-                    if (tags.Trim().Substring(tags.Trim().Length - 1, 1) == ",")
-                    {
-                        tags = tags.Trim().Substring(0, tags.Trim().Length - 1);
-                    }
-                    r.TagIds = tags;
-
-                }
-
-            }
             if (result == null)
             {
                 return Content(HttpStatusCode.NotFound, "查無店家");
             }
 
             return Ok(result);
+        }
+        /// <summary>
+        /// 查詢店家依據 店名、地址、tag、type (前台)
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="address"></param>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        [HttpGet]//待更正為動態生成
+        [Route("Enable")]//api/ShopInfoes/search?tag=2,5
+        public IHttpActionResult GetAllEnableShopInfo(bool isEnable)
+        {
+            var result = from s in db.ShopInfo
+                         where s.Enable==isEnable
+                         select s;
+            var tagname = from t in db.Tag
+                          select t;
+            var ChineseTagresult=ShopInfoTransfer.ChangeTagtoChinese(result, tagname);
+
+            
+            if (ChineseTagresult == null)
+            {
+                return Content(HttpStatusCode.NotFound, "查無此店家");
+            }
+
+            return Ok(ChineseTagresult);
         }
         /// <summary>
         /// 查詢店家依據 店名、地址、tag、type (前台)
@@ -262,17 +140,7 @@ namespace GNT_server.Controllers
             }
             if (type != "null")
             {
-                string realtype;
-                if (type == "bar")
-                    realtype = "酒吧";
-                else if (type == "snack")
-                    realtype = "小吃宵夜";
-                else if (type == "dessert")
-                    realtype = "咖啡甜點";
-                else if (type == "viewpoint")
-                    realtype = "夜間景點";
-                else
-                    realtype = "";
+                string realtype = ShopInfoTransfer.TypeTransfer(type);
                 if (realtype != "")
                     alldata = alldata.And(a => a.Type.Contains(realtype));
             }
@@ -289,8 +157,10 @@ namespace GNT_server.Controllers
             }
 
             var result = db.ShopInfo.Where(alldata);
-
-            if (result != null)
+            var tagname = from t in db.Tag
+                          select t;
+            var ChineseTagresult = ShopInfoTransfer.ChangeTagtoChinese(result, tagname);
+            if (ChineseTagresult != null)
                 return Ok(result);
 
              return Content(HttpStatusCode.NotFound, "查無店家");
@@ -380,6 +250,10 @@ namespace GNT_server.Controllers
 
         //    return Ok(shopInfo);
         //}
+        
+
+
+
 
         protected override void Dispose(bool disposing)
         {
