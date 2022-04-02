@@ -40,12 +40,12 @@ namespace GNT_server.Controllers
 
         // GET: api/MemberInfoes1/5
         /// <summary>
-        /// 查詢會員(後台)
+        /// 查詢會員by MemberID(前台)
         /// </summary>
         /// <param name="Memberid"></param>
         /// <returns></returns>
         [ResponseType(typeof(MemberInfo))]
-        [Route("Admin/{Memberid:int}")]
+        [Route("{Memberid:int}")]
         public IHttpActionResult GetMemberInfo(int Memberid)
         {
             MemberInfo memberInfo = db.MemberInfo.Find(Memberid);
