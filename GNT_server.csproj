@@ -263,6 +263,7 @@
     <Compile Include="Models\MemberInfo.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MemberInfoTransfer.cs" />
     <Compile Include="Models\projectDBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
