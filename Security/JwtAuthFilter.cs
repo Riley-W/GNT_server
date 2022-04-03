@@ -58,10 +58,10 @@ namespace GNT_server.Security
         {
             if (requestUri.Contains("/Login"))
                 return true;
-            else if(requestUri.Contains("Admin"))
-                return false;
-            else if (requestUri.Contains("admin"))
-                return false;
+            //else if(requestUri.Contains("Admin"))
+            //    return false;
+            //else if (requestUri.Contains("admin"))
+            //    return false;
             return true;
         }
 

@@ -30,9 +30,19 @@ namespace GNT_server.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("Admin")]
-        public IQueryable<MemberInfo> GetMemberInfoAdmin()
+        public IHttpActionResult GetMemberInfoAdmin()
         {
-            return db.MemberInfo;
+            var result = from m in db.MemberInfo
+                         select m;
+            if (result == null)
+            {
+                return Content(HttpStatusCode.NotFound, "查無此會員");
+            }
+            else
+            {
+                var newMemberInfo = MemberInfoTransfer.TransfertoDate(result);
+                return Ok(newMemberInfo);
+            }
         }
 
 
@@ -48,14 +58,19 @@ namespace GNT_server.Controllers
         [Route("{Memberid:int}")]
         public IHttpActionResult GetMemberInfo(int Memberid)
         {
-            MemberInfo memberInfo = db.MemberInfo.Find(Memberid);
-            if (memberInfo == null)
+            var result = from m in db.MemberInfo
+                         where m.MemberID==Memberid
+                         select m;
+            if (result == null)
             {
                 return Content(HttpStatusCode.NotFound, "找無此會員");
 
             }
-
-            return Ok(memberInfo);
+            else
+            {
+                var newMemberInfo = MemberInfoTransfer.TransfertoDate(result);
+                return Ok(newMemberInfo);
+            }
         }
 
 
@@ -66,9 +81,21 @@ namespace GNT_server.Controllers
         /// <returns></returns>
         [ResponseType(typeof(MemberInfo))]
         [Route("Admin/BlackList")]
-        public IQueryable<MemberInfo> GetMemberInfoInBlacklist()
+        public IHttpActionResult GetMemberInfoInBlacklist()
         {
-            return db.MemberInfo.Where(p => p.BlackList == true);
+            var result = from m in db.MemberInfo
+                         where m.BlackList==true
+                         select m;            
+            if (result == null)
+            {
+                return Content(HttpStatusCode.NotFound, "無黑名單會員");
+
+            }
+            else
+            {
+                var newMemberInfo = MemberInfoTransfer.TransfertoDate(result);
+                return Ok(newMemberInfo);
+            }
         }
 
         // GET:
@@ -78,13 +105,30 @@ namespace GNT_server.Controllers
         /// <returns></returns>
         [ResponseType(typeof(MemberInfo))]
         [Route("Admin/Keywords/{Keywords}")]
-        public IQueryable<MemberInfo> GetMemberInfoByKeywords(string Keywords)
+   
+        public IHttpActionResult GetMemberInfoByKeywords(string Keywords)
         {
-            return db.MemberInfo.Where(p => (p.Name.Contains(Keywords) || p.Phone.Contains(Keywords) ||
-            p.Address.Contains(Keywords) || p.Gender.Contains(Keywords) || p.BirthDate.ToString().Contains(Keywords))
-            || p.Email.Contains(Keywords));
-        }
+            var result = from m in db.MemberInfo
+                         where (m.Name.Contains(Keywords) 
+                         || m.Phone.Contains(Keywords) 
+                         || m.Address.Contains(Keywords) 
+                         || m.Gender.Contains(Keywords) 
+                         || m.BirthDate.ToString().Contains(Keywords)
+                         ||m.Email.Contains(Keywords))
+                         select m;
+            
+            if (result == null)
+            {
+                return Content(HttpStatusCode.NotFound, "找無含有{Keywords}會員");
 
+            }
+            else
+            {
+                var newMemberInfo = MemberInfoTransfer.TransfertoDate(result);
+                return Ok(newMemberInfo);
+            }
+            
+        }
 
 
 
