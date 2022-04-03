@@ -255,7 +255,7 @@
     <Compile Include="Models\AdminInfo.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DateTransfer.cs" />
+    <Compile Include="Models\WebsiteReviewTransfer.cs" />
     <Compile Include="Models\Global.cs" />
     <Compile Include="Models\MemberFavorite.cs">
       <DependentUpon>projectDBModel.tt</DependentUpon>

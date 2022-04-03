@@ -5,7 +5,7 @@ using System.Web;
 
 namespace GNT_server.Models
 {
-    public class DateTransfer
+    public class WebsiteReviewTransfer
     {
         public static List<object> TransfertoDate(IQueryable<WebsiteReview> origin)
         {

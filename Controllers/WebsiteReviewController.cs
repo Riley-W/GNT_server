@@ -37,7 +37,7 @@ namespace GNT_server.Controllers
                          orderby w.ReviewDate descending
                          select w;
 
-            return Ok(DateTransfer.TransfertoDate(result));
+            return Ok(WebsiteReviewTransfer.TransfertoDate(result));
 
         }
 
@@ -54,7 +54,7 @@ namespace GNT_server.Controllers
                          orderby w.ReviewDate descending
                          select w;
 
-            return Ok(DateTransfer.TransfertoDate(result));
+            return Ok(WebsiteReviewTransfer.TransfertoDate(result));
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace GNT_server.Controllers
                          orderby w.ReviewDate descending
                          select w;
 
-            return Ok(DateTransfer.TransfertoDate(result));
+            return Ok(WebsiteReviewTransfer.TransfertoDate(result));
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace GNT_server.Controllers
                          orderby w.ReviewDate descending
                          select w;
 
-            return Ok(DateTransfer.TransfertoDate(result));
+            return Ok(WebsiteReviewTransfer.TransfertoDate(result));
 
         }
 
@@ -106,11 +106,11 @@ namespace GNT_server.Controllers
             if (GetReviewByIDCount < 1)
             {
                 //throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NoContent) { Content = new StringContent("找無此ID。") });
-                return Ok(DateTransfer.TransfertoDate(GetReviewByID));
+                return Ok(WebsiteReviewTransfer.TransfertoDate(GetReviewByID));
 
 
             }
-            return Ok(DateTransfer.TransfertoDate(GetReviewByID));
+            return Ok(WebsiteReviewTransfer.TransfertoDate(GetReviewByID));
 
         }
 
