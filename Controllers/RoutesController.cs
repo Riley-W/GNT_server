@@ -35,6 +35,28 @@ namespace GNT_server.Controllers
 
             return (RouteTransfer.changetime(route));
         }
+        // GET: api/Routes/5
+        /// <summary>
+        /// 查詢單個會員的行程(前台)
+        /// </summary>
+        /// <param name="RouteID"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(Route))]
+        [Route("RouteID/{RouteID:int}")]
+
+        public IHttpActionResult GetRouteByRouteID(int RouteID)
+        {
+
+            var result = db.Route.Where(o => o.RouteID == RouteID);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(RouteTransfer.changetime(result));
+
+        }
 
         // GET: api/Routes/5
         /// <summary>
@@ -45,7 +67,7 @@ namespace GNT_server.Controllers
         [ResponseType(typeof(Route))]
         [Route("{memberID:int}")]
         
-        public IHttpActionResult GetRoute(int memberID)
+        public IHttpActionResult GetRouteByMemberID(int memberID)
         {
             
             var result = db.Route.Where(o=>o.MemberID==memberID);
