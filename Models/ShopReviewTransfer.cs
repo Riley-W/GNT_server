@@ -22,6 +22,7 @@ namespace GNT_server.Models
                         MemberID = ss.MemberID,
                         ShopID = ss.ShopID,
                         ReviewDate = dd[0],
+                        RContent=ss.RContent,
                         Score = ss.Score
                     });
 
