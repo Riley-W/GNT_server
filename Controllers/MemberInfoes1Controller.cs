@@ -40,7 +40,7 @@ namespace GNT_server.Controllers
             }
             else
             {
-                var newMemberInfo = MemberInfoTransfer.TransfertoDate(result);
+                var newMemberInfo = MemberInfoTransfer.TransfertoDateForAdmin(result);
                 return Ok(newMemberInfo);
             }
         }
@@ -68,7 +68,7 @@ namespace GNT_server.Controllers
             }
             else
             {
-                var newMemberInfo = MemberInfoTransfer.TransfertoDate(result);
+                var newMemberInfo = MemberInfoTransfer.TransfertoDateForUser(result);
                 return Ok(newMemberInfo);
             }
         }
@@ -93,7 +93,7 @@ namespace GNT_server.Controllers
             }
             else
             {
-                var newMemberInfo = MemberInfoTransfer.TransfertoDate(result);
+                var newMemberInfo = MemberInfoTransfer.TransfertoDateForAdmin(result);
                 return Ok(newMemberInfo);
             }
         }
@@ -124,7 +124,7 @@ namespace GNT_server.Controllers
             }
             else
             {
-                var newMemberInfo = MemberInfoTransfer.TransfertoDate(result);
+                var newMemberInfo = MemberInfoTransfer.TransfertoDateForAdmin(result);
                 return Ok(newMemberInfo);
             }
             
