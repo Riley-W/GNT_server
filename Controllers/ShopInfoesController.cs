@@ -148,7 +148,7 @@ namespace GNT_server.Controllers
                 {
                     foreach (string Qint in Tag)
                     {
-                        alldata = alldata.And(a => a.TagIds.Contains(Qint));
+                        alldata = alldata.Or(a => a.TagIds.Contains(Qint));
                     }
                 }
             }
