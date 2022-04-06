@@ -126,7 +126,7 @@ namespace GNT_server.Controllers
         [Obsolete]
         public IHttpActionResult GetShopInfoTag(string tag, string address, string name, string type)
         {
-            var alldata = PredicateBuilder.True<ShopInfo>();
+            var alldata = PredicateBuilder.False<ShopInfo>();
             if (address != "null")
             {
                 alldata = alldata.And(a => a.Address.Contains(address));
