@@ -65,7 +65,7 @@ namespace GNT_server.Models
                         Name = o.Name,
                         Phone = o.Phone,
                         Address = o.Address,
-                        Gender = o.Address,
+                        Gender = o.Gender,
                         BirthDate = newBdatelist[0],
                         Email = o.Email,
                         RegisterDate = newRdatelist[0],
