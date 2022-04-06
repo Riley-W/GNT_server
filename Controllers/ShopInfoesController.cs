@@ -126,20 +126,21 @@ namespace GNT_server.Controllers
         [Obsolete]
         public IHttpActionResult GetShopInfoTag(string tag, string address, string name, string type)
         {
-            var alldata = PredicateBuilder.False<ShopInfo>();
+            var findwithouttag = PredicateBuilder.True<ShopInfo>();
+            var findbytag = PredicateBuilder.False<ShopInfo>();
             if (address != "null")
             {
-                alldata = alldata.And(a => a.Address.Contains(address));
+                findwithouttag = findwithouttag.And(a => a.Address.Contains(address));
             }
             if (name != "null")
             {
-                alldata = alldata.And(a => a.Name.Contains(name));
+                findwithouttag = findwithouttag.And(a => a.Name.Contains(name));
             }
             if (type != "null")
             {
                 string realtype = ShopInfoTransfer.TypeTransfer(type);
                 if (realtype != "")
-                    alldata = alldata.And(a => a.Type.Contains(realtype));
+                    findwithouttag = findwithouttag.And(a => a.Type.Contains(realtype));
             }
             if (tag != "null")
             {
@@ -148,12 +149,12 @@ namespace GNT_server.Controllers
                 {
                     foreach (string Qint in Tag)
                     {
-                        alldata = alldata.Or(a => a.TagIds.Contains(Qint));
+                        findbytag = findbytag.Or(a => a.TagIds.Contains(Qint));
                     }
                 }
             }
 
-            var result = db.ShopInfo.Where(alldata);
+            var result = db.ShopInfo.AsExpandable().Where(findwithouttag).Where(findbytag).Include(s=>s.TagIds);
             var tagname = from t in db.Tag
                           select t;
             var ChineseTagresult = ShopInfoTransfer.ChangeTagtoChinese(result, tagname);

@@ -20,6 +20,7 @@ namespace GNT_server.Models
                     datelist.Add(new
                     {
                         MemberID = ss.MemberID,
+                        MemberInfo=ss.MemberInfo,
                         ShopID = ss.ShopID,
                         ReviewDate = dd[0],
                         RContent=ss.RContent,
