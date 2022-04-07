@@ -165,6 +165,11 @@ namespace GNT_server.Controllers
             {
                 result = db.ShopInfo.AsExpandable().Where(findwithouttag).Where(findbytag);
             }
+            else if (address == "null" && name == "null" && type == "null" && tag == "null")
+            {
+                result = from s in db.ShopInfo
+                         select s;
+            }
             var tagname = from t in db.Tag
                           select t;
 
