@@ -153,15 +153,15 @@ namespace GNT_server.Controllers
                 }
             }
             IQueryable<ShopInfo> result = null;
-            if (address==null&&name==null&&type==null&&tag!=null)
+            if (address== "null" && name== "null" && type== "null" && tag!= "null")
             {
                 result = db.ShopInfo.AsExpandable().Where(findbytag);
             }
-            else if (address != null || name != null || type != null && tag == null)
+            else if (address != "null" || name != "null" || type != "null" && tag == "null")
             {
                 result = db.ShopInfo.AsExpandable().Where(findwithouttag);
             }
-            else if (address != null || name != null || type != null && tag != null)
+            else if (address != "null" || name != "null" || type != "null" && tag != "null")
             {
                 result = db.ShopInfo.AsExpandable().Where(findwithouttag).Where(findbytag);
             }
