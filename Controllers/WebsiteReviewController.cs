@@ -81,7 +81,7 @@ namespace GNT_server.Controllers
         [Route("keywords/{keywords}")]
         public IHttpActionResult GetWebsiteReviewByKeywords(string Keywords)
         {   //QueryByKeywords: 
-            
+
             var result = from w in db.WebsiteReview
                          where (w.ReviewDate.ToString().Contains(Keywords) || w.Type.Contains(Keywords) ||
                          w.RContent.Contains(Keywords) || w.Status.Contains(Keywords) || w.Remark.Contains(Keywords))
@@ -130,11 +130,6 @@ namespace GNT_server.Controllers
             {
                 return BadRequest(ModelState);
             }
-            //if (WebsiteReview.MemberID == null || WebsiteReview.ReviewDate == null || WebsiteReview.Type == null || WebsiteReview.RContent == null)
-            //{
-            //    //驗證是否資料齊全 //未綁Remark
-            //    return BadRequest("資料未完整。");
-            //}
             else
             {
                 WebsiteReview.ReviewDate = DateTime.Now;
@@ -245,7 +240,7 @@ namespace GNT_server.Controllers
                 }
             }
 
-            //return Ok(WebsiteReview); //StatusCode(HttpStatusCode.OK);
+            //return Ok(WebsiteReview); 
             return Ok("修改完成。");
 
         }
@@ -265,8 +260,6 @@ namespace GNT_server.Controllers
 
                 //set smtp-client with basicAuthentication
 
-                //NetworkCredential LoginInfo = new NetworkCredential("goodnighttainan@gmail.com", "P@ssw0rd-iii87");
-                //NetworkCredential LoginInfo = new NetworkCredential(Convert.ToString(ConfigurationManager.AppSettings["goodnighttainan@gmail.com"]), Convert.ToString(ConfigurationManager.AppSettings["filgqxrexlhpuxso"]));
                 NetworkCredential LoginInfo = new NetworkCredential("goodnighttainan@gmail.com", "filgqxrexlhpuxso");
 
                 mySmtpClient.UseDefaultCredentials = true;
@@ -289,15 +282,13 @@ namespace GNT_server.Controllers
                 myMail.SubjectEncoding = System.Text.Encoding.UTF8;
 
                 //insert logo
-                //LinkedResource logo = new LinkedResource(@"C:\Users\YU\Desktop\全端養成班\期末專題\Git\Merge_3_add jsonignore\GNT_server\fonts\好夜台南_v3_01.jpeg");
                 string Server_MapPath = System.Web.HttpContext.Current.Server.MapPath("/");
-                Attachment logo = new Attachment(Server_MapPath +　"/fonts/好夜台南_v3_01.jpeg");
+                Attachment logo = new Attachment(Server_MapPath + "/fonts/好夜台南_v3_01.jpeg");
                 logo.ContentId = "logo.jpeg";
                 myMail.Attachments.Add(logo);
-                //logo.ContentType = new ContentType(MediaTypeNames.Image.Jpeg);
 
                 //set body message and encoding
-                myMail.Body = "<div style=\"background-color: #E1E1E1;font-family: Microsoft JhengHei;text-align: center; padding: 70px 120px\"><a href=\"https://riley-w.github.io/goodNightTainan_front/\"><img src=\"cid:logo.jpeg\" width=\"400px\";></a><div style=\" padding: 24px; margin: 24px 120px; border: 2px transparent solid; text-align: center;font-family: Microsoft JhengHei; background-color: white\" >" + "<h2>HI, " + receiver + ",</h2><p>    意見回饋已收到，感謝您使用【好夜台南 Good Night Tainan】，您寶貴的意見是我們進步的動力。 </p><div style=\"border: 1px #CCC solid;background-color: #F5F5F5; border-radius: 3px;  margin: 36px 48px;padding: 36px; text-align: left; font-size: 14px;line-height:200%\" width=\"600px\"> △ 回饋時間: " + receiveDate + "<br>△ 回饋內容: " + reviewContent + "<div style=\"text-align: center\"></div></div></div><div style=\"line-height:15px ; color: grey; padding: 20px\"> **此為系統自動發送，請勿直接回覆。為了確保能收到來自【好夜台南 Good Night Tainan】的信件，請將goodnighttainan@gmail.com加入您的通訊錄**</div></div>";
+                myMail.Body = "<div style=\"background-color: #E1E1E1;font-family: Microsoft JhengHei;text-align: center; padding: 70px 20px\"><a href=\"https://riley-w.github.io/goodNightTainan_front/\"><img src=\"cid:logo.jpeg\" width=\"300px\";></a><div style=\" padding:5% 10% ; margin: 5px; border: 2px transparent solid; text-align: center;font-family: Microsoft JhengHei; background-color: white\" >" + "<h3>HI, " + receiver + ",</h3><p style=\"font-size: 14px\">    意見回饋已收到，感謝您使用【好夜台南 Good Night Tainan】，您寶貴的意見是我們進步的動力。 </p><div style=\"border: 1px #CCC solid;background-color: #F5F5F5; border-radius: 3px;  margin: 3%;padding: 3%; text-align: left; font-size: 14px;line-height:200%\" width=\"600px\"> △ 回饋時間: " + receiveDate + "<br>△ 回饋內容: " + reviewContent + "<div style=\"text-align: center\"></div></div></div><div style=\"line-height:15px ; color: grey; padding: 20px\"> **此為系統自動發送，請勿直接回覆。為了確保能收到來自【好夜台南 Good Night Tainan】的信件，請將goodnighttainan@gmail.com加入您的通訊錄**</div></div>";
 
                 myMail.BodyEncoding = System.Text.Encoding.UTF8;
 
@@ -357,7 +348,7 @@ namespace GNT_server.Controllers
 
 
                 //set body message and encoding
-                myMail.Body = "<div style=\"background-color: #E1E1E1;font-family: Microsoft JhengHei;text-align: center; padding: 70px 120px\"><a href=\"https://riley-w.github.io/goodNightTainan_front/\"><img src=\"cid:logo.jpeg\" width=\"400px\";></a><div style=\" padding: 24px; margin: 24px 120px; border: 2px transparent solid; text-align: center;font-family: Microsoft JhengHei; background-color: white\" >" + "<h2>HI, " + receiver + ",</h2><p>感謝您來信【好夜台南 Good Night Tainan】，您的意見回饋已處理： </p><div style=\"border: 1px #CCC solid;background-color: #F5F5F5; border-radius: 3px;  margin: 36px 48px;padding: 36px; text-align: left; font-size: 14px;line-height:200%\" width=\"600px\"> △ 回饋時間: " + receiveDate + "<br>△ 回饋內容: " + reviewContent + "<br>---------------------------------------------------------------------------<br>△ 系統回覆: " + Reply +"</div></div><div style=\"line-height:15px; color: grey; padding: 20px\"> **此為系統自動發送，請勿直接回覆。為了確保能收到來自【好夜台南 Good Night Tainan】的信件，請將goodnighttainan@gmail.com加入您的通訊錄**</div></div>";
+                myMail.Body = "<div style=\"background-color: #E1E1E1;font-family: Microsoft JhengHei;text-align: center; padding: 70px 20px\"><a href=\"https://riley-w.github.io/goodNightTainan_front/\"><img src=\"cid:logo.jpeg\" width=\"300px\";></a><div style=\" padding:5% 10% ; margin: 5px; border: 2px transparent solid; text-align: center;font-family: Microsoft JhengHei; background-color: white\" >" + "<h3>HI, " + receiver + ",</h3><p style=\"font-size: 14px\">    意見回饋已收到，感謝您使用【好夜台南 Good Night Tainan】，您寶貴的意見是我們進步的動力。 </p><div style=\"border: 1px #CCC solid;background-color: #F5F5F5; border-radius: 3px;  margin: 3%;padding: 3%; text-align: left; font-size: 14px;line-height:200%\" width=\"600px\"> △ 回饋時間: " + receiveDate + "<br>△ 回饋內容: " + reviewContent + "<hr>△ 系統回覆: " + Reply + "<div style=\"text-align: center\"></div></div></div><div style=\"line-height:15px ; color: grey; padding: 20px\"> **此為系統自動發送，請勿直接回覆。為了確保能收到來自【好夜台南 Good Night Tainan】的信件，請將goodnighttainan@gmail.com加入您的通訊錄**</div></div>"; 
 
                 myMail.BodyEncoding = System.Text.Encoding.UTF8;
 
