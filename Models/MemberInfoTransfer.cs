@@ -31,7 +31,9 @@ namespace GNT_server.Models
                         BirthDate=newBdatelist[0],
                         Email=o.Email,
                         RegisterDate= newRdatelist[0],
-                        BlackList=o.BlackList
+                        BlackList=o.BlackList,
+                        Account=o.Account,
+                        Password=o.Password
 
                     });
                 }
