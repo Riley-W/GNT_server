@@ -123,7 +123,6 @@ namespace GNT_server.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("search")]//api/ShopInfoes/search?tag=2,5
-        [Obsolete]
         public IHttpActionResult GetShopInfoTag(string tag, string address, string name, string type)
         {
             var findwithouttag = PredicateBuilder.True<ShopInfo>();
