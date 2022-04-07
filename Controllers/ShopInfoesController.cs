@@ -153,10 +153,22 @@ namespace GNT_server.Controllers
                     }
                 }
             }
-
-            var result = db.ShopInfo.AsExpandable().Where(findwithouttag).Where(findbytag).Include(s=>s.TagIds);
+            IQueryable<ShopInfo> result = null;
+            if (address==null&&name==null&&type==null&&tag!=null)
+            {
+                result = db.ShopInfo.AsExpandable().Where(findbytag);
+            }
+            else if (address != null || name != null || type != null && tag == null)
+            {
+                result = db.ShopInfo.AsExpandable().Where(findwithouttag);
+            }
+            else if (address != null || name != null || type != null && tag != null)
+            {
+                result = db.ShopInfo.AsExpandable().Where(findwithouttag).Where(findbytag);
+            }
             var tagname = from t in db.Tag
                           select t;
+
             var ChineseTagresult = ShopInfoTransfer.ChangeTagtoChinese(result, tagname);
             if (ChineseTagresult != null)
                 return Ok(result);
