@@ -31,13 +31,14 @@ namespace GNT_server.Controllers
         public List<object> GetShopReview()
         {
             var shopReview = from s in db.ShopReview
+                             orderby s.ReviewDate descending
                              select s;
             return ShopReviewTransfer.changetime(shopReview);
         }
 
         // GET: api/ShopReviews/5
         /// <summary>
-        /// 查詢會員評論紀錄(後台)
+        /// 查詢會員評論紀錄(前台)
         /// </summary>
         /// <param name="memberid"></param>
         /// <returns></returns>
@@ -71,7 +72,7 @@ namespace GNT_server.Controllers
         [ResponseType(typeof(ShopReview))]
         public IHttpActionResult GetShopReviewKeyWord(string keywords)
         {
-            var shopReview = db.ShopReview.Where(s => s.RContent.Contains(keywords));
+            var shopReview = db.ShopReview.Where(s => s.RContent.Contains(keywords) );
             var shopReviewCount = db.ShopReview.Where(s => s.RContent.Contains(keywords)).ToList();
             if (shopReviewCount.Count == 0)
             {
