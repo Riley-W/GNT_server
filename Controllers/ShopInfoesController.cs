@@ -192,6 +192,47 @@ namespace GNT_server.Controllers
         [HttpPut]
         [Route("Admin/{id:int}")]
         [ResponseType(typeof(void))]
+        public IHttpActionResult PutShopInfoAdmin(int id, ShopInfo shopInfo)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != shopInfo.ShopID)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(shopInfo).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ShopInfoExists(id))
+                {
+                    return Content(HttpStatusCode.NotFound, "查無店家");
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok("修改成功");
+        }
+        /// <summary>
+        /// 修改店家(後台)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="shopInfo"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("{id:int}")]
+        [ResponseType(typeof(void))]
         public IHttpActionResult PutShopInfo(int id, ShopInfo shopInfo)
         {
             if (!ModelState.IsValid)
@@ -224,7 +265,6 @@ namespace GNT_server.Controllers
 
             return Ok("修改成功");
         }
-
         // POST: api/ShopInfoes
         //api/{controller}
         /// <summary>
