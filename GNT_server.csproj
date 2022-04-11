@@ -44,6 +44,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\GNT_server.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Catel.Core, Version=5.12.22.0, Culture=neutral, processorArchitecture=MSIL">
