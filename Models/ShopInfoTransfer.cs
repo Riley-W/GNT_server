@@ -77,5 +77,48 @@ namespace GNT_server.Models
             }
             return result;
         }
+
+        public static string ChangeChinesetoTag(ShopInfo shopinfo, IQueryable<Tag> t)
+        {
+            List<string> taglist = new List<string>();
+            taglist = CheckTagList(t);
+            string tags = "";
+            if (!string.IsNullOrEmpty(shopinfo.TagIds))
+            {
+                string[] tagc = shopinfo.TagIds.Split(',');
+                foreach (string tag in tagc)
+                {
+                    for (int i = 0; i < taglist.Count(); i++)
+                    {
+                        if (taglist[i].Contains(tag))
+                        {
+                            if (i < 9)
+                            {
+                                tags += "T" + "0" + $"{i+1}"+",";
+                            }
+                            else
+                            {
+                                tags += "T" + $"{i+1}" + ",";
+                            }
+
+                            break;
+                        }
+                    }
+                    if (tags == "")
+                    {
+                        tags = shopinfo.TagIds;
+                    }
+
+                }
+                if (tags.Trim().Substring(tags.Trim().Length - 1, 1) == ",")
+                {
+                    tags = tags.Trim().Substring(0, tags.Trim().Length - 1);
+                }
+                shopinfo.TagIds = tags;
+
+            }
+            
+            return tags;
+        }
     }
 }

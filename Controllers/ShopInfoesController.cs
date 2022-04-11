@@ -203,7 +203,9 @@ namespace GNT_server.Controllers
             {
                 return BadRequest();
             }
-
+            var tagname = from t in db.Tag
+                          select t;
+            shopInfo.TagIds = ShopInfoTransfer.ChangeChinesetoTag(shopInfo, tagname);
             db.Entry(shopInfo).State = EntityState.Modified;
 
             try
@@ -244,7 +246,9 @@ namespace GNT_server.Controllers
             {
                 return BadRequest();
             }
-
+            var tagname = from t in db.Tag
+                          select t;
+            shopInfo.TagIds = ShopInfoTransfer.ChangeChinesetoTag(shopInfo, tagname);
             db.Entry(shopInfo).State = EntityState.Modified;
 
             try
